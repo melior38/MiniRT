@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/07 18:15:42 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/09 14:02:25 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void	ft_minirt(int x, int y, t_data *data)
 {
-
+	return ;
 }
 
 int	render_next_frame(void *yourstruct)
@@ -45,7 +45,7 @@ int	render_next_frame(void *yourstruct)
 		y = 0;
 		while (y < HEIGTH)
 		{
-			ft_minirt();
+			// ft_minirt();
 			y++;
 		}
 		x++;
@@ -54,17 +54,35 @@ int	render_next_frame(void *yourstruct)
 	return (0);
 }
 
+void	ft_handle_error(int error)
+{
+	if (error == 1)
+	{
+		perror("Error\nWrong file name, make sure to input an ");
+		perror("existing file wich end by a .rt\n");
+		exit(1);
+	}
+	if (error == 2)
+	{
+		perror("Error\nBad file composition\n");
+		exit(1);
+	}
+}
+
 int	main(int ac, char **av)
 {
-	(void)	ac;
 	(void)	**av;
 	void	*mlx_win;
 	void	*mlx;
 	t_data	data;
 	
-	
-
-	// parsing(av);
+	if (ac =! 2)
+	{
+		perror("wrong amount of argument \n");
+		exit(1);
+	}
+	// struct_set(data); pour deja inserer les valeurs go essayer de ne pas malloc se serai nice
+	ft_handle_error(parsing(&data, av[1]));
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGTH, "MiniRT");
 	data.img = mlx_new_image(mlx, WIDTH, HEIGTH);

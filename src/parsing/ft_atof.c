@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lol.c                                              :+:      :+:    :+:   */
+/*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/04 09:22:01 by asouchet         ###   ########.fr       */
+/*   Created: 2023/09/09 14:34:22 by asouchet          #+#    #+#             */
+/*   Updated: 2023/09/09 14:51:30 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MiniRT.h"
 
-int	fais_pas_chier(void)
+float	ft_atof(char *str)
 {
-	return (0);
+	float	res;
+	float	neg;
+	int		i;
+
+	i = 0;
+	neg = 1.0;
+	res = 0;
+	if (str[i] == '-')
+	{
+		neg = -1.0;
+		i++;
+	}
+	while (str[i] && str[i] != '.')
+	{
+		if (str[i] <= '0' && str[i] >= '9')
+			return (123.123); // on verra plus tard comment faire pour detecter un soucis
+	}
 }
