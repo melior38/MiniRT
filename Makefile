@@ -6,7 +6,7 @@
 #    By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 08:45:50 by lcamilo-          #+#    #+#              #
-#    Updated: 2023/09/04 09:32:42 by asouchet         ###   ########.fr        #
+#    Updated: 2023/09/11 09:01:25 by asouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,13 +31,15 @@ HEADERS_LIB		= libftprintfgnl/includes
 INC			= $(addprefix $HEADERS_LIB)
 
 # ------------  FLAGS  ------------------------------------------------------- #
-CFLAGS 		= -I $(HEADERS) -I $(HEADERS_LIB) -Werror -Wextra -Wall 
+CFLAGS 		= -I $(HEADERS) -I $(HEADERS_LIB) -Werror -Wextra -Wall -I ./mlx 
 CC			= @cc
 RM			= rm -rf
 
 # ------------  SOURCE FILES  ------------------------------------------------ #
 SRC 		= 	main.c							\
-				parsing/lol.c
+				parsing/ft_atof.c				\
+				parsing/parse_init.c			\
+				# parsing/parsing_utils.c
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 OBJS				= ${SRC:.c=.o}
@@ -55,7 +57,7 @@ lib:
 
 $(NAME): $(_OBJS)
 			@echo "$(COLOUR_CYAN)Compile..."
-			$(CC) $(_OBJS) libft.a $(CFLAGS) -o $@ -L libftprintfgnl -lft 
+			$(CC) $(_OBJS) libft.a $(CFLAGS) -o $@ -L libftprintfgnl -lft -I ./mlx -L ./mlx -lmlx -framework OpenGL -framework AppKit
 			@echo "$(COLOUR_RED)MiniRT ready. $(COLOUR_END)"
 
 $(OBJS_DIR)/%.o: $(SRC_PATH)/%.c
