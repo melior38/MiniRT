@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/04 09:06:35 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:26:51 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,23 @@
 
 #include "libft.h"
 
+
+typedef struct s_axis {
+	float	x;
+	float	y;
+	float	z;
+}				t_axis;
+
+typedef struct s_rgb {
+	float	r;
+	float	g;
+	float	b;
+}				t_rgb;
+
+typedef struct s_plan {
+	t_axis	axe;
+	t_axis	point_zero;
+}
 
 //////////////////////////////////// MAIN.C ////////////////////////////////////
 
