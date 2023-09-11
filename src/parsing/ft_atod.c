@@ -6,13 +6,13 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 14:34:22 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/11 10:17:22 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:20:39 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MiniRT.h"
 
-double	ft_atof(char *str)
+double	ft_atod(char *str)
 {
 	double	res;
 	double	neg;

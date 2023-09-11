@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:42:43 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/11 10:43:14 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/11 13:48:30 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_str_float(char *str)
 	while (str[i])
 		i++;
 	if (i < 5)
-		return (1);
+		return (false);
 	i = 0;
 	while (str[i])
 	{
@@ -47,14 +47,14 @@ int	check_str_float(char *str)
 				|| str[i] == '.')
 			i++;
 		else
-			return (1);
+			return (false);
 	}
 	if (comma_count != 2)
-		return (1);
-	return (0);
+		return (false);
+	return (true);
 }
 
-int	check_str_int(char *str)
+bool	check_str_int(char *str)
 {
 	int i;
 	int comma_count;
@@ -64,7 +64,7 @@ int	check_str_int(char *str)
 	while (str[i])
 		i++;
 	if (i < 5)
-		return (1);
+		return (false);
 	i = 0;
 	while (str[i])
 	{
@@ -73,11 +73,11 @@ int	check_str_int(char *str)
 		if ((str[i] <= '9' && str[i] >= '0') || str[i] == ',')
 			i++;
 		else
-			return (1);
+			return (false);
 	}
 	if (comma_count != 2)
-		return (1);
-	return (0);
+		return (false);
+	return (true);
 }
 
 int	rgb_convertor(char *str, char rgb)
@@ -123,12 +123,12 @@ float	coor_convertor(char *str, char coor)
 	if (coor == 'z')
 		index = 2;
 	splited_coor = ft_split(str, ',');
-	res = (float)ft_atof(splited_coor[index]);
+	res = (float)ft_atod(splited_coor[index]);
 	free_tab(splited_coor);
 	return (res);
 }
 
-int	Ambient_light_set(t_ambient_light *A_light, char **arg_tab)
+int	Ambient_light_set(t_param *param, char **arg_tab)
 {
 	int i;
 
@@ -137,19 +137,15 @@ int	Ambient_light_set(t_ambient_light *A_light, char **arg_tab)
 		i++;
 	if (i != 2)
 		return (1);
-	A_light->light_ratio = (float)ft_atof(arg_tab[1]);
-	if (A_light->light_ratio > 1 || A_light->light_ratio < 0 
-			|| A_light->light_ratio == 123.123001)
-		return (1);
-	A_light->rgb->r = rgb_convertor(arg_tab[2], 'r');
-	A_light->rgb->g = rgb_convertor(arg_tab[2], 'g');
-	A_light->rgb->b = rgb_convertor(arg_tab[2], 'b');
-	if (A_light->rgb->r < 0 || A_light->rgb->g < 0 || A_light->rgb->b < 0)
+	param->A_light->rgb->r = rgb_convertor(arg_tab[2], 'r');
+	param->A_light->rgb->g = rgb_convertor(arg_tab[2], 'g');
+	param->A_light->rgb->b = rgb_convertor(arg_tab[2], 'b');
+	if (param->A_light->rgb->r < 0 || param->A_light->rgb->g < 0 || param->A_light->rgb->b < 0)
 		return (1);
 	return (0);
 }
 
-int	Camera_set(t_camera *camera, char **arg_tab)
+int	Camera_set(t_param *param, char **arg_tab)
 {
 	int		i;
 
@@ -157,18 +153,6 @@ int	Camera_set(t_camera *camera, char **arg_tab)
 	while (arg_tab[i])
 		i++;
 	if (i != 3)
-		return (1);
-	camera->view_coor->x = coor_convertor(arg_tab[1], 'x');
-	camera->view_coor->y = coor_convertor(arg_tab[1], 'y');
-	camera->view_coor->z = coor_convertor(arg_tab[1], 'z');
-	if (camera->view_coor->x == 123.123001 || camera->view_coor->x == 123.123001
-			 || camera->view_coor->x == 123.123001)
-		return (1);
-	camera->normalized_vector->x = coor_convertor(arg_tab[2], 'x'); 
-	camera->normalized_vector->y = coor_convertor(arg_tab[2], 'y'); 
-	camera->normalized_vector->z = coor_convertor(arg_tab[2], 'z'); 
-	if (camera->view_coor->x == 123.123001 || camera->view_coor->x == 123.123001
-			 || camera->view_coor->x == 123.123001)
 		return (1);
 	else if ((camera->view_coor->x < -1.0 || camera->view_coor->x > 1.0) || 
 			(camera->view_coor->y < -1.0 || camera->view_coor->y > 1.0) ||
@@ -178,7 +162,7 @@ int	Camera_set(t_camera *camera, char **arg_tab)
 	return (0);
 }
 
-int	Light_set(t_light *light, char **arg_tab)
+int	Light_set(t_param *param, char **arg_tab)
 {
 	int		i;
 
@@ -204,7 +188,7 @@ int	Light_set(t_light *light, char **arg_tab)
 	return (0);
 }
 
-int	plane_set(t_plane *plane, char **arg_tab)
+int	plane_set(t_param *param, char **arg_tab)
 {
 	int		i;
 
@@ -237,7 +221,7 @@ int	plane_set(t_plane *plane, char **arg_tab)
 	return (0);
 }
 
-int	sphere_set(t_sphere *sphere, char **arg_tab)
+int	sphere_set(t_param *param, char **arg_tab)
 {
 	int		i;
 
@@ -264,7 +248,7 @@ int	sphere_set(t_sphere *sphere, char **arg_tab)
 	return (0);
 }
 
-int	cylinder_set(t_cylinder *cylinder, char **arg_tab)
+int	cylinder_set(t_param *param, char **arg_tab)
 {
 	int		i;
 

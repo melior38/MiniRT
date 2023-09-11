@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/11 08:10:53 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/11 12:43:42 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,6 @@ int	tab_check(int *tab)
 	return (0);
 }
 
-	// le but est de checker tout les parametres 1 fois et dans n'importe quel ordre
-	// donc sa implique un strcmp sur les 2 premier char (on peut peut etre split le resultat et ducoup strncmp le premier tab)
-	// puis faire une foret de if pour tout les cas puis ensuite apres un passage initialiser une var qui confirme le passage dans le if
 int	init_file(t_data *data, char *line)
 {
 	int	tab[6];
@@ -139,8 +136,9 @@ int parsing(t_data *data, char *av)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (init_file(data, line))
-			return (2);
+		// if (init_file(data, line))
+			// return (2);
+		printf("%s" line);
 		line = get_next_line(fd);
 	}
 	free(line);

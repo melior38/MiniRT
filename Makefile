@@ -6,7 +6,7 @@
 #    By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 08:45:50 by lcamilo-          #+#    #+#              #
-#    Updated: 2023/09/11 09:01:25 by asouchet         ###   ########.fr        #
+#    Updated: 2023/09/11 12:42:11 by asouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,9 @@ RM			= rm -rf
 
 # ------------  SOURCE FILES  ------------------------------------------------ #
 SRC 		= 	main.c							\
-				parsing/ft_atof.c				\
+				parsing/ft_atod.c				\
 				parsing/parse_init.c			\
+				parsing/get_function.c			\
 				# parsing/parsing_utils.c
 
 # ------------  FILEPATHS  --------------------------------------------------- #

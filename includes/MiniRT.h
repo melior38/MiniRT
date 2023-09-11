@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/11 10:43:28 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/11 13:52:39 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include <math.h>
 # include <mlx.h>
+# include <stdbool.h>
 
 # define HEIGTH	768.0
 # define WIDTH 1366.0
@@ -43,14 +44,14 @@ typedef struct s_sphere {
 
 typedef struct s_plane {
 	t_axis	*pl_coor;
-	t_axis	*normalized_vector;
+	t_axis	*vector;
 	t_rgb	*rgb;
 
 }				t_plane;
 
 typedef struct s_cylinder {
 	t_axis	*cy_center;
-	t_axis	*normalized_vector;
+	t_axis	*vector;
 	float	diameter;
 	float	height;
 	t_rgb	*rgb;
@@ -72,7 +73,7 @@ typedef struct s_ambient_light {
 
 typedef struct s_camera {
 	t_axis	*view_coor;
-	t_axis	*normalized_vector;
+	t_axis	*vector;
 	int		FOV;
 
 }				t_camera;
@@ -122,13 +123,13 @@ int			check_rt_file(char *av);
 
 ///////////////////////////////// PARSE_INIT.C /////////////////////////////////
 
-int			Ambient_light_set(t_ambient_light *A_light, char **arg_tab);
+int			Ambient_light_set(t_param *param, char **arg_tab);
 int			rgb_convertor(char *str, char rgb);
 void		free_tab(char **tab);
 float		coor_convertor(char *str, char coor);
-int			check_str_int(char *str);
+bool		check_str_int(char *str);
 int			check_str_float(char *str);
-int			Camera_set(t_camera *camera, char **arg_tab);
+bool		Camera_set(t_param *param, char **arg_tab);
 
 
 // int			Light_set(t_light *light, char **arg_tab);
@@ -136,9 +137,15 @@ int			Camera_set(t_camera *camera, char **arg_tab);
 // int			sphere_set(t_sphere *sphere, char **arg_tab);
 // int			cylinder_set(t_cylinder *cylinder, char **arg_tab);
 
-////////////////////////////////// FT_ATOF.C ///////////////////////////////////
+////////////////////////////////// FT_ATOD.C ///////////////////////////////////
 
-double		ft_atof(char *str);
+double		ft_atod(char *str);
 
+/////////////////////////////// GET_FUNCTION.C /////////////////////////////////
+
+bool		get_vector(t_axis *axis, char *str);
+bool		get_rgb(t_rgb *rgb);
+bool		get_dimension(double *value, char *str);
+bool		get_coor(t_axis *axis, char *str);
 
 #endif
