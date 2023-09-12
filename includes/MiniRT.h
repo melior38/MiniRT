@@ -35,6 +35,20 @@ typedef struct s_rgb {
 
 }				t_rgb;
 
+typedef struct s_object
+{
+	char				*id;
+	double				ratio;
+	int					fov;
+	double				brightness;
+	double 				diameter;
+	double				height;
+	t_axis				axis;
+	t_axis 				axisnorm; //A changer ?
+	t_rgb				rgb;
+	struct t_object		*next;
+}	t_object;
+
 typedef struct s_sphere {
 	t_axis	*sp_center;
 	float	radius;
