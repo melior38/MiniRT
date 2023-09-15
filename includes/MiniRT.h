@@ -18,9 +18,10 @@
 # include <mlx.h>
 # include <stdbool.h>
 
-# define HEIGTH	768.0
-# define WIDTH 1366.0
-
+# define HEIGTH		768.0
+# define WIDTH		1366.0
+# define ERROR		0
+# define SUCCESS	1
 typedef struct s_axis {
 	float	x;
 	float	y;

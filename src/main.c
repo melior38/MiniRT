@@ -81,11 +81,11 @@ int	main(int ac, char **av)
 		perror("wrong amount of argument \n");
 		exit(1);
 	}
-	printf("coor_convertor est-il foncionnel ? [%f]\n", (float)coor_convertor("1.0,0,0", 'x'));
-	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor("1.0,0,0", 'r'));
-	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor(",,", 'g'));
-	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor("255,30,45,", 'b'));
-	// struct_set(data); pour deja inserer les valeurs go essayer de ne pas malloc se serai nice
+//	printf("coor_convertor est-il foncionnel ? [%f]\n", (float)coor_convertor("1.0,0,0", 'x'));
+//	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor("1.0,0,0", 'r'));
+//	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor(",,", 'g'));
+//	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor("255,30,45,", 'b'));
+//	 struct_set(data); pour deja inserer les valeurs go essayer de ne pas malloc se serai nice
 	// ft_handle_error(parsing(&data, av[1]));
 	// mlx = mlx_init();
 	// mlx_win = mlx_new_window(mlx, WIDTH, HEIGTH, "MiniRT");

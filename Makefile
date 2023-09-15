@@ -38,7 +38,8 @@ RM			= rm -rf
 # ------------  SOURCE FILES  ------------------------------------------------ #
 SRC 		= 	main.c							\
 				parsing/ft_atod.c				\
-				parsing/parse_init.c			\
+				parsing/parsing.c
+#				parsing/parse_init.c			\
 				parsing/get_function.c			\
 				# parsing/parsing_utils.c
 
