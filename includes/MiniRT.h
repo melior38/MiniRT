@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/19 14:29:50 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:48:27 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void		ft_handle_error(int error);
 
 /////////////////////////////// PARSING_UTILS.C ////////////////////////////////
 
-int			init_file(t_data *data, char *line);
+bool			init_file(t_data *data, char *line);
 int			parsing(t_data *data, int ac, char *av);
 int			tab_check(int *tab);
 void		init_tab(int *tab);

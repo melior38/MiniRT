@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/13 09:23:59 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:37:27 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int parsing(t_data *data, int ac, char *av)
 	{
 		if (init_file(data, line) == false)
 			return (2);
-		// printf("%s", line);
 		line = get_next_line(fd);
 	}
 	free(line);
