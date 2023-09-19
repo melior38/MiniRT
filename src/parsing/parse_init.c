@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:42:43 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/19 14:07:41 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:11:02 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,9 @@ bool	Camera_set(t_object *list, char **arg_tab)
 {
 	if (get_coor(list->center_coor, arg_tab[1]))
 		return (false);
-	
+	if (get_vector(list->vector, arg_tab[2]))
+		return (false);
+	if 
 	return (0);
 }
 
