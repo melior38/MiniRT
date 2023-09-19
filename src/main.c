@@ -75,7 +75,7 @@ int	main(int ac, char **av)
 	// void	*mlx_win;
 	// void	*mlx;
 	// t_data	data;
-	
+	open_fd(ac, av);
 	if (ac != 2)
 	{
 		perror("wrong amount of argument \n");

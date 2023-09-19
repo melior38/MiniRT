@@ -163,4 +163,6 @@ bool		get_rgb(t_rgb *rgb);
 bool		get_dimension(double *value, char *str);
 bool		get_coor(t_axis *axis, char *str);
 
+
+int	open_fd(int ac, char **av);
 #endif
