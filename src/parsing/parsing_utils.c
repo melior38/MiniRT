@@ -51,7 +51,7 @@ bool	check_line(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if ((line[i] <= '9' && line >= '0') || line[i] == ' '
+		if ((line[i] <= '9' && line[i] >= '0') || line[i] == ' '
 				|| line[i] == ',' || line[i] == '.')
 			i++;
 		else
@@ -65,24 +65,30 @@ bool	init_file(t_data *data, char *line)
 	int i;
 	char **s_line;
 
+	(void) data;
 	i = 0;
 	if (check_line(line) == false)
 		return (false);
 	s_line = ft_split(line, ' ');
-	if (!ft_strncmp(line, 'A ', 2))
-		redirect_function(Ambient_light_set(data->param, s_line), data->param, s_line);
-	if (!ft_strncmp(line, 'C ', 2))
-		redirect_function(Camera_set(data->param, s_line), data->param, s_line);
-	if (!ft_strncmp(line, 'L ', 2))
-		redirect_function(Light_set(data->param, s_line), data->param, s_line);
-	if (!ft_strncmp(line, 'sp ', 3))
-		redirect_function(spheres_set(data->param, s_line), data->param, s_line);
-	if (!ft_strncmp(line, 'cy ', 3))
-		redirect_function(cylinders_set(data->param, s_line), data->param, s_line);
-	if (!ft_strncmp(line, 'pl ', 3))
-		redirect_function(plane_set(data->param, s_line), data->param, s_line);
-	if (data->param->error)
-		return (false);
+	while (s_line[i])
+	{
+		printf("s_line[%d] [%s]\n", i, s_line[i]);
+		i++;
+	}
+//	if (!ft_strncmp(line, 'A ', 2))
+//		redirect_function(Ambient_light_set(data->param, s_line), data->param, s_line);
+//	if (!ft_strncmp(line, 'C ', 2))
+//		redirect_function(Camera_set(data->param, s_line), data->param, s_line);
+//	if (!ft_strncmp(line, 'L ', 2))
+//		redirect_function(Light_set(data->param, s_line), data->param, s_line);
+//	if (!ft_strncmp(line, 'sp ', 3))
+//		redirect_function(spheres_set(data->param, s_line), data->param, s_line);
+//	if (!ft_strncmp(line, 'cy ', 3))
+//		redirect_function(cylinders_set(data->param, s_line), data->param, s_line);
+//	if (!ft_strncmp(line, 'pl ', 3))
+//		redirect_function(plane_set(data->param, s_line), data->param, s_line);
+//	if (data->param->error)
+//		return (false);
 	return (true);
 }
 
@@ -91,16 +97,19 @@ int parsing(t_data *data, int ac, char *av)
 	int		fd;
 	char	*line;
 
+	(void) data;
+	printf("av [%s]\n", av);
 	fd = open_fd(ac, av);
 	line = get_next_line(fd);
-	while (line)
-	{
-		if (init_file(data, line) == false)
-			return (2);
-		// printf("%s", line);
-		line = get_next_line(fd);
-	}
+	printf("line [%s]\n", line);
+//	while (line)
+//	{
+//		if (init_file(data, line) == false)
+//			return (2);
+//	printf("%s", line);
+//		line = get_next_line(fd);
+//	}
 	free(line);
-	line = NULL;
+//	line = NULL;
 	return (0);
 }

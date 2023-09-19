@@ -71,11 +71,14 @@ void	ft_handle_error(int error)
 
 int	main(int ac, char **av)
 {
-	(void)	**av;
-	 void	*mlx_win;
-	 void	*mlx;
-	 t_data	data;
-	 parsing(&data ,av[1]);
+//	 void	*mlx_win;
+//	 void	*mlx;
+//	 t_data	data;
+	char *line;
+
+	line = get_next_line(open_fd(ac, av[1]));
+	printf ("[%s]\n", line);
+//	 parsing(&data ,ac,av[1]);
 	 if (ac != 2)
 	 {
 		 perror("wrong amount of argument \n");
