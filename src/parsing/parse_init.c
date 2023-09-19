@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:42:43 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/19 14:11:02 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:35:03 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,142 +135,68 @@ bool	Ambient_light_set(t_object *list, char **arg_tab)
 		return (false);
 	if (get_rgb(list->rgb, arg_tab[2]) == false);
 		return (false);
-	return (0);
+	return (true);
 }
 
 bool	Camera_set(t_object *list, char **arg_tab)
 {
-	if (get_coor(list->center_coor, arg_tab[1]))
+	list->type = CAMERA;
+	if (get_coor(list->center_coor, arg_tab[1]) == false)
 		return (false);
-	if (get_vector(list->vector, arg_tab[2]))
+	if (get_vector(list->vector, arg_tab[2]) == false)
 		return (false);
-	if 
-	return (0);
+	list->fov = ft_atoi(arg_tab[3]);
+	return (true);
 }
 
 bool	Light_set(t_object *list, char **arg_tab)
 {
-	int		i;
-
-	i = 1;
-	while (arg_tab[i])
-		i++;
-	if (i != 3)
-		return (1);
-	light->view_point->x = coor_convertor(arg_tab[1], 'x');
-	light->view_point->y = coor_convertor(arg_tab[1], 'y');
-	light->view_point->z = coor_convertor(arg_tab[1], 'z');
-	if (light->view_point->x == 123.123001 || light->view_point->x == 123.123001
-			 || light->view_point->x == 123.123001)
-		return (1);
-	light->brightness = ft_atof(arg_tab[2]);
-	if (light->brightness == 123.123001)
-		return (1);
-	light->rgb->r = rgb_convertor(arg_tab[3], 'r');
-	light->rgb->g = rgb_convertor(arg_tab[3], 'g');
-	light->rgb->b = rgb_convertor(arg_tab[3], 'b');
-	if (light->rgb->r < 0 || light->rgb->g < 0 || light->rgb->b < 0)
-		return (1);
-	return (0);
+	list->type = LIGHT;
+	if (get_coor(list->center_coor, arg_tab[1]) == false)
+		return (false);
+	if (get_ratio(&(list->b_ratio), arg_tab[2]) == false)
+		return (false);
+	if (get_rgb(list->rgb, arg_tab[3]) == false);
+		return (false);
+	return (true);
 }
 
 bool	plane_set(t_object *list, char **arg_tab)
 {
-	int		i;
-
-	i = 1;
-	while (arg_tab[i])
-		i++;
-	if (i != 3)
-		return (1);
-	plane->pl_coor->x = coor_convertor(arg_tab[1], 'x');
-	plane->pl_coor->y = coor_convertor(arg_tab[1], 'y');
-	plane->pl_coor->z = coor_convertor(arg_tab[1], 'z');
-	if (plane->pl_coor->x == 123.123001 || plane->pl_coor->x == 123.123001
-			 || plane->pl_coor->x == 123.123001)
-		return (1);
-	plane->normalized_vector->x = coor_convertor(arg_tab[2], 'x'); 
-	plane->normalized_vector->y = coor_convertor(arg_tab[2], 'y'); 
-	plane->normalized_vector->z = coor_convertor(arg_tab[2], 'z'); 
-	if (plane->normalized_vector->x == 123.123001 || plane->normalized_vector->x == 123.123001
-			 || plane->normalized_vector->x == 123.123001)
-		return (1);
-	else if ((plane->normalized_vector->x < -1.0 || plane->normalized_vector->x > 1.0) || 
-			(plane->normalized_vector->y < -1.0 || plane->normalized_vector->y > 1.0) ||
-			(plane->normalized_vector->z < -1.0 || plane->normalized_vector->z > 1.0))
-		return (1);
-	plane->rgb->r = rgb_convertor(arg_tab[3], 'r');
-	plane->rgb->g = rgb_convertor(arg_tab[3], 'g');
-	plane->rgb->b = rgb_convertor(arg_tab[3], 'b');
-	if (plane->rgb->r < 0 || plane->rgb->g < 0 || plane->rgb->b < 0)
-		return (1);
-	return (0);
+	list->type = PLAN;
+	if (get_coor(list->center_coor, arg_tab[1]) == false)
+		return (false);
+	if (get_vector(list->vector, arg_tab[2]) == false)
+		return (false);
+	if (get_rgb(list->rgb, arg_tab[3]) == false);
+		return (false);
+	return (true);
 }
 
 bool	sphere_set(t_object *list, char **arg_tab)
 {
-	int		i;
-
-	i = 1;
-	while (arg_tab[i])
-		i++;
-	if (i != 3)
-		return (1);
-	sphere->sp_center->x = coor_convertor(arg_tab[1], 'x');
-	sphere->sp_center->y = coor_convertor(arg_tab[1], 'y');
-	sphere->sp_center->z = coor_convertor(arg_tab[1], 'z');
-	if (sphere->sp_center->x == 123.123001 || sphere->sp_center->x == 123.123001
-			 || sphere->sp_center->x == 123.123001)
-		return (1);
-	sphere->radius = (float)ft_atof(arg_tab[2]);
-	if (sphere->radius > 1 || sphere->radius < 0 
-			|| sphere->radius == 123.123001)
-		return (1);
-	sphere->colour->r = rgb_convertor(arg_tab[3], 'r');
-	sphere->colour->g = rgb_convertor(arg_tab[3], 'g');
-	sphere->colour->b = rgb_convertor(arg_tab[3], 'b');
-	if (sphere->colour->r < 0 || sphere->colour->g < 0 || sphere->colour->b < 0)
-		return (1);
-	return (0);
+	list->type = SPHERE;
+	if (get_coor(list->center_coor, arg_tab[1]) == false)
+		return (false);
+	if (get_dimension(&(list->diameter), arg_tab[2]) == false)
+		return (false);
+	if (get_rgb(list->rgb, arg_tab[3]) == false);
+		return (false);
+	return (true);
 }
 
 bool	cylinder_set(t_object *list, char **arg_tab)
 {
-	int		i;
-
-	i = 1;
-	while (arg_tab[i])
-		i++;
-	if (i != 5)
-		return (1);
-	cylinder->cy_center->x = coor_convertor(arg_tab[1], 'x');
-	cylinder->cy_center->y = coor_convertor(arg_tab[1], 'y');
-	cylinder->cy_center->z = coor_convertor(arg_tab[1], 'z');
-	if (cylinder->cy_center->x == 123.123001 || cylinder->cy_center->x == 123.123001
-			 || cylinder->cy_center->x == 123.123001)
-		return (1);
-	cylinder->normalized_vector->x = coor_convertor(arg_tab[2], 'x'); 
-	cylinder->normalized_vector->y = coor_convertor(arg_tab[2], 'y'); 
-	cylinder->normalized_vector->z = coor_convertor(arg_tab[2], 'z'); 
-	if (cylinder->normalized_vector->x == 123.123001 || cylinder->normalized_vector->x == 123.123001
-			 || cylinder->normalized_vector->x == 123.123001)
-		return (1);
-	else if ((cylinder->normalized_vector->x < -1.0 || cylinder->normalized_vector->x > 1.0) || 
-			(cylinder->normalized_vector->y < -1.0 || cylinder->normalized_vector->y > 1.0) ||
-			(cylinder->normalized_vector->z < -1.0 || cylinder->normalized_vector->z > 1.0))
-		return (1);
-	cylinder->diameter = (float)ft_atof(arg_tab[3]);
-	if (cylinder->diameter > 1 || cylinder->diameter < 0 
-			|| cylinder->diameter == 123.123001)
-		return (1);
-	cylinder->height = (float)ft_atof(arg_tab[4]);
-	if (cylinder->height > 1 || cylinder->height < 0 
-			|| cylinder->height == 123.123001)
-		return (1);
-	cylinder->rgb->r = rgb_convertor(arg_tab[5], 'r');
-	cylinder->rgb->g = rgb_convertor(arg_tab[5], 'g');
-	cylinder->rgb->b = rgb_convertor(arg_tab[5], 'b');
-	if (cylinder->rgb->r < 0 || cylinder->rgb->g < 0 || cylinder->rgb->b < 0)
-		return (1);
-	return (0);
+	list->type = CYLINDER;
+	if (get_coor(list->center_coor, arg_tab[1]) == false)
+		return (false);
+	if (get_vector(&(list->vector), arg_tab[2]) == false)
+		return (false);
+	if (get_dimension(&(list->height), arg_tab[2]) == false)
+		return (false);
+	if (get_dimension(&(list->diameter), arg_tab[2]) == false)
+		return (false);
+	if (get_rgb(list->rgb, arg_tab[5]) == false);
+		return (false);
+	return (true);
 }

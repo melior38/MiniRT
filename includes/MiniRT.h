@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/19 13:51:43 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:29:50 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
 # define AMBIENT_LIGHT 1
 # define CAMERA 2
 # define LIGHT 3
-# define PLANE 4
+# define PLAN 4
 # define SPHERE 5
-# define CYLINDERS 6
+# define CYLINDER 6
 
 typedef struct s_axis {
 	float	x;
