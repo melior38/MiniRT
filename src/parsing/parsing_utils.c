@@ -86,16 +86,12 @@ bool	init_file(t_data *data, char *line)
 	return (true);
 }
 
-int parsing(t_data *data, char *av)
+int parsing(t_data *data, int ac, char *av)
 {
 	int		fd;
 	char	*line;
 
-	if (check_rt_file(av))
-		return (1);
-	fd = open(av, O_RDONLY | O_DIRECTORY);
-	if (fd == -1)
-		return (1);
+	fd = open_fd(ac, av);
 	line = get_next_line(fd);
 	while (line)
 	{
