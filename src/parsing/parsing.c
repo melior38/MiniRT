@@ -22,17 +22,17 @@ int	print_error(char *msg, int code)
 /// Check args and open it
 /// \param ac number of args
 /// \param av args
-int	open_fd(int ac, char **av)
+int	open_fd(int ac, char *av)
 {
 	int		fd;
 	int 	i;
 
 	if (ac != 2)
 		return (print_error("Usage ./minirt example\n",ERROR));
-	i = ft_strlen(av[1]);
-	if (ft_strncmp(av[1] + i - 3, ".rt", 4))
+	i = ft_strlen(av);
+	if (ft_strncmp(av + i - 3, ".rt", 4))
 		return (print_error("Only .rt are allowed\n", ERROR));
-	fd = open(av[1], O_RDONLY);
+	fd = open(av, O_RDONLY);
 	if (fd < 0)
 		return (print_error("Open the noor pls\n", ERROR));
 	return (fd);

@@ -90,7 +90,7 @@ void		ft_handle_error(int error);
 /////////////////////////////// PARSING_UTILS.C ////////////////////////////////
 
 int			init_file(t_data *data, char *line);
-int			parsing(t_data *data, char *av);
+int			parsing(t_data *data, int ac, char *av);
 int			tab_check(int *tab);
 void		init_tab(int *tab);
 int			check_rt_file(char *av);
@@ -121,6 +121,7 @@ bool		get_dimension(double *value, char *str);
 bool		get_coor(t_axis *axis, char *str);
 bool		get_ratio(double *ratio, char *str);
 
+////////////////////////////////// FT_PARSING.C/////////////////////////////////
+int			open_fd(int ac, char *av);
 
-int	open_fd(int ac, char **av);
 #endif
