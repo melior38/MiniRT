@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 12:08:26 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/13 09:49:39 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/19 13:51:31 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ bool	get_ratio(double *ratio, char *str)
 {
 	*ratio = ft_atod(str);
 	if (*ratio == 123.123001 || (*ratio < 0.0 || *ratio > 1.0))
-		return (false);
+		return (1);
 	return (true);
 }

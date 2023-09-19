@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:42:43 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/14 08:41:57 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:07:41 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,11 +130,8 @@ float	coor_convertor(char *str, char coor)
 
 bool	Ambient_light_set(t_object *list, char **arg_tab)
 {
-	double *ptr;
-
-	*ptr = list->b_ratio;
 	list->type = AMBIENT_LIGHT;
-	if (get_ratio(ptr, arg_tab[1]) == false)
+	if (get_ratio(&(list->b_ratio), arg_tab[1]) == false)
 		return (false);
 	if (get_rgb(list->rgb, arg_tab[2]) == false);
 		return (false);
@@ -143,18 +140,9 @@ bool	Ambient_light_set(t_object *list, char **arg_tab)
 
 bool	Camera_set(t_object *list, char **arg_tab)
 {
-	int		i;
-
-	i = 1;
-	while (arg_tab[i])
-		i++;
-	if (i != 3)
-		return (1);
-	else if ((camera->view_coor->x < -1.0 || camera->view_coor->x > 1.0) || 
-			(camera->view_coor->y < -1.0 || camera->view_coor->y > 1.0) ||
-			(camera->view_coor->z < -1.0 || camera->view_coor->z > 1.0))
-		return (1);
-	camera->FOV = ft_atoi(arg_tab[3]); // g pas integrer de check char sur le atoi si jaja
+	if (get_coor(list->center_coor, arg_tab[1]))
+		return (false);
+	
 	return (0);
 }
 
