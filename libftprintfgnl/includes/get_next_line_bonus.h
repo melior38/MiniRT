@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcamilo- <lcamilo-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 00:28:51 by lcamilo-          #+#    #+#             */
-/*   Updated: 2022/10/27 21:07:41 by lcamilo-         ###   ########.fr       */
+/*   Updated: 2023/09/19 17:23:40 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int		read_buffer(char *buffer);
 void	free_buffer(char **buffer, int fd);
 int		read_line(char **line, int fd, int i);
 //gnl_utils.c
-char	*ft_strchr(const char *s, int c);
 char	*ft_strlendup(const char *s, int i);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strlenjoin(char const *s1, char const *s2, int i);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcamilo- <lcamilo-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 00:28:43 by lcamilo-          #+#    #+#             */
-/*   Updated: 2022/10/27 00:28:43 by lcamilo-         ###   ########.fr       */
+/*   Updated: 2023/09/19 17:24:06 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,6 @@ char	*ft_strlenjoin(const char *s1, const char *s2, int len)
 	}
 	*str = 0;
 	return (ret);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	if (!s)
-		return (0);
-	while (*s)
-	{
-		if (*s == ((char)c))
-			return ((char *)s);
-		s++;
-	}
-	if (c == 0)
-		return ((char *)s);
-	return (0);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
