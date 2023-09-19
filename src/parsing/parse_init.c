@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:42:43 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/11 13:48:30 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/14 08:41:57 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_tab(char **tab)
 	tab = NULL;
 }
 
-int	check_str_float(char *str)
+bool	check_str_float(char *str)
 {
 	int i;
 	int comma_count;
@@ -128,24 +128,20 @@ float	coor_convertor(char *str, char coor)
 	return (res);
 }
 
-int	Ambient_light_set(t_param *param, char **arg_tab)
+bool	Ambient_light_set(t_object *list, char **arg_tab)
 {
-	int i;
+	double *ptr;
 
-	i = 1;
-	while (arg_tab[i])
-		i++;
-	if (i != 2)
-		return (1);
-	param->A_light->rgb->r = rgb_convertor(arg_tab[2], 'r');
-	param->A_light->rgb->g = rgb_convertor(arg_tab[2], 'g');
-	param->A_light->rgb->b = rgb_convertor(arg_tab[2], 'b');
-	if (param->A_light->rgb->r < 0 || param->A_light->rgb->g < 0 || param->A_light->rgb->b < 0)
-		return (1);
+	*ptr = list->b_ratio;
+	list->type = AMBIENT_LIGHT;
+	if (get_ratio(ptr, arg_tab[1]) == false)
+		return (false);
+	if (get_rgb(list->rgb, arg_tab[2]) == false);
+		return (false);
 	return (0);
 }
 
-int	Camera_set(t_param *param, char **arg_tab)
+bool	Camera_set(t_object *list, char **arg_tab)
 {
 	int		i;
 
@@ -162,7 +158,7 @@ int	Camera_set(t_param *param, char **arg_tab)
 	return (0);
 }
 
-int	Light_set(t_param *param, char **arg_tab)
+bool	Light_set(t_object *list, char **arg_tab)
 {
 	int		i;
 
@@ -188,7 +184,7 @@ int	Light_set(t_param *param, char **arg_tab)
 	return (0);
 }
 
-int	plane_set(t_param *param, char **arg_tab)
+bool	plane_set(t_object *list, char **arg_tab)
 {
 	int		i;
 
@@ -221,7 +217,7 @@ int	plane_set(t_param *param, char **arg_tab)
 	return (0);
 }
 
-int	sphere_set(t_param *param, char **arg_tab)
+bool	sphere_set(t_object *list, char **arg_tab)
 {
 	int		i;
 
@@ -248,7 +244,7 @@ int	sphere_set(t_param *param, char **arg_tab)
 	return (0);
 }
 
-int	cylinder_set(t_param *param, char **arg_tab)
+bool	cylinder_set(t_object *list, char **arg_tab)
 {
 	int		i;
 
