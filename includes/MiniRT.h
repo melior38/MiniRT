@@ -47,20 +47,20 @@ typedef struct s_rgb {
 
 typedef struct s_object
 {
-	int					type; // je dirai plutot un int type avec des define c plus lisible qu'un id en char 
+	int					type;
 	double				b_ratio;
 	int					fov;
+	double 				bright;
 	double 				diameter;
 	double				height;
 	t_axis				*center_coor;
-	t_axis 				*vector; //A changer ? ui 8->
+	t_axis 				*vector;
 	t_rgb				*rgb;
 	struct t_object		*next;
 }	t_object;
 
 typedef struct s_param {
 	t_object			*list;
-	int					error;
 
 }						t_param;
 
@@ -72,6 +72,8 @@ typedef struct s_data {
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
+	int			error;
+	t_object 	*obj;
 	t_param		*param;
 	
 }				t_data;
@@ -81,7 +83,15 @@ typedef struct s_data {
 int			main(int ac, char **av);
 void		ft_handle_error(int error);
 
+//////////////////////////////// OBJ_UTILS.C ///////////////////////////////////
 
+t_object	*create_alight(double ratio, t_rgb *rgb);
+t_object	*create_camera(t_axis *coor, t_axis *vector, int fov);
+t_object	*create_light(t_axis *coor, double bright, t_rgb *rgb);
+t_object	*create_plane(t_axis *coor, t_axis *vector, t_rgb *rgb);
+t_object	*create_sphere(t_axis *coor, double diam, t_rgb *rgb);
+t_object	*create_cylinder(t_axis *coor, t_axis *vector, double diam,
+				double height, t_rgb *rgb);
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////// parsing ///////////////////////////////////
 //////////////////////////////////// folder ////////////////////////////////////
@@ -89,7 +99,7 @@ void		ft_handle_error(int error);
 
 /////////////////////////////// PARSING_UTILS.C ////////////////////////////////
 
-bool		init_file(t_data *data, char *line);
+void		init_file(t_data *data, char *line);
 int			parsing(t_data *data, int ac, char *av);
 int			tab_check(int *tab);
 void		init_tab(int *tab);

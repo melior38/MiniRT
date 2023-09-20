@@ -25,7 +25,7 @@ int	print_error(char *msg, int code)
 int	open_fd(int ac, char *av)
 {
 	int		fd;
-	int 	i;
+	size_t 	i;
 
 	if (ac != 2)
 		return (print_error("Usage ./minirt example\n",ERROR));

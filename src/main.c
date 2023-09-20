@@ -73,17 +73,10 @@ int	main(int ac, char **av)
 {
 //	 void	*mlx_win;
 //	 void	*mlx;
-//	 t_data	data;
-	char *line;
+	 t_data	data;
 
-	line = get_next_line(open_fd(ac, av[1]));
-	printf ("[%s]\n", line);
-//	 parsing(&data ,ac,av[1]);
-	 if (ac != 2)
-	 {
-		 perror("wrong amount of argument \n");
-		 exit(1);
-	 }
+
+	 parsing(&data ,ac,av[1]);
 //	printf("coor_convertor est-il foncionnel ? [%f]\n", (float)coor_convertor("1.0,0,0", 'x'));
 //	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor("1.0,0,0", 'r'));
 //	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor(",,", 'g'));
