@@ -6,19 +6,13 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 08:57:43 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/21 09:51:31 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/21 10:36:37 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "MiniRT.h"
 
-// en attendant de la rajouter dans nos structs
-typedef struct s_vec {
-	double	x;
-	double	y;
-	double	z;
-}				t_vec;
 
 // donne la norm d'un vecteur (sa longueur)
 double	vec_norm(t_vec vec)
@@ -60,7 +54,7 @@ t_vec	add_vec(t_vec vec1, t_vec vec2)
 }
 
 // soustraction de 2 vecteur et return le resultat attention au sens
-t_vec	add_vec(t_vec vec1, t_vec vec2)
+t_vec	subs_vec(t_vec vec1, t_vec vec2)
 {
 	t_vec res;
 

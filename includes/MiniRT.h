@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/19 16:58:03 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/21 10:37:59 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ typedef struct s_rgb {
 	int	b;
 
 }				t_rgb;
+
+// en attendant de la rajouter dans nos structs
+typedef struct s_vec {
+	double	x;
+	double	y;
+	double	z;
+}				t_vec;
 
 typedef struct s_object
 {
@@ -121,7 +128,27 @@ bool		get_dimension(double *value, char *str);
 bool		get_coor(t_axis *axis, char *str);
 bool		get_ratio(double *ratio, char *str);
 
-////////////////////////////////// FT_PARSING.C/////////////////////////////////
+///////////////////////////////// PARSING.C ////////////////////////////////////
 int			open_fd(int ac, char *av);
+int			print_error(char *msg, int code);
+
+
+////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// projection /////////////////////////////////
+//////////////////////////////////// folder ////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////// VEC_UTILS.C /////////////////////////////////
+
+double		vec_norm(t_vec vec);
+void		normed_vec(t_vec *vec);
+t_vec		cross_product(t_vec vec1, t_vec vec2);
+t_vec		add_vec(t_vec vec1, t_vec vec2);
+t_vec		subs_vec(t_vec vec1, t_vec vec2);
+t_vec		scale_vec(t_vec vec, double scaling);
+
+//////////////////////////////// VEC_OPERATION.C ////////////////////////////////
+
+
 
 #endif
