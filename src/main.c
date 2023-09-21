@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/19 17:31:54 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/21 09:51:43 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-// void	ft_minirt(int x, int y, t_data *data)
-// {
-// 	return ;
-// }
 
 int	render_next_frame(void *yourstruct)
 {
@@ -45,7 +41,7 @@ int	render_next_frame(void *yourstruct)
 		y = 0;
 		while (y < HEIGTH)
 		{
-			// ft_minirt();
+			// my_mlx_pixel_put(data, x, y, ft_minirt(data->param, x, y, pix()));
 			y++;
 		}
 		x++;
