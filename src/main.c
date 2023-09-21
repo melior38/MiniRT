@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/11 10:18:32 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/21 09:51:43 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-// void	ft_minirt(int x, int y, t_data *data)
-// {
-// 	return ;
-// }
 
 int	render_next_frame(void *yourstruct)
 {
@@ -45,7 +41,7 @@ int	render_next_frame(void *yourstruct)
 		y = 0;
 		while (y < HEIGTH)
 		{
-			// ft_minirt();
+			// my_mlx_pixel_put(data, x, y, ft_minirt(data->param, x, y, pix()));
 			y++;
 		}
 		x++;
@@ -75,14 +71,18 @@ int	main(int ac, char **av)
 //	 void	*mlx;
 	 t_data	data;
 
-
 	 parsing(&data ,ac,av[1]);
+	 if (ac != 2)
+	 {
+		 perror("wrong amount of argument \n");
+		 exit(1);
+	 }
+	 ft_handle_error(parsing(&data ,ac,av[1]));
 //	printf("coor_convertor est-il foncionnel ? [%f]\n", (float)coor_convertor("1.0,0,0", 'x'));
 //	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor("1.0,0,0", 'r'));
 //	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor(",,", 'g'));
 //	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor("255,30,45,", 'b'));
 //	 struct_set(data); pour deja inserer les valeurs go essayer de ne pas malloc se serai nice
-	// ft_handle_error(parsing(&data, av[1]));
 	// mlx = mlx_init();
 	// mlx_win = mlx_new_window(mlx, WIDTH, HEIGTH, "MiniRT");
 	// data.img = mlx_new_image(mlx, WIDTH, HEIGTH);
