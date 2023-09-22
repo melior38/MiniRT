@@ -82,7 +82,6 @@ void	init_file(t_data *data, char *line)
 	i = 0;
 //	if (check_line(line) == false)
 //		return (false);
-	(void) data;
 	s_line = ft_split(line, ' ');
 	while (s_line[i])
 	{
@@ -90,9 +89,14 @@ void	init_file(t_data *data, char *line)
 		i++;
 	}
 	if (ft_strcmp(s_line[0], "A") == 0)
-		create_alight(ft_atod(s_line[1]), NULL);
+		create_alight(data, s_line);
 }
 
+/// Recupere le fd via la fonction open_fd et creer les objects
+/// \param data structure principal
+/// \param ac nb d'arguments
+/// \param av args
+/// \return a voir
 int parsing(t_data *data, int ac, char *av)
 {
 	int		fd;
@@ -102,12 +106,16 @@ int parsing(t_data *data, int ac, char *av)
 	line = get_next_line(fd);
 	while (line)
 	{
-//		if (init_file(data, line) == false)
-//			return (2);
 		init_file(data, line);
+		if (data->error != 0)
+		{
+			ft_printf("Error...\n"); //A coder une sortie d'erreur
+			free(line);
+			return(0);
+		}
 		line = get_next_line(fd);
 	}
 	free(line);
 	line = NULL;
-	return (0);
+	return (1);
 }

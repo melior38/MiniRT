@@ -12,23 +12,22 @@
 
 #include "MiniRT.h"
 
-t_object	*create_alight(double ratio, t_rgb *rgb)
+//[A] [0.2] [255,255,255]
+t_alight	*create_alight(t_data *data, char **args)
 {
-	t_object	*new;
+	t_alight	*new;
 
-	new = malloc(sizeof(t_object));
+	new = malloc(sizeof(t_alight));
 	if (!new)
 		return (NULL);
-	new->type = AMBIENT_LIGHT;
-	new->b_ratio = ratio;
-	new->fov = NULL;
-	new->bright = NULL;
-	new->diameter = NULL;
-	new->height = NULL;
-	new->center_coor = NULL;
-	new->vector = NULL;
-	new->rgb = rgb;
-	new->next = NULL;
+	if (ft_atod(args[1]) >= 0.0 && ft_atod(args[1]) <= 1.0)
+		new->ratio = ft_atod(args[1]);
+	else
+	{
+		data->error = 1;
+		return (NULL);
+	}
+	new->rgb = rgb_converter(data, args[2]);
 	return (new);
 }
 
@@ -40,14 +39,9 @@ t_object	*create_camera(t_axis *coor, t_axis *vector, int fov)
 	if (!new)
 		return (NULL);
 	new->type = CAMERA;
-	new->b_ratio = NULL;
 	new->fov = fov;
-	new->bright = NULL;
-	new->diameter = NULL;
-	new->height = NULL;
 	new->center_coor = coor;
 	new->vector = vector;
-	new->rgb = NULL;
 	new->next = NULL;
 	return (new);
 }
@@ -60,13 +54,8 @@ t_object	*create_light(t_axis *coor, double bright, t_rgb *rgb)
 	if (!new)
 		return (NULL);
 	new->type = LIGHT;
-	new->b_ratio = NULL;
-	new->fov = NULL;
 	new->bright = bright;
-	new->diameter = NULL;
-	new->height = NULL;
-	new->center_coor = NULL;
-	new->vector = NULL;
+	new->center_coor = coor;
 	new->rgb = rgb;
 	new->next = NULL;
 	return (new);
@@ -80,11 +69,6 @@ t_object	*create_plane(t_axis *coor, t_axis *vector, t_rgb *rgb)
 	if (!new)
 		return (NULL);
 	new->type = PLAN;
-	new->b_ratio = NULL;
-	new->fov = NULL;
-	new->bright = NULL;
-	new->diameter = NULL;
-	new->height = NULL;
 	new->center_coor = coor;
 	new->vector = vector;
 	new->rgb = rgb;
@@ -100,13 +84,8 @@ t_object	*create_sphere(t_axis *coor, double diam, t_rgb *rgb)
 	if (!new)
 		return (NULL);
 	new->type = SPHERE;
-	new->b_ratio = NULL;
-	new->fov = NULL;
-	new->bright = NULL;
+	new->center_coor = coor;
 	new->diameter = diam;
-	new->height = NULL;
-	new->center_coor = NULL;
-	new->vector = NULL;
 	new->rgb = rgb;
 	new->next = NULL;
 	return (new);
@@ -121,9 +100,6 @@ t_object	*create_cylinder(t_axis *coor, t_axis *vector, double diam,
 	if (!new)
 		return (NULL);
 	new->type = CYLINDER;
-	new->b_ratio = NULL;
-	new->fov = NULL;
-	new->bright = NULL;
 	new->diameter = diam;
 	new->height = height;
 	new->center_coor = coor;

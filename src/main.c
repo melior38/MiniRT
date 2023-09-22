@@ -65,12 +65,26 @@ void	ft_handle_error(int error)
 	}
 }
 
+void	init_data(t_data *data)
+{
+	data->img = NULL;
+	data->addr = NULL;
+	data->mlx = NULL;
+	data->mlx_win = NULL;
+	data->bits_per_pixel = 0;
+	data->line_length = 0;
+	data->endian = 0;
+	data->error = 0;
+	data->param = NULL;
+}
+
 int	main(int ac, char **av)
 {
 //	 void	*mlx_win;
 //	 void	*mlx;
 	 t_data	data;
 
+	 init_data(&data);
 	 parsing(&data ,ac,av[1]);
 	 if (ac != 2)
 	 {

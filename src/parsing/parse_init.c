@@ -82,14 +82,14 @@ bool	check_str_int(char *str)
 
 int	rgb_convertor(char *str, char rgb)
 {
-	int		i;
+//	int		i;
 	char	**splited_rgb;
 	int		res;
 	int		index;
 
 	if (check_str_int(str))
 		return (-1);
-	i = 0;
+//	i = 0;
 	if (rgb == 'r')
 		index = 0;
 	if (rgb == 'g')
@@ -108,14 +108,14 @@ int	rgb_convertor(char *str, char rgb)
 
 float	coor_convertor(char *str, char coor)
 {
-	int		i;
+//	int		i;
 	char	**splited_coor;
 	float		res;
 	int		index;
 
 	if (check_str_float(str))
 		return (-1);
-	i = 0;
+//	i = 0;
 	if (coor == 'x')
 		index = 0;
 	if (coor == 'y')
@@ -128,75 +128,75 @@ float	coor_convertor(char *str, char coor)
 	return (res);
 }
 
-bool	Ambient_light_set(t_object *list, char **arg_tab)
-{
-	list->type = AMBIENT_LIGHT;
-	if (get_ratio(&(list->b_ratio), arg_tab[1]) == false)
-		return (false);
-	if (get_rgb(list->rgb, arg_tab[2]) == false);
-		return (false);
-	return (true);
-}
-
-bool	Camera_set(t_object *list, char **arg_tab)
-{
-	list->type = CAMERA;
-	if (get_coor(list->center_coor, arg_tab[1]) == false)
-		return (false);
-	if (get_vector(list->vector, arg_tab[2]) == false)
-		return (false);
-	list->fov = ft_atoi(arg_tab[3]);
-	return (true);
-}
-
-bool	Light_set(t_object *list, char **arg_tab)
-{
-	list->type = LIGHT;
-	if (get_coor(list->center_coor, arg_tab[1]) == false)
-		return (false);
-	if (get_ratio(&(list->b_ratio), arg_tab[2]) == false)
-		return (false);
-	if (get_rgb(list->rgb, arg_tab[3]) == false);
-		return (false);
-	return (true);
-}
-
-bool	plane_set(t_object *list, char **arg_tab)
-{
-	list->type = PLAN;
-	if (get_coor(list->center_coor, arg_tab[1]) == false)
-		return (false);
-	if (get_vector(list->vector, arg_tab[2]) == false)
-		return (false);
-	if (get_rgb(list->rgb, arg_tab[3]) == false);
-		return (false);
-	return (true);
-}
-
-bool	sphere_set(t_object *list, char **arg_tab)
-{
-	list->type = SPHERE;
-	if (get_coor(list->center_coor, arg_tab[1]) == false)
-		return (false);
-	if (get_dimension(&(list->diameter), arg_tab[2]) == false)
-		return (false);
-	if (get_rgb(list->rgb, arg_tab[3]) == false);
-		return (false);
-	return (true);
-}
-
-bool	cylinder_set(t_object *list, char **arg_tab)
-{
-	list->type = CYLINDER;
-	if (get_coor(list->center_coor, arg_tab[1]) == false)
-		return (false);
-	if (get_vector(&(list->vector), arg_tab[2]) == false)
-		return (false);
-	if (get_dimension(&(list->height), arg_tab[2]) == false)
-		return (false);
-	if (get_dimension(&(list->diameter), arg_tab[2]) == false)
-		return (false);
-	if (get_rgb(list->rgb, arg_tab[5]) == false)
-		return (false);
-	return (true);
-}
+//bool	Ambient_light_set(t_object *list, char **arg_tab)
+//{
+//	list->type = AMBIENT_LIGHT;
+//	if (get_ratio(&(list->b_ratio), arg_tab[1]) == false)
+//		return (false);
+//	if (get_rgb(list->rgb, arg_tab[2]) == false);
+//		return (false);
+//	return (true);
+//}
+//
+//bool	Camera_set(t_object *list, char **arg_tab)
+//{
+//	list->type = CAMERA;
+//	if (get_coor(list->center_coor, arg_tab[1]) == false)
+//		return (false);
+//	if (get_vector(list->vector, arg_tab[2]) == false)
+//		return (false);
+//	list->fov = ft_atoi(arg_tab[3]);
+//	return (true);
+//}
+//
+//bool	Light_set(t_object *list, char **arg_tab)
+//{
+//	list->type = LIGHT;
+//	if (get_coor(list->center_coor, arg_tab[1]) == false)
+//		return (false);
+//	if (get_ratio(&(list->b_ratio), arg_tab[2]) == false)
+//		return (false);
+//	if (get_rgb(list->rgb, arg_tab[3]) == false);
+//		return (false);
+//	return (true);
+//}
+//
+//bool	plane_set(t_object *list, char **arg_tab)
+//{
+//	list->type = PLAN;
+//	if (get_coor(list->center_coor, arg_tab[1]) == false)
+//		return (false);
+//	if (get_vector(list->vector, arg_tab[2]) == false)
+//		return (false);
+//	if (get_rgb(list->rgb, arg_tab[3]) == false);
+//		return (false);
+//	return (true);
+//}
+//
+//bool	sphere_set(t_object *list, char **arg_tab)
+//{
+//	list->type = SPHERE;
+//	if (get_coor(list->center_coor, arg_tab[1]) == false)
+//		return (false);
+//	if (get_dimension(&(list->diameter), arg_tab[2]) == false)
+//		return (false);
+//	if (get_rgb(list->rgb, arg_tab[3]) == false);
+//		return (false);
+//	return (true);
+//}
+//
+//bool	cylinder_set(t_object *list, char **arg_tab)
+//{
+//	list->type = CYLINDER;
+//	if (get_coor(list->center_coor, arg_tab[1]) == false)
+//		return (false);
+//	if (get_vector(&(list->vector), arg_tab[2]) == false)
+//		return (false);
+//	if (get_dimension(&(list->height), arg_tab[2]) == false)
+//		return (false);
+//	if (get_dimension(&(list->diameter), arg_tab[2]) == false)
+//		return (false);
+//	if (get_rgb(list->rgb, arg_tab[5]) == false)
+//		return (false);
+//	return (true);
+//}

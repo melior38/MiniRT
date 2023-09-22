@@ -42,12 +42,13 @@ SRC 		= 	main.c							\
 				parsing/parse_init.c			\
 				parsing/get_function.c			\
 				parsing/parsing_utils.c			\
-				utils/obj_utils.c
+				utils/obj_utils.c				\
+				utils/rgb_utils.c
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 OBJS				= ${SRC:.c=.o}
 OBJS_DIR			= objs
-DIRS				= objs objs/parsing obj/utils
+DIRS				= objs objs/parsing objs/utils
 _OBJS				= $(addprefix $(OBJS_DIR)/, $(OBJS))
 
 all: lib $(NAME)
