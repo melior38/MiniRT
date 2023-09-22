@@ -71,6 +71,7 @@ int	main(int ac, char **av)
 //	 void	*mlx;
 	 t_data	data;
 
+	 parsing(&data ,ac,av[1]);
 	 if (ac != 2)
 	 {
 		 perror("wrong amount of argument \n");

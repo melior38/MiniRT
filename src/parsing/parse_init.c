@@ -196,7 +196,7 @@ bool	cylinder_set(t_object *list, char **arg_tab)
 		return (false);
 	if (get_dimension(&(list->diameter), arg_tab[2]) == false)
 		return (false);
-	if (get_rgb(list->rgb, arg_tab[5]) == false);
+	if (get_rgb(list->rgb, arg_tab[5]) == false)
 		return (false);
 	return (true);
 }

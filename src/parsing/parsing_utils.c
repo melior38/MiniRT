@@ -60,36 +60,37 @@ bool	check_line(char *line)
 	return (true);
 }
 
-bool	init_file(t_data *data, char *line)
+int ft_strcmp(char *s1, char *s2)
+{
+	int i;
+
+	i = 0;
+	while (s1[i])
+	{
+		if (s1[i] != s2[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void	init_file(t_data *data, char *line)
 {
 	int i;
 	char **s_line;
 
-	(void) data;
 	i = 0;
-	if (check_line(line) == false)
-		return (false);
+//	if (check_line(line) == false)
+//		return (false);
+	(void) data;
 	s_line = ft_split(line, ' ');
 	while (s_line[i])
 	{
 		printf("s_line[%d] [%s]\n", i, s_line[i]);
 		i++;
 	}
-//	if (!ft_strncmp(line, 'A ', 2))
-//		redirect_function(Ambient_light_set(data->param, s_line), data->param, s_line);
-//	if (!ft_strncmp(line, 'C ', 2))
-//		redirect_function(Camera_set(data->param, s_line), data->param, s_line);
-//	if (!ft_strncmp(line, 'L ', 2))
-//		redirect_function(Light_set(data->param, s_line), data->param, s_line);
-//	if (!ft_strncmp(line, 'sp ', 3))
-//		redirect_function(spheres_set(data->param, s_line), data->param, s_line);
-//	if (!ft_strncmp(line, 'cy ', 3))
-//		redirect_function(cylinders_set(data->param, s_line), data->param, s_line);
-//	if (!ft_strncmp(line, 'pl ', 3))
-//		redirect_function(plane_set(data->param, s_line), data->param, s_line);
-//	if (data->param->error)
-//		return (false);
-	return (true);
+	if (ft_strcmp(s_line[0], "A") == 0)
+		create_alight(ft_atod(s_line[1]), NULL);
 }
 
 int parsing(t_data *data, int ac, char *av)
@@ -97,14 +98,13 @@ int parsing(t_data *data, int ac, char *av)
 	int		fd;
 	char	*line;
 
-	(void) data;
-	printf("av [%s]\n", av);
 	fd = open_fd(ac, av);
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (init_file(data, line) == false)
-			return (2);
+//		if (init_file(data, line) == false)
+//			return (2);
+		init_file(data, line);
 		line = get_next_line(fd);
 	}
 	free(line);
