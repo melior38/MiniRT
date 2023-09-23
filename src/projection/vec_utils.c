@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 08:57:43 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/21 10:36:37 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:31:44 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 
 // donne la norm d'un vecteur (sa longueur)
-double	vec_norm(t_vec vec)
+double	vec_norm(t_axis vec)
 {
 	return (sqrt(pow(vec.x, 2)+ pow(vec.y, 2) + pow(vec.z, 2)));
 }
 
 // donne la version du vecteur normer
-void	normed_vec(t_vec *vec)
+void	normed_vec(t_axis *vec)
 {
 	double norm;
 
@@ -32,9 +32,9 @@ void	normed_vec(t_vec *vec)
 }
 
 // le cross product nous permet de recuperer les vecteur referentielle
-t_vec	cross_product(t_vec vec1, t_vec vec2)
+t_axis	cross_product(t_axis vec1, t_axis vec2)
 {
-	t_vec	res;
+	t_axis	res;
 	
 	res.x = vec1.y * vec2.z - vec1.z * vec2.y;
 	res.y = vec1.z * vec2.x - vec1.x * vec2.z;
@@ -43,9 +43,9 @@ t_vec	cross_product(t_vec vec1, t_vec vec2)
 }
 
 // addition de 2 vecteur et return le resultat
-t_vec	add_vec(t_vec vec1, t_vec vec2)
+t_axis	add_vec(t_axis vec1, t_axis vec2)
 {
-	t_vec res;
+	t_axis res;
 
 	res.x = vec1.x + vec2.x;
 	res.y = vec1.y + vec2.y;
@@ -54,9 +54,9 @@ t_vec	add_vec(t_vec vec1, t_vec vec2)
 }
 
 // soustraction de 2 vecteur et return le resultat attention au sens
-t_vec	subs_vec(t_vec vec1, t_vec vec2)
+t_axis	subs_vec(t_axis vec1, t_axis vec2)
 {
-	t_vec res;
+	t_axis res;
 
 	res.x = vec1.x - vec2.x;
 	res.y = vec1.y - vec2.y;
@@ -65,9 +65,9 @@ t_vec	subs_vec(t_vec vec1, t_vec vec2)
 }
 
 // le scaling d'un vecteur 
-t_vec	scale_vec(t_vec vec, double scaling)
+t_axis	scale_vec(t_axis vec, double scaling)
 {
-	t_vec res;
+	t_axis res;
 
 	res.x = vec.x * scaling;
 	res.x = vec.y * scaling;
