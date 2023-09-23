@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/23 14:32:15 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/23 15:11:33 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,60 @@ typedef struct s_rgb {
 
 }				t_rgb;
 
-// // en attendant de la rajouter dans nos structs
-// typedef struct s_vec {
-// 	double	x;
-// 	double	y;
-// 	double	z;
-// }				t_vec;
-
-typedef struct s_object
+typedef struct s_alight
 {
-	int					type;
-	double				b_ratio;
-	int					fov;
-	double 				bright;
-	double 				diameter;
-	double				height;
-	t_axis				*center_coor;
-	t_axis 				*vector;
+	double				ratio;
 	t_rgb				*rgb;
-	struct t_object		*next;
-}	t_object;
+}	t_alight;
 
-typedef struct s_param {
-	t_object			*list;
+typedef struct s_camera
+{
+	int					fov;
+	t_axis				*coor;
+	t_axis				*vector;
+}	t_camera;
 
+typedef struct s_light
+{
+	double				bright;
+	t_rgb				*rgb;
+	t_axis				*coor;
+}	t_light;
+
+typedef struct s_plane
+{
+	t_axis				*coor;
+	t_axis				*vector;
+	t_rgb				*rgb;
+	struct t_plane		*next;
+}	t_plane;
+
+typedef struct s_sphere
+{
+	t_axis				*coor;
+	double				diam;
+	t_rgb				*rgb;
+	struct t_sphere		*next;
+}	t_sphere;
+
+typedef struct s_cylinder
+{
+	t_axis				*coor;
+	t_axis				*vector;
+	double				diam;
+	double				height;
+	t_rgb				*rgb;
+	struct t_cylinder	*next;
+}	t_cylinder;
+
+typedef struct s_param
+{
+	t_alight			*alight;
+	t_camera			*camera;
+	t_light				*light;
+	t_plane				*plane;
+	t_sphere			*sphere;
+	t_cylinder			*cylinder;
 }						t_param;
 
 typedef struct s_data {
@@ -80,9 +110,7 @@ typedef struct s_data {
 	int			line_length;
 	int			endian;
 	int			error;
-	t_object 	*obj;
 	t_param		*param;
-	
 }				t_data;
 
 //////////////////////////////////// MAIN.C ////////////////////////////////////
@@ -91,14 +119,8 @@ int			main(int ac, char **av);
 void		ft_handle_error(int error);
 
 //////////////////////////////// OBJ_UTILS.C ///////////////////////////////////
+t_alight	*create_alight(t_data *data, char **args);
 
-t_object	*create_alight(double ratio, t_rgb *rgb);
-t_object	*create_camera(t_axis *coor, t_axis *vector, int fov);
-t_object	*create_light(t_axis *coor, double bright, t_rgb *rgb);
-t_object	*create_plane(t_axis *coor, t_axis *vector, t_rgb *rgb);
-t_object	*create_sphere(t_axis *coor, double diam, t_rgb *rgb);
-t_object	*create_cylinder(t_axis *coor, t_axis *vector, double diam,
-				double height, t_rgb *rgb);
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////// parsing ///////////////////////////////////
 //////////////////////////////////// folder ////////////////////////////////////
@@ -160,5 +182,8 @@ t_axis		scale_vec(t_axis vec, double scaling);
 //////////////////////////////// VEC_OPERATION.C ////////////////////////////////
 
 
+
+////////////////////////////////// RGB_UTILS.C//////////////////////////////////
+t_rgb		*rgb_converter(t_data *data, char *str);
 
 #endif
