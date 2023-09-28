@@ -43,7 +43,8 @@ SRC 		= 	main.c							\
 				parsing/get_function.c			\
 				parsing/parsing_utils.c			\
 				utils/obj_utils.c				\
-				utils/rgb_utils.c
+				utils/rgb_utils.c				\
+				utils/show.c
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 OBJS				= ${SRC:.c=.o}
