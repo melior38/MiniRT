@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/19 16:58:03 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/23 15:11:33 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,8 +182,28 @@ bool		get_dimension(double *value, char *str);
 bool		get_coor(t_axis *axis, char *str);
 bool		get_ratio(double *ratio, char *str);
 
-////////////////////////////////// FT_PARSING.C/////////////////////////////////
+///////////////////////////////// PARSING.C ////////////////////////////////////
 int			open_fd(int ac, char *av);
+int			print_error(char *msg, int code);
+
+
+////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// projection /////////////////////////////////
+//////////////////////////////////// folder ////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////// VEC_UTILS.C /////////////////////////////////
+
+double		vec_norm(t_vec vec);
+void		normed_vec(t_vec *vec);
+t_axis		cross_product(t_axis vec1, t_axis vec2);
+t_axis		add_vec(t_axis vec1, t_axis vec2);
+t_axis		subs_vec(t_axis vec1, t_axis vec2);
+t_axis		scale_vec(t_axis vec, double scaling);
+
+//////////////////////////////// VEC_OPERATION.C ////////////////////////////////
+
+
 
 ////////////////////////////////// RGB_UTILS.C//////////////////////////////////
 t_rgb		*rgb_converter(t_data *data, char *str);
