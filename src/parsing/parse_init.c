@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:42:43 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/19 17:42:24 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:06:38 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,106 +27,106 @@ void	free_tab(char **tab)
 	tab = NULL;
 }
 
-bool	check_str_float(char *str)
-{
-	int i;
-	int comma_count;
+// bool	check_str_float(char *str)
+// {
+// 	int i;
+// 	int comma_count;
 
-	i = 0;
-	comma_count = 0;
-	while (str[i])
-		i++;
-	if (i < 5)
-		return (false);
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == ',')
-			comma_count++;
-		if ((str[i] <= '9' && str[i] >= '0') || str[i] == ','
-				|| str[i] == '.')
-			i++;
-		else
-			return (false);
-	}
-	if (comma_count != 2)
-		return (false);
-	return (true);
-}
+// 	i = 0;
+// 	comma_count = 0;
+// 	while (str[i])
+// 		i++;
+// 	if (i < 5)
+// 		return (false);
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		if (str[i] == ',')
+// 			comma_count++;
+// 		if ((str[i] <= '9' && str[i] >= '0') || str[i] == ','
+// 				|| str[i] == '.')
+// 			i++;
+// 		else
+// 			return (false);
+// 	}
+// 	if (comma_count != 2)
+// 		return (false);
+// 	return (true);
+// }
 
-bool	check_str_int(char *str)
-{
-	int i;
-	int comma_count;
+// bool	check_str_int(char *str)
+// {
+// 	int i;
+// 	int comma_count;
 
-	i = 0;
-	comma_count = 0;
-	while (str[i])
-		i++;
-	if (i < 5)
-		return (false);
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == ',')
-			comma_count++;
-		if ((str[i] <= '9' && str[i] >= '0') || str[i] == ',')
-			i++;
-		else
-			return (false);
-	}
-	if (comma_count != 2)
-		return (false);
-	return (true);
-}
+// 	i = 0;
+// 	comma_count = 0;
+// 	while (str[i])
+// 		i++;
+// 	if (i < 5)
+// 		return (false);
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		if (str[i] == ',')
+// 			comma_count++;
+// 		if ((str[i] <= '9' && str[i] >= '0') || str[i] == ',')
+// 			i++;
+// 		else
+// 			return (false);
+// 	}
+// 	if (comma_count != 2)
+// 		return (false);
+// 	return (true);
+// }
 
-int	rgb_convertor(char *str, char rgb)
-{
-//	int		i;
-	char	**splited_rgb;
-	int		res;
-	int		index;
+// int	rgb_convertor(char *str, char rgb)
+// {
+// //	int		i;
+// 	char	**splited_rgb;
+// 	int		res;
+// 	int		index;
 
-	if (check_str_int(str))
-		return (-1);
-//	i = 0;
-	if (rgb == 'r')
-		index = 0;
-	if (rgb == 'g')
-		index = 1;
-	if (rgb == 'b')
-		index = 2;
-	splited_rgb = ft_split(str, ',');
-	res = ft_atoi(splited_rgb[index]);
-	if (res >= 0 && res < 256)
-	{
-		free_tab(splited_rgb);
-		return (res);
-	}
-	return (-1);
-}
+// 	if (check_str_int(str))
+// 		return (-1);
+// //	i = 0;
+// 	if (rgb == 'r')
+// 		index = 0;
+// 	if (rgb == 'g')
+// 		index = 1;
+// 	if (rgb == 'b')
+// 		index = 2;
+// 	splited_rgb = ft_split(str, ',');
+// 	res = ft_atoi(splited_rgb[index]);
+// 	if (res >= 0 && res < 256)
+// 	{
+// 		free_tab(splited_rgb);
+// 		return (res);
+// 	}
+// 	return (-1);
+// }
 
-float	coor_convertor(char *str, char coor)
-{
-//	int		i;
-	char	**splited_coor;
-	float		res;
-	int		index;
+// float	coor_convertor(char *str, char coor)
+// {
+// //	int		i;
+// 	char	**splited_coor;
+// 	float		res;
+// 	int		index;
 
-	if (check_str_float(str))
-		return (-1);
-//	i = 0;
-	if (coor == 'x')
-		index = 0;
-	if (coor == 'y')
-		index = 1;
-	if (coor == 'z')
-		index = 2;
-	splited_coor = ft_split(str, ',');
-	res = (float)ft_atod(splited_coor[index]);
-	free_tab(splited_coor);
-	return (res);
-}
+// 	if (check_str_float(str))
+// 		return (-1);
+// //	i = 0;
+// 	if (coor == 'x')
+// 		index = 0;
+// 	if (coor == 'y')
+// 		index = 1;
+// 	if (coor == 'z')
+// 		index = 2;
+// 	splited_coor = ft_split(str, ',');
+// 	res = ft_atod(splited_coor[index]);
+// 	free_tab(splited_coor);
+// 	return (res);
+// }
 
 //bool	Ambient_light_set(t_object *list, char **arg_tab)
 //{

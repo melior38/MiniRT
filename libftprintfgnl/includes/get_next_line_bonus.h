@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 00:28:51 by lcamilo-          #+#    #+#             */
-/*   Updated: 2023/09/19 17:23:40 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:08:27 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void	free_buffer(char **buffer, int fd);
 int		read_line(char **line, int fd, int i);
 //gnl_utils.c
 char	*ft_strlendup(const char *s, int i);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t	ft_strlcpys(char *dst, const char *src, size_t dstsize);
 char	*ft_strlenjoin(char const *s1, char const *s2, int i);
 #endif

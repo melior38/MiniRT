@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/28 15:19:02 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:36:49 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,24 @@ void	init_file(t_data *data, char *line)
 		data->param->cylinder = create_cylinder(data, s_line);
 }
 
+char	*trim_gnl(char *line)
+{
+	char	*res;
+	char	*dup;
+
+	dup = ft_strdup(line);
+	if (line == NULL)
+		return (NULL);
+	free(line);
+	line = NULL;
+	res = ft_strtrim(dup, "\n");
+	if (res == NULL)
+		return NULL;
+	free(dup);
+	dup = NULL;
+	return (res);
+}
+
 /// Recupere le fd via la fonction open_fd et creer les objects
 /// \param data structure principal
 /// \param ac nb d'arguments
@@ -116,6 +134,7 @@ int parsing(t_data *data, int ac, char *av)
 	{
 		printf("error [%d] line [%.*s]\n", data->error, (int)ft_strlen(line)
 		- 1,line);
+		line = trim_gnl(line);
 		init_file(data, line);
 		if (data->error != 0)
 		{

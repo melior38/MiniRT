@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/28 15:15:44 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:07:02 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,19 +179,7 @@ int			check_rt_file(char *av);
 
 ///////////////////////////////// PARSE_INIT.C /////////////////////////////////
 
-
-bool		Ambient_light_set(t_param *param, char **arg_tab);
-int			rgb_convertor(char *str, char rgb);
 void		free_tab(char **tab);
-float		coor_convertor(char *str, char coor);
-bool		check_str_int(char *str);
-bool		check_str_float(char *str);
-//bool		Camera_set(t_object *list, char **arg_tab);
-//bool		Light_set(t_object *list, char **arg_tab);
-//bool		plane_set(t_object *list, char **arg_tab);
-//bool		sphere_set(t_object *list, char **arg_tab);
-//bool		cylinder_set(t_object *list, char **arg_tab);
-
 
 ////////////////////////////////// FT_ATOD.C ///////////////////////////////////
 double		ft_atod(char *str, t_data *data);
