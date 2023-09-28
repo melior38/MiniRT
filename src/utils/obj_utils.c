@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/28 10:37:30 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:17:32 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ t_alight	*create_alight(t_data *data, char **args)
 	new = malloc(sizeof(t_alight));
 	if (!new)
 		return (NULL);
-	if (ft_atod(args[1]) >= 0.0 && ft_atod(args[1]) <= 1.0)
-		new->ratio = ft_atod(args[1]);
+	if (ft_atod(args[1], data) >= 0.0 && ft_atod(args[1], data) <= 1.0)
+		new->ratio = ft_atod(args[1], data);
 	else
 	{
 		data->error = 1;
@@ -47,10 +47,10 @@ t_camera	*create_camera(t_data *data, char **args)
 	new = malloc(sizeof(t_camera));
 	if (!new)
 		return (NULL);
-	new->coor = ft_coor(args[1]);
+	new->coor = ft_coor(args[1], data);
 	new->vector = ft_vector(data, args[2]);
-	if (ft_atod(args[3]) >= 0 && ft_atod(args[3]) <= 180)
-		new->fov = ft_atod(args[3]);
+	if (ft_atod(args[3], data) >= 0 && ft_atod(args[3], data) <= 180)
+		new->fov = ft_atod(args[3], data);
 	else
 		data->error = 4;
 	return (new);
@@ -65,9 +65,9 @@ t_light	*create_light(t_data *data, char **args)
 	new = malloc(sizeof(t_light));
 	if (!new)
 		return (NULL);
-	new->coor = ft_coor(args[1]);
-	if (ft_atod(args[2]) >= 0.0 && ft_atod(args[2]) <= 1.0)
-		new->bright = ft_atod(args[2]);
+	new->coor = ft_coor(args[1], data);
+	if (ft_atod(args[2], data) >= 0.0 && ft_atod(args[2], data) <= 1.0)
+		new->bright = ft_atod(args[2], data);
 	else
 		data->error = 5;
 	new->rgb = rgb_converter(data, args[3]);
@@ -83,7 +83,7 @@ t_plane	*create_plane(t_data *data, char **args)
 	new = malloc(sizeof(t_plane));
 	if (!new)
 		return (NULL);
-	new->coor = ft_coor(args[1]);
+	new->coor = ft_coor(args[1], data);
 	new->vector = ft_vector(data, args[2]);
 	new->rgb = rgb_converter(data, args[3]);
 	new->next = NULL;
@@ -99,8 +99,8 @@ t_sphere	*create_sphere(t_data *data, char **args)
 	new = malloc(sizeof(t_sphere));
 	if (!new)
 		return (NULL);
-	new->coor = ft_coor(args[1]);
-	new->diam = ft_atod(args[2]);
+	new->coor = ft_coor(args[1], data);
+	new->diam = ft_atod(args[2], data);
 	new->rgb = rgb_converter(data, args[3]);
 	new->next = NULL;
 	return (new);
@@ -115,10 +115,10 @@ t_cylinder	*create_cylinder(t_data *data, char **args)
 	new = malloc(sizeof(t_cylinder));
 	if (!new)
 		return (NULL);
-	new->coor = ft_coor(args[1]);
+	new->coor = ft_coor(args[1], data);
 	new->vector = ft_vector(data, args[2]);
-	new->diam = ft_atod(args[3]);
-	new->height = ft_atod(args[4]);
+	new->diam = ft_atod(args[3], data);
+	new->height = ft_atod(args[4], data);
 	new->rgb = rgb_converter(data, args[5]);
 	new->next = NULL;
 	return (new);

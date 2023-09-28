@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/28 10:06:24 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:15:44 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ bool		check_str_float(char *str);
 
 
 ////////////////////////////////// FT_ATOD.C ///////////////////////////////////
-double		ft_atod(char *str);
+double		ft_atod(char *str, t_data *data);
 
 /////////////////////////////// GET_FUNCTION.C /////////////////////////////////
 
@@ -235,6 +235,6 @@ t_referential		set_referential(t_axis *cam_ve);
 
 ////////////////////////////////// RGB_UTILS.C//////////////////////////////////
 t_rgb		*rgb_converter(t_data *data, char *str);
-t_axis		*ft_coor(char *str);
+t_axis		*ft_coor(char *str, t_data *data);
 t_axis		*ft_vector(t_data *data, char *str);
 #endif
