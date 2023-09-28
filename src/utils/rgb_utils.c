@@ -63,8 +63,11 @@ t_axis	*ft_vector(t_data *data, char *str)
 	if (!new)
 		return (NULL);
 	split = ft_split(str, ',');
-	// si tu veut faire un check d'erreur tu peut pas utiliser la notation !Split[0]
-	// car si il y a un 0 a l'interieur il le considere vide pourtant il contient une donner valide
+	if (split[0] == NULL || split[1] == NULL || split[2] == NULL)
+	{
+		free_tab(split);
+		return (NULL);
+	}
 	if (ft_atod(split[0]) >= -1.0 && ft_atoi(split[0]) <= 1.0
 		&& ft_atod(split[1]) >= -1.0 && ft_atoi(split[1]) <= 1.0
 		&& ft_atod(split[2]) >= -1.0 && ft_atoi(split[2]) <= 1.0)
