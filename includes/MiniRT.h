@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/23 15:11:33 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 10:06:24 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@
 # include <mlx.h>
 # include <stdbool.h>
 
-# define HEIGTH		768.0
-# define WIDTH		1366.0
+# define HEIGTH		720.0
+# define WIDTH		1280.0
 # define ERROR		0
 # define SUCCESS	1
-# define HEIGTH	768.0
-# define WIDTH 1366.0
 # define AMBIENT_LIGHT 1
 # define CAMERA 2
 # define LIGHT 3
@@ -53,18 +51,30 @@ typedef struct s_rgb {
 
 }				t_rgb;
 
+typedef struct s_vec_dir
+{
+	t_axis	qx;
+	t_axis	qy;
+}				t_vec_dir;
+
+typedef struct s_referential {
+	t_axis	x;
+	t_axis	y;
+	t_axis	z;
+}				t_referential;
+
 typedef struct s_alight
 {
 	double				ratio;
 	t_rgb				*rgb;
-}	t_alight;
+}				t_alight;
 
 typedef struct s_camera
 {
 	double				fov;
 	t_axis				*coor;
 	t_axis				*vector;
-}	t_camera;
+}				t_camera;
 
 typedef struct s_light
 {
@@ -81,6 +91,7 @@ typedef struct s_plane
 	struct s_plane		*next;
 }	t_plane;
 
+
 typedef struct s_sphere
 {
 	t_axis				*coor;
@@ -88,6 +99,7 @@ typedef struct s_sphere
 	t_rgb				*rgb;
 	struct s_sphere		*next;
 }	t_sphere;
+
 
 typedef struct s_cylinder
 {
@@ -101,13 +113,17 @@ typedef struct s_cylinder
 
 typedef struct s_param
 {
-	t_alight			*alight;
-	t_camera			*camera;
-	t_light				*light;
-	t_plane				*plane;
-	t_sphere			*sphere;
-	t_cylinder			*cylinder;
-}						t_param;
+	t_alight		*alight;
+	t_camera		*camera;
+	t_light			*light;
+	t_plane			*plane;
+	t_sphere		*sphere;
+	t_cylinder		*cylinder;
+	double			hx;
+	double			hy;
+	t_referential	ref;
+	t_vec_dir		vec;
+}				t_param;
 
 typedef struct s_data {
 	void		*img;
@@ -125,6 +141,10 @@ typedef struct s_data {
 
 int			main(int ac, char **av);
 void		ft_handle_error(int error);
+int			my_mlx_get_color_value(int red, int green, int blue);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+
 
 /////////////////////////////////// SHOW.C /////////////////////////////////////
 void		show_alight(t_data *data);
@@ -159,6 +179,7 @@ int			check_rt_file(char *av);
 
 ///////////////////////////////// PARSE_INIT.C /////////////////////////////////
 
+
 bool		Ambient_light_set(t_param *param, char **arg_tab);
 int			rgb_convertor(char *str, char rgb);
 void		free_tab(char **tab);
@@ -170,6 +191,7 @@ bool		check_str_float(char *str);
 //bool		plane_set(t_object *list, char **arg_tab);
 //bool		sphere_set(t_object *list, char **arg_tab);
 //bool		cylinder_set(t_object *list, char **arg_tab);
+
 
 ////////////////////////////////// FT_ATOD.C ///////////////////////////////////
 double		ft_atod(char *str);
@@ -194,14 +216,20 @@ int			print_error(char *msg, int code);
 
 ////////////////////////////////// VEC_UTILS.C /////////////////////////////////
 
-//double		vec_norm(t_vec vec);
-//void		normed_vec(t_vec *vec);
+double		vec_norm(t_axis vec);
+void		normed_vec(t_axis *vec);
 t_axis		cross_product(t_axis vec1, t_axis vec2);
 t_axis		add_vec(t_axis vec1, t_axis vec2);
 t_axis		subs_vec(t_axis vec1, t_axis vec2);
 t_axis		scale_vec(t_axis vec, double scaling);
 
 //////////////////////////////// VEC_OPERATION.C ////////////////////////////////
+
+void				little_main_for_pixel(t_data *data, int x, int y);
+int					shifting_pixel(t_param *param, int x, int y, t_referential ref);
+void				get_win_scale(t_param *param, double fov);
+t_referential		set_referential(t_axis *cam_ve);
+
 
 
 

@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/19 17:34:52 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 10:06:59 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	check_rt_file(char *av)
 	return (check);
 }
 
-void redirect_function(void (*parse_struct)(t_param *, char **), t_param *param, char **s_line)
+void redirect_function(void (*parse_struct)(t_data *, char **), t_data *data, char **s_line)
 {
-	parse_struct(param, s_line);
+	parse_struct(data, s_line);
 }
 
 bool	check_line(char *line)
@@ -60,45 +60,38 @@ bool	check_line(char *line)
 	return (true);
 }
 
-int ft_strcmp(char *s1, char *s2)
-{
-	int i;
+// int ft_strcmp(char *s1, char *s2)
+// {
+// 	int i;
 
-	i = 0;
-	while (s1[i])
-	{
-		if (s1[i] != s2[i])
-			return (1);
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	if (ft_strlen(s1) != ft_strlen(s2))
+// 		return (0);
+// 	while (s1[i])
+// 	{
+// 		if (s1[i] != s2[i])
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 void	init_file(t_data *data, char *line)
 {
-	char **s_line;
+	char	**s_line;
 
-//	if (check_line(line) == false)
-//		return (false);
 	s_line = ft_split(line, ' ');
-//	int i;
-//	i = 0;
-//	while (s_line[i])
-//	{
-//		printf("s_line[%d] [%s]\n", i, s_line[i]);
-//		i++;
-//	}
-	if (ft_strcmp(s_line[0], "A") == 0)
+	if (ft_strncmp(line, "A ", 2) == 0)
 		data->param->alight = create_alight(data, s_line);
-	if (ft_strcmp(s_line[0], "C") == 0)
+	if (ft_strncmp(line, "C ", 2) == 0)
 		data->param->camera = create_camera(data, s_line);
-	if (ft_strcmp(s_line[0], "L") == 0)
+	if (ft_strncmp(line, "L ", 2) == 0)
 		data->param->light = create_light(data, s_line);
-	if (ft_strcmp(s_line[0], "sp") == 0)
+	if (ft_strncmp(line, "sp ", 3) == 0)
 		data->param->sphere = create_sphere(data, s_line);
-	if (ft_strcmp(s_line[0], "pl") == 0)
+	if (ft_strncmp(line, "pl ", 3) == 0)
 		data->param->plane = create_plane(data, s_line);
-	if (ft_strcmp(s_line[0], "cy") == 0)
+	if (ft_strncmp(line, "cy ", 3) == 0)
 		data->param->cylinder = create_cylinder(data, s_line);
 }
 
@@ -111,9 +104,14 @@ int parsing(t_data *data, int ac, char *av)
 {
 	int		fd;
 	char	*line;
+	t_param	*param;
 
 	fd = open_fd(ac, av);
 	line = get_next_line(fd);
+	param = malloc(sizeof(t_param));
+	if (!param)
+		exit(1); // a mieux faire mais la je suis pas sur ce soucis la
+	data->param = param;
 	while (line)
 	{
 		printf("error [%d] line [%.*s]\n", data->error, (int)ft_strlen(line)

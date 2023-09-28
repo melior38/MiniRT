@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/21 09:51:43 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 10:46:20 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	render_next_frame(void *yourstruct)
 		y = 0;
 		while (y < HEIGTH)
 		{
-			// my_mlx_pixel_put(data, x, y, ft_minirt(data->param, x, y, pix()));
+			// my_mlx_pixel_put(data, x, y, my_mlx_get_color_value(23, 45, 200));
+			little_main_for_pixel(data, x, y);
 			y++;
 		}
 		x++;
@@ -96,9 +97,9 @@ void	show_obj(t_data *data)
 
 int	main(int ac, char **av)
 {
-//	 void	*mlx_win;
-//	 void	*mlx;
-	 t_data	data;
+	// void	*mlx_win;
+	// void	*mlx;
+	t_data	data;
 
 //	if (ac != 2)
 //	{
@@ -107,7 +108,7 @@ int	main(int ac, char **av)
 //	}
 	init_data(&data);
 	parsing(&data ,ac,av[1]);
-//	show_obj(&data);
+	show_obj(&data);
 //	 ft_handle_error(parsing(&data ,ac,av[1]));
 //	printf("coor_convertor est-il foncionnel ? [%f]\n", (float)coor_convertor("1.0,0,0", 'x'));
 //	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor("1.0,0,0", 'r'));

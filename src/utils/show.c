@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   show.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/21 09:51:43 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 10:47:24 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	show_plane(t_data *data)
 	while (tmp)
 	{
 		printf(WHITE);
-		printf("id %d", i);
+		printf("id %d\n", i);
 
 		printf(GREEN);
 		printf("coords [%f", tmp->coor->x);
@@ -118,7 +118,7 @@ void	show_sphere(t_data *data)
 	while (tmp)
 	{
 		printf(WHITE);
-		printf("id %d", i);
+		printf("id %d\n", i);
 
 		printf(GREEN);
 		printf("coords [%f", tmp->coor->x);
@@ -149,7 +149,7 @@ void	show_cylinder(t_data *data)
 	while (tmp)
 	{
 		printf(WHITE);
-		printf("id %d", i);
+		printf("id %d\n", i);
 
 		printf(GREEN);
 		printf("coords [%f", tmp->coor->x);
