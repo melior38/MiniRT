@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 14:34:22 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/28 15:20:17 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:25:43 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ double 	ft_atod(char *str, t_data *data)
 			i++;
 		}
 		else
+		{
 			data->error = 6;
-			printf("lol\n");
+			return (res);
+		}
 	}
 	if(str[i] == '.')
 	{
