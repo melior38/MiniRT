@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atof.c                                          :+:      :+:    :+:   */
+/*   ft_atod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 14:34:22 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/11 11:20:39 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 09:50:13 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MiniRT.h"
 
+// une modiff de atod serait de le coder comme ça : int	ft_atod(char *str, double *d)
+// de cette maniere on peut faire un return avec code d'erreur tout en modifiant le double *d.
 double	ft_atod(char *str)
 {
 	double	res;
@@ -25,6 +27,7 @@ double	ft_atod(char *str)
 	neg = 1.0;
 	res = 0.0;
 	tmp = 0.0;
+	// printf("str = [%s]\n", str);
 	if (str[i] == '-')
 	{
 		neg = -1.0;

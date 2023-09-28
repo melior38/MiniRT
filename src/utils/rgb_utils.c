@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   rgb_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/19 17:34:52 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 10:46:16 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,8 @@ t_axis	*ft_vector(t_data *data, char *str)
 	if (!new)
 		return (NULL);
 	split = ft_split(str, ',');
-	if (!split[1] || !split[2] || !split[3])
-	{
-		free_tab(split);
-		return (NULL);
-	}
+	// si tu veut faire un check d'erreur tu peut pas utiliser la notation !Split[0]
+	// car si il y a un 0 a l'interieur il le considere vide pourtant il contient une donner valide
 	if (ft_atod(split[0]) >= -1.0 && ft_atoi(split[0]) <= 1.0
 		&& ft_atod(split[1]) >= -1.0 && ft_atoi(split[1]) <= 1.0
 		&& ft_atod(split[2]) >= -1.0 && ft_atoi(split[2]) <= 1.0)

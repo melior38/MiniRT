@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/28 08:40:02 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 10:46:20 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	main(int ac, char **av)
 //	}
 	init_data(&data);
 	parsing(&data ,ac,av[1]);
-//	show_obj(&data);
+	show_obj(&data);
 //	 ft_handle_error(parsing(&data ,ac,av[1]));
 //	printf("coor_convertor est-il foncionnel ? [%f]\n", (float)coor_convertor("1.0,0,0", 'x'));
 //	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor("1.0,0,0", 'r'));
