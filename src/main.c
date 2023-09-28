@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/28 08:37:02 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 08:40:02 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void	init_data(t_data *data)
 	data->bits_per_pixel = 0;
 	data->line_length = 0;
 	data->endian = 0;
-	// data->error = 0;
-	// data->param = NULL;
+	data->error = 0;
+	data->param = NULL;
 }
 
 void	show_obj(t_data *data)
@@ -97,8 +97,8 @@ void	show_obj(t_data *data)
 
 int	main(int ac, char **av)
 {
-	void	*mlx_win;
-	void	*mlx;
+	// void	*mlx_win;
+	// void	*mlx;
 	t_data	data;
 
 //	if (ac != 2)
@@ -115,17 +115,17 @@ int	main(int ac, char **av)
 //	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor(",,", 'g'));
 //	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor("255,30,45,", 'b'));
 //	 struct_set(data); pour deja inserer les valeurs go essayer de ne pas malloc se serai nice
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, WIDTH, HEIGTH, "MiniRT");
-	data.img = mlx_new_image(mlx, WIDTH, HEIGTH);
-	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,
-			&data.endian);
-	data.mlx = mlx;
-	data.mlx_win = mlx_win;
+	// mlx = mlx_init();
+	// mlx_win = mlx_new_window(mlx, WIDTH, HEIGTH, "MiniRT");
+	// data.img = mlx_new_image(mlx, WIDTH, HEIGTH);
+	// data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,
+			// &data.endian);
+	// data.mlx = mlx;
+	// data.mlx_win = mlx_win;
 	// mlx_hook(mlx_win, ON_KEYUP, 0, ft_offset_hook, &img);
 	// mlx_hook(mlx_win, ON_DESTROY, 0, ft_handle_exit, &img);
 	// mlx_hook(mlx_win, ON_MOUSEDOWN, 0, ft_mouse_press, &img);
 	// mlx_hook(mlx_win, ON_MOUSEUP, 0, ft_mouse_release, &img);
-	mlx_loop_hook(mlx, render_next_frame, &data);
-	mlx_loop(mlx);
+	// mlx_loop_hook(mlx, render_next_frame, &data);
+	// mlx_loop(mlx);
 }

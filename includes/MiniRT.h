@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/27 09:44:23 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 08:41:38 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ typedef struct s_rgb {
 
 }				t_rgb;
 
+typedef struct s_vec_dir
+{
+	t_axis	qx;
+	t_axis	qy;
+}				t_vec_dir;
+
 typedef struct s_referential {
 	t_axis	x;
 	t_axis	y;
@@ -82,26 +88,18 @@ typedef struct s_plane
 	t_axis				*coor;
 	t_axis				*vector;
 	t_rgb				*rgb;
-<<<<<<< HEAD
-	struct t_plane		*next;
-}				t_plane;
-=======
 	struct s_plane		*next;
 }	t_plane;
->>>>>>> refs/remotes/origin/master
+
 
 typedef struct s_sphere
 {
 	t_axis				*coor;
 	double				diam;
 	t_rgb				*rgb;
-<<<<<<< HEAD
-	struct t_sphere		*next;
-}				t_sphere;
-=======
 	struct s_sphere		*next;
 }	t_sphere;
->>>>>>> refs/remotes/origin/master
+
 
 typedef struct s_cylinder
 {
@@ -110,19 +108,8 @@ typedef struct s_cylinder
 	double				diam;
 	double				height;
 	t_rgb				*rgb;
-<<<<<<< HEAD
-	struct t_cylinder	*next;
-}				t_cylinder;
-
-typedef struct s_vec_dir
-{
-	t_axis	qx;
-	t_axis	qy;
-}				t_vec_dir;
-=======
 	struct s_cylinder	*next;
 }	t_cylinder;
->>>>>>> refs/remotes/origin/master
 
 typedef struct s_param
 {
@@ -192,19 +179,7 @@ int			check_rt_file(char *av);
 
 ///////////////////////////////// PARSE_INIT.C /////////////////////////////////
 
-<<<<<<< HEAD
-// bool		Ambient_light_set(t_param *param, char **arg_tab);
-// int			rgb_convertor(char *str, char rgb);
-// void		free_tab(char **tab);
-// float		coor_convertor(char *str, char coor);
-// bool		check_str_int(char *str);
-// bool		check_str_float(char *str);
-// bool		Camera_set(t_object *list, char **arg_tab);
-// bool		Light_set(t_object *list, char **arg_tab);
-// bool		plane_set(t_object *list, char **arg_tab);
-// bool		sphere_set(t_object *list, char **arg_tab);
-// bool		cylinder_set(t_object *list, char **arg_tab);
-=======
+
 bool		Ambient_light_set(t_param *param, char **arg_tab);
 int			rgb_convertor(char *str, char rgb);
 void		free_tab(char **tab);
@@ -216,7 +191,7 @@ bool		check_str_float(char *str);
 //bool		plane_set(t_object *list, char **arg_tab);
 //bool		sphere_set(t_object *list, char **arg_tab);
 //bool		cylinder_set(t_object *list, char **arg_tab);
->>>>>>> refs/remotes/origin/master
+
 
 ////////////////////////////////// FT_ATOD.C ///////////////////////////////////
 double		ft_atod(char *str);
