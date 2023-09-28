@@ -116,7 +116,8 @@ int parsing(t_data *data, int ac, char *av)
 	line = get_next_line(fd);
 	while (line)
 	{
-		printf("error [%d] line [%s]\n", data->error, line);
+		printf("error [%d] line [%.*s]\n", data->error, (int)ft_strlen(line)
+		- 1,line);
 		init_file(data, line);
 		if (data->error != 0)
 		{

@@ -63,7 +63,7 @@ t_axis	*ft_vector(t_data *data, char *str)
 	if (!new)
 		return (NULL);
 	split = ft_split(str, ',');
-	if (!split[1] || !split[2] || !split[3])
+	if (!split[0] || !split[1] || !split[2])
 	{
 		free_tab(split);
 		return (NULL);

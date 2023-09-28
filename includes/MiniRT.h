@@ -194,8 +194,8 @@ int			print_error(char *msg, int code);
 
 ////////////////////////////////// VEC_UTILS.C /////////////////////////////////
 
-double		vec_norm(t_vec vec);
-void		normed_vec(t_vec *vec);
+//double		vec_norm(t_vec vec);
+//void		normed_vec(t_vec *vec);
 t_axis		cross_product(t_axis vec1, t_axis vec2);
 t_axis		add_vec(t_axis vec1, t_axis vec2);
 t_axis		subs_vec(t_axis vec1, t_axis vec2);
