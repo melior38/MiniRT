@@ -76,21 +76,31 @@ int ft_strcmp(char *s1, char *s2)
 
 void	init_file(t_data *data, char *line)
 {
-	int i;
 	char **s_line;
 	(void) data;
 
-	i = 0;
 //	if (check_line(line) == false)
 //		return (false);
 	s_line = ft_split(line, ' ');
-	while (s_line[i])
-	{
-		printf("s_line[%d] [%s]\n", i, s_line[i]);
-		i++;
-	}
+//	int i;
+//	i = 0;
+//	while (s_line[i])
+//	{
+//		printf("s_line[%d] [%s]\n", i, s_line[i]);
+//		i++;
+//	}
 	if (ft_strcmp(s_line[0], "A") == 0)
-		create_alight(data, s_line);
+		data->param->alight = create_alight(data, s_line);
+	if (ft_strcmp(s_line[0], "C") == 0)
+		data->param->camera = create_camera(data, s_line);
+	if (ft_strcmp(s_line[0], "L") == 0)
+		data->param->light = create_light(data, s_line);
+	if (ft_strcmp(s_line[0], "sp") == 0)
+		data->param->sphere = create_sphere(data, s_line);
+	if (ft_strcmp(s_line[0], "pl") == 0)
+		data->param->plane = create_plane(data, s_line);
+	if (ft_strcmp(s_line[0], "cy") == 0)
+		data->param->cylinder = create_cylinder(data, s_line);
 }
 
 /// Recupere le fd via la fonction open_fd et creer les objects
@@ -107,6 +117,7 @@ int parsing(t_data *data, int ac, char *av)
 	line = get_next_line(fd);
 	while (line)
 	{
+		printf("error [%d] line [%s]\n", data->error, line);
 		init_file(data, line);
 		if (data->error != 0)
 		{

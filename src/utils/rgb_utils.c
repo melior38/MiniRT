@@ -34,5 +34,50 @@ t_rgb	*rgb_converter(t_data *data, char *str)
 	}
 	else
 		data->error = 2;
+	free_tab(split);
 	return (rgb);
+}
+
+t_axis	*ft_coor(char *str)
+{
+	t_axis	*new;
+	char	**split;
+
+	new = malloc(sizeof(t_axis));
+	if (!new)
+		return (NULL);
+	split = ft_split(str, ',');
+	new->x = ft_atod(split[0]);
+	new->y = ft_atod(split[1]);
+	new->z = ft_atod(split[2]);
+	free_tab(split);
+	return (new);
+}
+
+t_axis	*ft_vector(t_data *data, char *str)
+{
+	t_axis	*new;
+	char	**split;
+
+	new = malloc(sizeof(t_axis));
+	if (!new)
+		return (NULL);
+	split = ft_split(str, ',');
+	if (!split[1] || !split[2] || !split[3])
+	{
+		free_tab(split);
+		return (NULL);
+	}
+	if (ft_atod(split[0]) >= -1.0 && ft_atoi(split[0]) <= 1.0
+		&& ft_atod(split[1]) >= -1.0 && ft_atoi(split[1]) <= 1.0
+		&& ft_atod(split[2]) >= -1.0 && ft_atoi(split[2]) <= 1.0)
+	{
+		new->x = ft_atod(split[0]);
+		new->y = ft_atod(split[1]);
+		new->z = ft_atod(split[2]);
+	}
+	else
+		data->error = 3;
+	free_tab(split);
+	return (new);
 }

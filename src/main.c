@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/27 09:31:05 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 08:37:02 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,23 +79,37 @@ void	init_data(t_data *data)
 	// data->param = NULL;
 }
 
+void	show_obj(t_data *data)
+{
+	printf("Ambient light :\n");
+	show_alight(data);
+	printf("Camera :\n");
+	show_camera(data);
+	printf("light :\n");
+	show_light(data);
+	printf("Plane :\n");
+	show_plane(data);
+	printf("Sphere :\n");
+	show_sphere(data);
+	printf("Cylinder :\n");
+	show_cylinder(data);
+}
+
 int	main(int ac, char **av)
 {
 	void	*mlx_win;
 	void	*mlx;
 	t_data	data;
-	(void)	av;
-	(void)	ac;
 
-
-	 init_data(&data);
-	//  parsing(&data ,ac,av[1]);
-	//  if (ac != 2)
-	//  {
-	// 	 perror("wrong amount of argument \n");
-	// 	 exit(1);
-	//  }
-	//  ft_handle_error(parsing(&data ,ac,av[1]));
+//	if (ac != 2)
+//	{
+//		perror("wrong amount of argument \n");
+//		exit(1);
+//	}
+	init_data(&data);
+	parsing(&data ,ac,av[1]);
+//	show_obj(&data);
+//	 ft_handle_error(parsing(&data ,ac,av[1]));
 //	printf("coor_convertor est-il foncionnel ? [%f]\n", (float)coor_convertor("1.0,0,0", 'x'));
 //	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor("1.0,0,0", 'r'));
 //	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor(",,", 'g'));
