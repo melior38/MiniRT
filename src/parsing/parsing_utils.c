@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/19 17:34:52 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:44:34 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	init_file(t_data *data, char *line)
 {
 	int i;
 	char **s_line;
+	(void) data;
 
 	i = 0;
 //	if (check_line(line) == false)

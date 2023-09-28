@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/21 09:51:43 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:31:05 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	render_next_frame(void *yourstruct)
 		y = 0;
 		while (y < HEIGTH)
 		{
-			// my_mlx_pixel_put(data, x, y, ft_minirt(data->param, x, y, pix()));
+			// my_mlx_pixel_put(data, x, y, my_mlx_get_color_value(23, 45, 200));
+			little_main_for_pixel(data, x, y);
 			y++;
 		}
 		x++;
@@ -74,40 +75,43 @@ void	init_data(t_data *data)
 	data->bits_per_pixel = 0;
 	data->line_length = 0;
 	data->endian = 0;
-	data->error = 0;
-	data->param = NULL;
+	// data->error = 0;
+	// data->param = NULL;
 }
 
 int	main(int ac, char **av)
 {
-//	 void	*mlx_win;
-//	 void	*mlx;
-	 t_data	data;
+	void	*mlx_win;
+	void	*mlx;
+	t_data	data;
+	(void)	av;
+	(void)	ac;
+
 
 	 init_data(&data);
-	 parsing(&data ,ac,av[1]);
-	 if (ac != 2)
-	 {
-		 perror("wrong amount of argument \n");
-		 exit(1);
-	 }
-	 ft_handle_error(parsing(&data ,ac,av[1]));
+	//  parsing(&data ,ac,av[1]);
+	//  if (ac != 2)
+	//  {
+	// 	 perror("wrong amount of argument \n");
+	// 	 exit(1);
+	//  }
+	//  ft_handle_error(parsing(&data ,ac,av[1]));
 //	printf("coor_convertor est-il foncionnel ? [%f]\n", (float)coor_convertor("1.0,0,0", 'x'));
 //	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor("1.0,0,0", 'r'));
 //	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor(",,", 'g'));
 //	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor("255,30,45,", 'b'));
 //	 struct_set(data); pour deja inserer les valeurs go essayer de ne pas malloc se serai nice
-	// mlx = mlx_init();
-	// mlx_win = mlx_new_window(mlx, WIDTH, HEIGTH, "MiniRT");
-	// data.img = mlx_new_image(mlx, WIDTH, HEIGTH);
-	// data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,
-			// &data.endian);
-	// data.mlx = mlx;
-	// data.mlx_win = mlx_win;
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, WIDTH, HEIGTH, "MiniRT");
+	data.img = mlx_new_image(mlx, WIDTH, HEIGTH);
+	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,
+			&data.endian);
+	data.mlx = mlx;
+	data.mlx_win = mlx_win;
 	// mlx_hook(mlx_win, ON_KEYUP, 0, ft_offset_hook, &img);
 	// mlx_hook(mlx_win, ON_DESTROY, 0, ft_handle_exit, &img);
 	// mlx_hook(mlx_win, ON_MOUSEDOWN, 0, ft_mouse_press, &img);
 	// mlx_hook(mlx_win, ON_MOUSEUP, 0, ft_mouse_release, &img);
-	// mlx_loop_hook(mlx, render_next_frame, &data);
-	// mlx_loop(mlx);
+	mlx_loop_hook(mlx, render_next_frame, &data);
+	mlx_loop(mlx);
 }

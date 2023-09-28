@@ -6,7 +6,7 @@
 #    By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 08:45:50 by lcamilo-          #+#    #+#              #
-#    Updated: 2023/09/11 12:42:11 by asouchet         ###   ########.fr        #
+#    Updated: 2023/09/27 09:44:48 by asouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,12 +43,12 @@ SRC 		= 	main.c							\
 				parsing/get_function.c			\
 				parsing/parsing_utils.c			\
 				utils/obj_utils.c				\
-				utils/rgb_utils.c
+				utils/rgb_utils.c				
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 OBJS				= ${SRC:.c=.o}
 OBJS_DIR			= objs
-DIRS				= objs objs/parsing objs/utils
+DIRS				= objs objs/parsing objs/utils objs/projection
 _OBJS				= $(addprefix $(OBJS_DIR)/, $(OBJS))
 
 all: lib $(NAME)
