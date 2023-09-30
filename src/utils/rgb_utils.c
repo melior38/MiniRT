@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/28 10:46:16 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:13:10 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_rgb	*rgb_converter(t_data *data, char *str)
 	return (rgb);
 }
 
-t_axis	*ft_coor(char *str)
+t_axis	*ft_coor(char *str, t_data *data)
 {
 	t_axis	*new;
 	char	**split;
@@ -47,9 +47,9 @@ t_axis	*ft_coor(char *str)
 	if (!new)
 		return (NULL);
 	split = ft_split(str, ',');
-	new->x = ft_atod(split[0]);
-	new->y = ft_atod(split[1]);
-	new->z = ft_atod(split[2]);
+	new->x = ft_atod(split[0], data);
+	new->y = ft_atod(split[1], data);
+	new->z = ft_atod(split[2], data);
 	free_tab(split);
 	return (new);
 }
@@ -63,18 +63,13 @@ t_axis	*ft_vector(t_data *data, char *str)
 	if (!new)
 		return (NULL);
 	split = ft_split(str, ',');
-	if (split[0] == NULL || split[1] == NULL || split[2] == NULL)
+	if (ft_atod(split[0], data) >= -1.0 && ft_atod(split[0], data) <= 1.0
+		&& ft_atod(split[1], data) >= -1.0 && ft_atod(split[1], data) <= 1.0
+		&& ft_atod(split[2], data) >= -1.0 && ft_atod(split[2], data) <= 1.0)
 	{
-		free_tab(split);
-		return (NULL);
-	}
-	if (ft_atod(split[0]) >= -1.0 && ft_atoi(split[0]) <= 1.0
-		&& ft_atod(split[1]) >= -1.0 && ft_atoi(split[1]) <= 1.0
-		&& ft_atod(split[2]) >= -1.0 && ft_atoi(split[2]) <= 1.0)
-	{
-		new->x = ft_atod(split[0]);
-		new->y = ft_atod(split[1]);
-		new->z = ft_atod(split[2]);
+		new->x = ft_atod(split[0], data);
+		new->y = ft_atod(split[1], data);
+		new->z = ft_atod(split[2], data);
 	}
 	else
 		data->error = 3;

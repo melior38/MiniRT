@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/28 10:06:24 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:07:02 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ typedef struct s_plane
 	struct s_plane		*next;
 }	t_plane;
 
-
 typedef struct s_sphere
 {
 	t_axis				*coor;
@@ -99,7 +98,6 @@ typedef struct s_sphere
 	t_rgb				*rgb;
 	struct s_sphere		*next;
 }	t_sphere;
-
 
 typedef struct s_cylinder
 {
@@ -144,7 +142,10 @@ void		ft_handle_error(int error);
 int			my_mlx_get_color_value(int red, int green, int blue);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
-
+////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////// utils /////////////////////////////////////
+//////////////////////////////////// folder ////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////// SHOW.C /////////////////////////////////////
 void		show_alight(t_data *data);
@@ -154,15 +155,25 @@ void		show_plane(t_data *data);
 void		show_sphere(t_data *data);
 void		show_cylinder(t_data *data);
 
-
+///////////////////////////////// ADD_BACK.C ///////////////////////////////////
+void		cyl_addb(t_cylinder **lst, t_cylinder *new);
+void		sp_addb(t_sphere **lst, t_sphere *new);
+void		pl_addb(t_plane **lst, t_plane*new);
 
 //////////////////////////////// OBJ_UTILS.C ///////////////////////////////////
-t_alight	*create_alight(t_data *data, char **args);
-t_camera	*create_camera(t_data *data, char **args);
-t_light		*create_light(t_data *data, char **args);
 t_plane		*create_plane(t_data *data, char **args);
 t_sphere	*create_sphere(t_data *data, char **args);
 t_cylinder	*create_cylinder(t_data *data, char **args);
+
+/////////////////////////////// UOBJ_UTILS.C ///////////////////////////////////
+t_alight	*create_alight(t_data *data, char **args);
+t_camera	*create_camera(t_data *data, char **args);
+t_light		*create_light(t_data *data, char **args);
+
+////////////////////////////////// RGB_UTILS.C//////////////////////////////////
+t_rgb		*rgb_converter(t_data *data, char *str);
+t_axis		*ft_coor(char *str, t_data *data);
+t_axis		*ft_vector(t_data *data, char *str);
 
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////// parsing ///////////////////////////////////
@@ -179,22 +190,10 @@ int			check_rt_file(char *av);
 
 ///////////////////////////////// PARSE_INIT.C /////////////////////////////////
 
-
-bool		Ambient_light_set(t_param *param, char **arg_tab);
-int			rgb_convertor(char *str, char rgb);
 void		free_tab(char **tab);
-float		coor_convertor(char *str, char coor);
-bool		check_str_int(char *str);
-bool		check_str_float(char *str);
-//bool		Camera_set(t_object *list, char **arg_tab);
-//bool		Light_set(t_object *list, char **arg_tab);
-//bool		plane_set(t_object *list, char **arg_tab);
-//bool		sphere_set(t_object *list, char **arg_tab);
-//bool		cylinder_set(t_object *list, char **arg_tab);
-
 
 ////////////////////////////////// FT_ATOD.C ///////////////////////////////////
-double		ft_atod(char *str);
+double		ft_atod(char *str, t_data *data);
 
 /////////////////////////////// GET_FUNCTION.C /////////////////////////////////
 
@@ -207,7 +206,6 @@ bool		get_ratio(double *ratio, char *str);
 ///////////////////////////////// PARSING.C ////////////////////////////////////
 int			open_fd(int ac, char *av);
 int			print_error(char *msg, int code);
-
 
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// projection /////////////////////////////////
@@ -223,18 +221,11 @@ t_axis		add_vec(t_axis vec1, t_axis vec2);
 t_axis		subs_vec(t_axis vec1, t_axis vec2);
 t_axis		scale_vec(t_axis vec, double scaling);
 
-//////////////////////////////// VEC_OPERATION.C ////////////////////////////////
+//////////////////////////////// VEC_OPERATION.C ///////////////////////////////
+void		little_main_for_pixel(t_data *data, int x, int y);
+int			shifting_pixel(t_param *param, int x, int y,
+				t_referential ref);
+void		get_win_scale(t_param *param, double fov);
+t_referential	set_referential(t_axis *cam_ve);
 
-void				little_main_for_pixel(t_data *data, int x, int y);
-int					shifting_pixel(t_param *param, int x, int y, t_referential ref);
-void				get_win_scale(t_param *param, double fov);
-t_referential		set_referential(t_axis *cam_ve);
-
-
-
-
-////////////////////////////////// RGB_UTILS.C//////////////////////////////////
-t_rgb		*rgb_converter(t_data *data, char *str);
-t_axis		*ft_coor(char *str);
-t_axis		*ft_vector(t_data *data, char *str);
 #endif

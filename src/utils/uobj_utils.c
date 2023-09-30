@@ -19,49 +19,55 @@
 //4 error fov
 //5 error bright
 
-//[pl] [0.0,0.0,-10.0] 0.0,1.0,0.0] [0,0,225]
-t_plane	*create_plane(t_data *data, char **args)
+//[A] [0.2] [255,255,255]
+t_alight	*create_alight(t_data *data, char **args)
 {
-	t_plane	*new;
+	t_alight	*new;
 
-	new = malloc(sizeof(t_plane));
+	new = malloc(sizeof(t_alight));
+	if (!new)
+		return (NULL);
+	if (ft_atod(args[1], data) >= 0.0 && ft_atod(args[1], data) <= 1.0)
+		new->ratio = ft_atod(args[1], data);
+	else
+	{
+		data->error = 1;
+		return (new);
+	}
+	new->rgb = rgb_converter(data, args[2]);
+	return (new);
+}
+
+//[C] [-50.0,0,20] [0,0,1] [70]
+t_camera	*create_camera(t_data *data, char **args)
+{
+	t_camera	*new;
+
+	new = malloc(sizeof(t_camera));
 	if (!new)
 		return (NULL);
 	new->coor = ft_coor(args[1], data);
 	new->vector = ft_vector(data, args[2]);
-	new->rgb = rgb_converter(data, args[3]);
-	new->next = NULL;
+	if (ft_atod(args[3], data) >= 0 && ft_atod(args[3], data) <= 180)
+		new->fov = ft_atod(args[3], data);
+	else
+		data->error = 4;
 	return (new);
 }
 
-//[sp] [0.0,0.0,20.6] [12.6] [10,0,255]
-t_sphere	*create_sphere(t_data *data, char **args)
+//[L] [-40.0,50.0,0.0] [0.6] [10,0,255]
+t_light	*create_light(t_data *data, char **args)
 {
-	t_sphere	*new;
+	t_light	*new;
 
-	new = malloc(sizeof(t_sphere));
+	new = malloc(sizeof(t_light));
 	if (!new)
 		return (NULL);
 	new->coor = ft_coor(args[1], data);
-	new->diam = ft_atod(args[2], data);
+	if (ft_atod(args[2], data) >= 0.0 && ft_atod(args[2], data) <= 1.0)
+		new->bright = ft_atod(args[2], data);
+	else
+		data->error = 5;
 	new->rgb = rgb_converter(data, args[3]);
-	new->next = NULL;
-	return (new);
-}
-
-//[cy] [50.0,0.0,20.6] [0.0,0.0,1.0] [14.2] [21.42] [10,0,255]
-t_cylinder	*create_cylinder(t_data *data, char **args)
-{
-	t_cylinder	*new;
-
-	new = malloc(sizeof(t_cylinder));
-	if (!new)
-		return (NULL);
-	new->coor = ft_coor(args[1], data);
-	new->vector = ft_vector(data, args[2]);
-	new->diam = ft_atod(args[3], data);
-	new->height = ft_atod(args[4], data);
-	new->rgb = rgb_converter(data, args[5]);
-	new->next = NULL;
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/28 10:06:59 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:36:49 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,6 @@ int	check_rt_file(char *av)
 	return (check);
 }
 
-void redirect_function(void (*parse_struct)(t_data *, char **), t_data *data, char **s_line)
-{
-	parse_struct(data, s_line);
-}
-
 bool	check_line(char *line)
 {
 	int i;
@@ -60,22 +55,6 @@ bool	check_line(char *line)
 	return (true);
 }
 
-// int ft_strcmp(char *s1, char *s2)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	if (ft_strlen(s1) != ft_strlen(s2))
-// 		return (0);
-// 	while (s1[i])
-// 	{
-// 		if (s1[i] != s2[i])
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
 void	init_file(t_data *data, char *line)
 {
 	char	**s_line;
@@ -88,11 +67,29 @@ void	init_file(t_data *data, char *line)
 	if (ft_strncmp(line, "L ", 2) == 0)
 		data->param->light = create_light(data, s_line);
 	if (ft_strncmp(line, "sp ", 3) == 0)
-		data->param->sphere = create_sphere(data, s_line);
+		sp_addb(&data->param->sphere, create_sphere(data, s_line));
 	if (ft_strncmp(line, "pl ", 3) == 0)
-		data->param->plane = create_plane(data, s_line);
+		pl_addb(&data->param->plane, create_plane(data, s_line));
 	if (ft_strncmp(line, "cy ", 3) == 0)
-		data->param->cylinder = create_cylinder(data, s_line);
+		cyl_addb(&data->param->cylinder, create_cylinder(data, s_line));
+}
+
+char	*trim_gnl(char *line)
+{
+	char	*res;
+	char	*dup;
+
+	dup = ft_strdup(line);
+	if (line == NULL)
+		return (NULL);
+	free(line);
+	line = NULL;
+	res = ft_strtrim(dup, "\n");
+	if (res == NULL)
+		return NULL;
+	free(dup);
+	dup = NULL;
+	return (res);
 }
 
 /// Recupere le fd via la fonction open_fd et creer les objects
@@ -116,7 +113,7 @@ int parsing(t_data *data, int ac, char *av)
 	{
 		printf("error [%d] line [%.*s]\n", data->error, (int)ft_strlen(line)
 		- 1,line);
-		line = ft_strtrim(line, "\n");
+		line = trim_gnl(line);
 		init_file(data, line);
 		if (data->error != 0)
 		{
