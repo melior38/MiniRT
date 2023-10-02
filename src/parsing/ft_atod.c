@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atof.c                                          :+:      :+:    :+:   */
+/*   ft_atod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 14:34:22 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/11 11:20:39 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:25:43 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MiniRT.h"
 
-double	ft_atod(char *str)
+// une modiff de atod serait de le coder comme ça : int	ft_atod(char *str, double *d)
+// de cette maniere on peut faire un return avec code d'erreur tout en modifiant le double *d.
+double 	ft_atod(char *str, t_data *data)
 {
 	double	res;
 	double	neg;
@@ -25,6 +27,7 @@ double	ft_atod(char *str)
 	neg = 1.0;
 	res = 0.0;
 	tmp = 0.0;
+	// printf("str = [%s]\n", str);
 	if (str[i] == '-')
 	{
 		neg = -1.0;
@@ -38,7 +41,10 @@ double	ft_atod(char *str)
 			i++;
 		}
 		else
-			return (123.123); // on verra plus tard comment faire pour detecter un soucis
+		{
+			data->error = 6;
+			return (res);
+		}
 	}
 	if(str[i] == '.')
 	{
@@ -46,13 +52,14 @@ double	ft_atod(char *str)
 		while (str[i])
 		{
 			if (str[i] <= '0' && str[i] >= '9')
-				return (0);
+				data->error = 6;
 			tmp = (tmp * 10) + (str[i] - 48);
 			i++;
 			count++;
 		}
 		tmp = tmp / pow(10.0,(double)count);
 	}
-	res = res + tmp;
+	res += tmp;
+	// printf("lol");
 	return (res * neg);
 }

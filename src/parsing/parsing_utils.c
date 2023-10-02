@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/19 17:34:52 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:36:49 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,6 @@ int	check_rt_file(char *av)
 	return (check);
 }
 
-void redirect_function(void (*parse_struct)(t_param *, char **), t_param *param, char **s_line)
-{
-	parse_struct(param, s_line);
-}
-
 bool	check_line(char *line)
 {
 	int i;
@@ -60,36 +55,41 @@ bool	check_line(char *line)
 	return (true);
 }
 
-int ft_strcmp(char *s1, char *s2)
-{
-	int i;
-
-	i = 0;
-	while (s1[i])
-	{
-		if (s1[i] != s2[i])
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 void	init_file(t_data *data, char *line)
 {
-	int i;
-	char **s_line;
+	char	**s_line;
 
-	i = 0;
-//	if (check_line(line) == false)
-//		return (false);
 	s_line = ft_split(line, ' ');
-	while (s_line[i])
-	{
-		printf("s_line[%d] [%s]\n", i, s_line[i]);
-		i++;
-	}
-	if (ft_strcmp(s_line[0], "A") == 0)
-		create_alight(data, s_line);
+	if (ft_strncmp(line, "A ", 2) == 0)
+		data->param->alight = create_alight(data, s_line);
+	if (ft_strncmp(line, "C ", 2) == 0)
+		data->param->camera = create_camera(data, s_line);
+	if (ft_strncmp(line, "L ", 2) == 0)
+		data->param->light = create_light(data, s_line);
+	if (ft_strncmp(line, "sp ", 3) == 0)
+		sp_addb(&data->param->sphere, create_sphere(data, s_line));
+	if (ft_strncmp(line, "pl ", 3) == 0)
+		pl_addb(&data->param->plane, create_plane(data, s_line));
+	if (ft_strncmp(line, "cy ", 3) == 0)
+		cyl_addb(&data->param->cylinder, create_cylinder(data, s_line));
+}
+
+char	*trim_gnl(char *line)
+{
+	char	*res;
+	char	*dup;
+
+	dup = ft_strdup(line);
+	if (line == NULL)
+		return (NULL);
+	free(line);
+	line = NULL;
+	res = ft_strtrim(dup, "\n");
+	if (res == NULL)
+		return NULL;
+	free(dup);
+	dup = NULL;
+	return (res);
 }
 
 /// Recupere le fd via la fonction open_fd et creer les objects
@@ -101,11 +101,19 @@ int parsing(t_data *data, int ac, char *av)
 {
 	int		fd;
 	char	*line;
+	t_param	*param;
 
 	fd = open_fd(ac, av);
 	line = get_next_line(fd);
+	param = malloc(sizeof(t_param));
+	if (!param)
+		exit(1); // a mieux faire mais la je suis pas sur ce soucis la
+	data->param = param;
 	while (line)
 	{
+		printf("error [%d] line [%.*s]\n", data->error, (int)ft_strlen(line)
+		- 1,line);
+		line = trim_gnl(line);
 		init_file(data, line);
 		if (data->error != 0)
 		{
@@ -113,6 +121,7 @@ int parsing(t_data *data, int ac, char *av)
 			free(line);
 			return(0);
 		}
+		free(line);
 		line = get_next_line(fd);
 	}
 	free(line);

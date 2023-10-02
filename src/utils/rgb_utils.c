@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   rgb_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/19 17:34:52 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:13:10 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,45 @@ t_rgb	*rgb_converter(t_data *data, char *str)
 	}
 	else
 		data->error = 2;
+	free_tab(split);
 	return (rgb);
+}
+
+t_axis	*ft_coor(char *str, t_data *data)
+{
+	t_axis	*new;
+	char	**split;
+
+	new = malloc(sizeof(t_axis));
+	if (!new)
+		return (NULL);
+	split = ft_split(str, ',');
+	new->x = ft_atod(split[0], data);
+	new->y = ft_atod(split[1], data);
+	new->z = ft_atod(split[2], data);
+	free_tab(split);
+	return (new);
+}
+
+t_axis	*ft_vector(t_data *data, char *str)
+{
+	t_axis	*new;
+	char	**split;
+
+	new = malloc(sizeof(t_axis));
+	if (!new)
+		return (NULL);
+	split = ft_split(str, ',');
+	if (ft_atod(split[0], data) >= -1.0 && ft_atod(split[0], data) <= 1.0
+		&& ft_atod(split[1], data) >= -1.0 && ft_atod(split[1], data) <= 1.0
+		&& ft_atod(split[2], data) >= -1.0 && ft_atod(split[2], data) <= 1.0)
+	{
+		new->x = ft_atod(split[0], data);
+		new->y = ft_atod(split[1], data);
+		new->z = ft_atod(split[2], data);
+	}
+	else
+		data->error = 3;
+	free_tab(split);
+	return (new);
 }

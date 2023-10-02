@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 00:28:43 by lcamilo-          #+#    #+#             */
-/*   Updated: 2023/09/19 17:24:06 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:07:31 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strlenjoin(const char *s1, const char *s2, int len)
 	return (ret);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+size_t	ft_strlcpys(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 
