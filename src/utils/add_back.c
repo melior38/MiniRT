@@ -15,11 +15,8 @@
 void	pl_addb(t_plane **lst, t_plane *new)
 {
 	t_plane	*current;
-	static int i;
 
-	if (!i)
-		i = 0;
-	if (i == 0)
+	if (new == NULL)
 		*lst = new;
 	else
 	{
@@ -28,17 +25,13 @@ void	pl_addb(t_plane **lst, t_plane *new)
 			current = current->next;
 		current->next = new;
 	}
-	i++;
 }
 
 void	sp_addb(t_sphere **lst, t_sphere *new)
 {
 	t_sphere	*current;
-	static int i;
 
-	if (!i)
-		i = 0;
-	if (i == 0)
+	if (new == NULL)
 		*lst = new;
 	else
 	{
@@ -47,17 +40,13 @@ void	sp_addb(t_sphere **lst, t_sphere *new)
 			current = current->next;
 		current->next = new;
 	}
-	i++;
 }
 
 void	cyl_addb(t_cylinder **lst, t_cylinder *new)
 {
 	t_cylinder	*current;
-	static int i;
 
-	if (!i)
-		i = 0;
-	if (i == 0)
+	if (new == NULL)
 		*lst = new;
 	else
 	{
@@ -66,5 +55,4 @@ void	cyl_addb(t_cylinder **lst, t_cylinder *new)
 			current = current->next;
 		current->next = new;
 	}
-	i++;
 }

@@ -108,6 +108,9 @@ int parsing(t_data *data, int ac, char *av)
 	param = malloc(sizeof(t_param));
 	if (!param)
 		exit(1); // a mieux faire mais la je suis pas sur ce soucis la
+	param->cylinder = NULL;
+	param->plane = NULL;
+	param->sphere = NULL;
 	data->param = param;
 	while (line)
 	{
