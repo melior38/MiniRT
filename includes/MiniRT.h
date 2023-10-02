@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/02 08:31:33 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/02 08:39:27 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ typedef struct s_rgb {
 	int	b;
 
 }				t_rgb;
+
+
+typedef struct s_vec_dir
+{
+	t_axis	qx;
+	t_axis	qy;
+}				t_vec_dir;
 
 typedef struct s_referential {
 	t_axis	x;
@@ -116,7 +123,6 @@ typedef struct s_param
 	t_referential	ref;
 	t_vec_dir		vec;
 }				t_param;
-
 
 typedef struct s_data {
 	void		*img;

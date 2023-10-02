@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 09:32:28 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/27 09:43:28 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/02 09:16:32 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,10 @@ t_referential	set_referential(t_axis *cam_ve)
 	return (ref);
 }
 
-// t_axis	get_W_center(t_axis cam_coor, t_referential ref)
-// {
-// 	return (add_vec(cam_coor, ref.z));
-// }
-
 // void	get_win_scale(t_param *para, double fov)
 // {
 // 	param->hx = tan(fov / 2) * 1;
-// 	param->hy = (param->hx / (WIDTH - 1.0)) * (HEIGTH - 1.0);
+// 	param->hy = (param->hx / (double)(WIDTH)) * (double)(HEIGTH);
 // }
 
 // return un t_axis mais pour les test va return un int 
