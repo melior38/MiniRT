@@ -47,6 +47,9 @@ SRC 		= 	main.c							\
 				utils/rgb_utils.c				\
 				utils/show.c 					\
 				utils/add_back.c				\
+				utils/free.c					\
+				utils/free_obj.c				\
+				utils/free_uobj.c				\
 				math/vec_utils.c 				\
 				math/vec_operation.c
 

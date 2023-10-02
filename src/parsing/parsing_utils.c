@@ -118,12 +118,6 @@ int parsing(t_data *data, int ac, char *av)
 		- 1,line);
 		line = trim_gnl(line);
 		init_file(data, line);
-		if (data->error != 0)
-		{
-			ft_printf("Error...\n"); //A coder une sortie d'erreur
-			free(line);
-			return(0);
-		}
 		free(line);
 		line = get_next_line(fd);
 	}

@@ -109,23 +109,17 @@ int	main(int ac, char **av)
 	init_data(&data);
 	parsing(&data ,ac,av[1]);
 	show_obj(&data);
-//	 ft_handle_error(parsing(&data ,ac,av[1]));
-//	printf("coor_convertor est-il foncionnel ? [%f]\n", (float)coor_convertor("1.0,0,0", 'x'));
-//	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor("1.0,0,0", 'r'));
-//	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor(",,", 'g'));
-//	printf("rgb_convertor est-il foncionnel ? [%d]\n", rgb_convertor("255,30,45,", 'b'));
-//	 struct_set(data); pour deja inserer les valeurs go essayer de ne pas malloc se serai nice
-	// mlx = mlx_init();
-	// mlx_win = mlx_new_window(mlx, WIDTH, HEIGTH, "MiniRT");
-	// data.img = mlx_new_image(mlx, WIDTH, HEIGTH);
-	// data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,
-			// &data.endian);
-	// data.mlx = mlx;
-	// data.mlx_win = mlx_win;
-	// mlx_hook(mlx_win, ON_KEYUP, 0, ft_offset_hook, &img);
-	// mlx_hook(mlx_win, ON_DESTROY, 0, ft_handle_exit, &img);
-	// mlx_hook(mlx_win, ON_MOUSEDOWN, 0, ft_mouse_press, &img);
-	// mlx_hook(mlx_win, ON_MOUSEUP, 0, ft_mouse_release, &img);
-	// mlx_loop_hook(mlx, render_next_frame, &data);
-	// mlx_loop(mlx);
+//	 mlx = mlx_init();
+//	 mlx_win = mlx_new_window(mlx, WIDTH, HEIGTH, "MiniRT");
+//	 data.img = mlx_new_image(mlx, WIDTH, HEIGTH);
+//	 data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,
+//			 &data.endian);
+//	 data.mlx = mlx;
+//	 data.mlx_win = mlx_win;
+//	 mlx_hook(mlx_win, ON_KEYUP, 0, ft_offset_hook, &img);
+//	 mlx_hook(mlx_win, ON_DESTROY, 0, ft_handle_exit, &img);
+//	 mlx_hook(mlx_win, ON_MOUSEDOWN, 0, ft_mouse_press, &img);
+//	 mlx_hook(mlx_win, ON_MOUSEUP, 0, ft_mouse_release, &img);
+//	 mlx_loop_hook(mlx, render_next_frame, &data);
+//	 mlx_loop(mlx);
 }
