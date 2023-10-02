@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/23 15:11:33 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:52:00 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,20 @@
 # include <mlx.h>
 # include <stdbool.h>
 
-# define HEIGTH		768.0
-# define WIDTH		1366.0
+# define HEIGTH		720.0
+# define WIDTH		1280.0
 # define ERROR		0
 # define SUCCESS	1
-# define HEIGTH	768.0
-# define WIDTH 1366.0
+# define HEIGTH		768.0
+# define WIDTH 		1366.0
 # define AMBIENT_LIGHT 1
 # define CAMERA 2
 # define LIGHT 3
 # define PLAN 4
 # define SPHERE 5
 # define CYLINDER 6
+# define HORIZONTAL 16
+# define VERTICAL 9
 
 typedef struct s_axis {
 	float	x;
@@ -45,6 +47,12 @@ typedef struct s_rgb {
 
 }				t_rgb;
 
+typedef struct s_referential {
+	t_axis	x;
+	t_axis	y;
+	t_axis	z;
+}				t_referential;
+
 typedef struct s_alight
 {
 	double				ratio;
@@ -53,7 +61,7 @@ typedef struct s_alight
 
 typedef struct s_camera
 {
-	int					fov;
+	int					fov; // il faut changer le int pour un double
 	t_axis				*coor;
 	t_axis				*vector;
 }	t_camera;
@@ -99,6 +107,9 @@ typedef struct s_param
 	t_plane				*plane;
 	t_sphere			*sphere;
 	t_cylinder			*cylinder;
+	t_referential		ref;
+	double				hx;
+	double				hy;
 }						t_param;
 
 typedef struct s_data {
@@ -136,8 +147,8 @@ int			check_rt_file(char *av);
 
 ///////////////////////////////// PARSE_INIT.C /////////////////////////////////
 
-bool		Ambient_light_set(t_param *param, char **arg_tab);
-int			rgb_convertor(char *str, char rgb);
+// bool		Ambient_light_set(t_param *param, char **arg_tab);
+// int			rgb_convertor(char *str, char rgb);
 void		free_tab(char **tab);
 float		coor_convertor(char *str, char coor);
 bool		check_str_int(char *str);
@@ -154,11 +165,11 @@ double		ft_atod(char *str);
 
 /////////////////////////////// GET_FUNCTION.C /////////////////////////////////
 
-bool		get_vector(t_axis *axis, char *str);
-bool		get_rgb(t_rgb *rgb, char *str);
-bool		get_dimension(double *value, char *str);
-bool		get_coor(t_axis *axis, char *str);
-bool		get_ratio(double *ratio, char *str);
+// bool		get_vector(t_axis *axis, char *str);
+// bool		get_rgb(t_rgb *rgb, char *str);
+// bool		get_dimension(double *value, char *str);
+// bool		get_coor(t_axis *axis, char *str);
+// bool		get_ratio(double *ratio, char *str);
 
 ///////////////////////////////// PARSING.C ////////////////////////////////////
 int			open_fd(int ac, char *av);
