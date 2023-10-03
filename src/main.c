@@ -102,35 +102,40 @@ void	show_obj(t_data *data)
 
 int	main(int ac, char **av)
 {
-	void	*mlx_win;
-	void	*mlx;
+//	void	*mlx_win;
+//	void	*mlx;
 	t_data	data;
 
+	printf("data address [%p]\n", &data);
 	if (ac != 2)
 	{
 		perror("wrong amount of argument \n");
 		exit(1);
 	}
 	init_data(&data);
+	(void) av;
+	(void) ac;
 	parsing(&data, ac, av[1]);
-	t_data *tmp;
-	tmp = &data;
+//	t_data *tmp;
+//	tmp = &data;
 	// t_referential	ref = set_referential(tmp->param->camera->vector);
 	// printf("1 : ref.x = {%f} \nref.y = {%f}\nref.z = {%f}\n", ref.x.x, ref.x.y, ref.x.z);
 	// printf("2 : ref.x = {%f} \nref.y = {%f}\nref.z = {%f}\n", ref.y.x, ref.y.y, ref.y.z);
 	// printf("3 : ref.x = {%f} \nref.y = {%f}\nref.z = {%f}\n", ref.z.x, ref.z.y, ref.z.z);
-	show_obj(&data);
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, WIDTH, HEIGTH, "MiniRT");
-	data.img = mlx_new_image(mlx, WIDTH, HEIGTH);
-	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,
-			&data.endian);
-	data.mlx = mlx;
-	data.mlx_win = mlx_win;
+//	show_obj(&data);
+	free_struct(&data);
+	return (0);
+//	mlx = mlx_init();
+//	mlx_win = mlx_new_window(mlx, WIDTH, HEIGTH, "MiniRT");
+//	data.img = mlx_new_image(mlx, WIDTH, HEIGTH);
+//	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length,
+//			&data.endian);
+//	data.mlx = mlx;
+//	data.mlx_win = mlx_win;
 	// mlx_hook(mlx_win, ON_KEYUP, 0, ft_offset_hook, &img);
 	// mlx_hook(mlx_win, ON_DESTROY, 0, ft_handle_exit, &img);
 	// mlx_hook(mlx_win, ON_MOUSEDOWN, 0, ft_mouse_press, &img);
 	// mlx_hook(mlx_win, ON_MOUSEUP, 0, ft_mouse_release, &img);
-	mlx_loop_hook(mlx, render_next_frame, &data);
-	mlx_loop(mlx);
+//	mlx_loop_hook(mlx, render_next_frame, &data);
+//	mlx_loop(mlx);
 }

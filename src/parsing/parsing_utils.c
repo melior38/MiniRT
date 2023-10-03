@@ -60,6 +60,7 @@ void	init_file(t_data *data, char *line)
 	char	**s_line;
 
 	s_line = ft_split(line, ' ');
+	printf("s_line address [%p]\n", &s_line);
 	if (ft_strncmp(line, "A ", 2) == 0)
 		data->param->alight = create_alight(data, s_line);
 	if (ft_strncmp(line, "C ", 2) == 0)
@@ -72,6 +73,7 @@ void	init_file(t_data *data, char *line)
 		pl_addb(&data->param->plane, create_plane(data, s_line));
 	if (ft_strncmp(line, "cy ", 3) == 0)
 		cyl_addb(&data->param->cylinder, create_cylinder(data, s_line));
+	free_tab(s_line);
 }
 
 char	*trim_gnl(char *line)
@@ -80,11 +82,13 @@ char	*trim_gnl(char *line)
 	char	*dup;
 
 	dup = ft_strdup(line);
+	printf("dup address [%p]\n", &dup);
 	if (line == NULL)
 		return (NULL);
 	free(line);
 	line = NULL;
 	res = ft_strtrim(dup, "\n");
+	printf("res address [%p]\n", &res);
 	if (res == NULL)
 		return NULL;
 	free(dup);
@@ -105,7 +109,9 @@ int parsing(t_data *data, int ac, char *av)
 
 	fd = open_fd(data ,ac, av);
 	line = get_next_line(fd);
+	printf("line parsing gnl [%p]\n", &line);
 	param = malloc(sizeof(t_param));
+	printf("param address [%p]\n", &param);
 	if (!param)
 		exit(1); // a mieux faire mais la je suis pas sur ce soucis la
 	param->alight = NULL;
@@ -117,8 +123,6 @@ int parsing(t_data *data, int ac, char *av)
 	data->param = param;
 	while (line)
 	{
-		printf("error [%d] line [%.*s]\n", data->error, (int)ft_strlen(line)
-		- 1,line);
 		line = trim_gnl(line);
 		init_file(data, line);
 		free(line);

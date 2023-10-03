@@ -14,61 +14,58 @@
 
 void	free_plane(t_param *param)
 {
-	while (param->plane)
+	t_plane *lst;
+	t_plane *lst_tmp;
+
+	lst = param->plane;
+	while (lst)
 	{
-		free(param->plane->coor);
-		param->plane->coor = NULL;
-		if (param->plane->vector)
-		{
-			free(param->plane->vector);
-			param->plane->vector = NULL;
-		}
-		if (param->plane->rgb)
-		{
-			free(param->plane->rgb);
-			param->plane->rgb = NULL;
-		}
-		free(param->plane);
-		param->plane = NULL;
-		param->plane = param->plane->next;
+		lst_tmp = lst->next;
+		free(lst->coor);
+		if (lst->vector)
+			free(lst->vector);
+		if (lst->rgb)
+			free(lst->rgb);
+		free(lst);
+		lst = lst_tmp;
 	}
+	param->plane = NULL;
 }
 
 void	free_sphere(t_param *param)
 {
-	while (param->sphere)
+	t_sphere	*lst;
+	t_sphere	*lst_tmp;
+
+	lst = param->sphere;
+	while (lst)
 	{
-		free(param->sphere->coor);
-		param->sphere->coor = NULL;
-		if (param->sphere->rgb)
-		{
-			free(param->sphere->rgb);
-			param->sphere->rgb = NULL;
-		}
-		free(param->sphere);
-		param->sphere = NULL;
-		param->sphere = param->sphere->next;
+		lst_tmp = lst->next;
+		free(lst->coor);
+		if (lst->rgb)
+			free(lst->rgb);
+		free(lst);
+		lst = lst_tmp;
 	}
+	param->sphere = NULL;
 }
 
 void	free_cylinder(t_param *param)
 {
-	while (param->cylinder)
+	t_cylinder	*lst;
+	t_cylinder	*lst_tmp;
+
+	lst = param->cylinder;
+	while (lst)
 	{
-		free(param->cylinder->coor);
-		param->cylinder->coor = NULL;
-		if (param->cylinder->vector)
-		{
-			free(param->cylinder->vector);
-			param->cylinder->vector = NULL;
-		}
-		if (param->cylinder->rgb)
-		{
-			free(param->cylinder->rgb);
-			param->cylinder->rgb = NULL;
-		}
-		free(param->cylinder);
-		param->cylinder = NULL;
-		param->cylinder = param->cylinder->next;
+		lst_tmp = lst->next;
+		free(lst->coor);
+		if (lst->vector)
+			free(lst->vector);
+		if (lst->rgb)
+			free(lst->rgb);
+		free(lst);
+		lst = lst_tmp;
 	}
+	param->cylinder = NULL;
 }

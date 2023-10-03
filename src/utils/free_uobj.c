@@ -17,6 +17,7 @@ void	free_camera(t_camera *camera)
 	free(camera->coor);
 	camera->coor = NULL;
 	free(camera->vector);
+	printf("fov camera address [%p]\n", &camera->fov);
 	camera->vector = NULL;
 }
 
@@ -26,4 +27,5 @@ void	free_light(t_light *light)
 	light->coor = NULL;
 	free(light->rgb);
 	light->rgb = NULL;
+	printf("bright light address [%p]\n", &light->bright);
 }

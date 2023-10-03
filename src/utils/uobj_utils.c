@@ -25,6 +25,7 @@ t_alight	*create_alight(t_data *data, char **args)
 	t_alight	*new;
 
 	new = malloc(sizeof(t_alight));
+	printf("alight address [%p]\n", &new);
 	if (!new)
 		return (NULL);
 	new->rgb = NULL;
@@ -38,6 +39,7 @@ t_alight	*create_alight(t_data *data, char **args)
 		return (new);
 	}
 	new->rgb = rgb_converter(data, args[2]);
+	printf("alight->rgb address [%p]\n", new->rgb);
 	return (new);
 }
 
@@ -47,6 +49,7 @@ t_camera	*create_camera(t_data *data, char **args)
 	t_camera	*new;
 
 	new = malloc(sizeof(t_camera));
+	printf("camera address [%p]\n", &new);
 	if (!new)
 		return (NULL);
 	if (data->param->camera)
@@ -66,6 +69,7 @@ t_light	*create_light(t_data *data, char **args)
 	t_light	*new;
 
 	new = malloc(sizeof(t_light));
+	printf("light address [%p]\n", &new);
 	if (!new)
 		return (NULL);
 	if (data->param->light)
