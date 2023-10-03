@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   obj_utils.c                                        :+:      :+:    :+:   */
+/*   uobj_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/28 15:17:32 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:12:27 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ t_alight	*create_alight(t_data *data, char **args)
 	new = malloc(sizeof(t_alight));
 	if (!new)
 		return (NULL);
-	if (data->param->alight)
-		print_error(data, "Alight twice or more in .rt file\n");
+	// if (data->param->alight)
+		// print_error(data, "Alight twice or more in .rt file\n");
 	if (ft_atod(args[1], data) >= 0.0 && ft_atod(args[1], data) <= 1.0)
 		new->ratio = ft_atod(args[1], data);
 	else
@@ -48,8 +48,8 @@ t_camera	*create_camera(t_data *data, char **args)
 	new = malloc(sizeof(t_camera));
 	if (!new)
 		return (NULL);
-	if (data->param->alight)
-		print_error(data, "Camera twice or more in .rt file\n");
+	// if (data->param->alight)
+	// 	print_error(data, "Camera twice or more in .rt file\n");
 	new->coor = ft_coor(args[1], data);
 	new->vector = ft_vector(data, args[2]);
 	if (ft_atod(args[3], data) >= 0 && ft_atod(args[3], data) <= 180)
@@ -67,8 +67,8 @@ t_light	*create_light(t_data *data, char **args)
 	new = malloc(sizeof(t_light));
 	if (!new)
 		return (NULL);
-	if (data->param->alight)
-		print_error(data, "Light twice or more in .rt file\n");
+	// if (data->param->alight)
+	// 	print_error(data, "Light twice or more in .rt file\n");
 	new->coor = ft_coor(args[1], data);
 	if (ft_atod(args[2], data) >= 0.0 && ft_atod(args[2], data) <= 1.0)
 		new->bright = ft_atod(args[2], data);

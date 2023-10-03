@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/28 15:13:10 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:07:33 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_rgb	*rgb_converter(t_data *data, char *str)
 		rgb->b = ft_atoi(split[2]);
 	}
 	else
-		print_error("Rgb not in range\n");
+		print_error(data, "Rgb not in range\n");
 	free_tab(split);
 	return (rgb);
 }
