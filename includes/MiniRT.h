@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/02 08:39:27 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/02 13:58:53 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ typedef struct s_rgb {
 
 typedef struct s_vec_dir
 {
-	t_axis	qx;
-	t_axis	qy;
+	t_axis	shift_x;
+	t_axis	shift_y;
+	double	pixel_size;
 }				t_vec_dir;
 
 typedef struct s_referential {
@@ -121,7 +122,7 @@ typedef struct s_param
 	double			hx;
 	double			hy;
 	t_referential	ref;
-	t_vec_dir		vec;
+	t_vec_dir		dir;
 }				t_param;
 
 typedef struct s_data {
@@ -224,8 +225,7 @@ t_axis		scale_vec(t_axis vec, double scaling);
 
 //////////////////////////////// VEC_OPERATION.C ///////////////////////////////
 void		little_main_for_pixel(t_data *data, int x, int y);
-int			shifting_pixel(t_param *param, int x, int y,
-				t_referential ref);
+int			shifting_pixel(t_param *param, int x, int y, t_referential ref);
 void		get_win_scale(t_param *param, double fov);
 t_referential	set_referential(t_axis *cam_ve);
 

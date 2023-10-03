@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 09:32:28 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/02 09:16:32 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/02 13:52:00 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ t_referential	set_referential(t_axis *cam_ve)
 	return (ref);
 }
 
-// void	get_win_scale(t_param *para, double fov)
-// {
-// 	param->hx = tan(fov / 2) * 1;
-// 	param->hy = (param->hx / (double)(WIDTH)) * (double)(HEIGTH);
-// }
+void	get_win_scale(t_param *param, double fov)
+{
+	param->hx = tan(fov);
+	param->hy = (param->hx  * (double)(HEIGTH) / (double)(WIDTH));
+}
 
 // return un t_axis mais pour les test va return un int 
 int	shifting_pixel(t_param *param, int x, int y, t_referential ref)
@@ -46,30 +46,18 @@ int	shifting_pixel(t_param *param, int x, int y, t_referential ref)
 	(void)	param;
 	t_vec_dir	ret;
 	t_axis	res;
-	double	hx;
-	double	hy;
-	double	fov = 110.0;
-	t_vec_dir	vec;
 
- 	hx = tan(fov / 2) * 1;
-	hy = (hx / (WIDTH)) * (HEIGTH);
-	vec.qx = scale_vec(ref.x, (hx * 2.0) / (double)x);
-	vec.qy = scale_vec(ref.y, (hy * 2.0) / (double)y);
+	param->vec.qx = scale_vec(param->ref.x, (param->hx * 2.0) / WIDTH);
+	param->vec.qy = scale_vec(param->ref.y, (param->hy * 2.0) / HEIGTH);
 
-	ret.qx = scale_vec(vec.qx, x / 16);
-	ret.qy = scale_vec(vec.qy, y / 9);
-	res = add_vec(vec.qx, vec.qy);
-	// param->vec.qx = scale_vec(param->ref.x, (param->hx * 2.0) / WIDTH);
-	// param->vec.qy = scale_vec(param->ref.y, (param->hy * 2.0) / HEIGTH);
-
-	// ret.qx = scale_vec(param->vec.qx, x);
-	// ret.qy = scale_vec(param->vec.qy, y);
-	// res = add_vec(param->vec.qx, param->vec.qy);
+	ret.qx = scale_vec(param->vec.qx, x);
+	ret.qy = scale_vec(param->vec.qy, y);
+	res = add_vec(param->vec.qx, param->vec.qy);
 	int tmp1 = (int)res.x;
 	int tmp2 = (int)res.y;
 	int tmp3 = (int)res.z;
 
-	printf("res.x = {%f} \nres.y = {%f}\nres.z = {%f}\n", res.x, res.y, res.z);
+	// printf("res.x = {%f} \nres.y = {%f}\nres.z = {%f}\n", res.x, res.y, res.z);
 	tmp1 = tmp1 / 10;
 	tmp2 = tmp2 / 10;
 	tmp3 = tmp3 / 10;
@@ -86,14 +74,14 @@ int	shifting_pixel(t_param *param, int x, int y, t_referential ref)
 
 void	little_main_for_pixel(t_data *data, int x, int y)
 {
-	int colour;
-	t_referential ref;
-	t_axis	test = {0,1,0};
-	t_param *param = NULL;
+	int				colour;
+	t_referential	ref;
+	t_param			*param;
 
+	param = data->param;
 	// printf("x = {%d}\ny = {%d}\n", x, y);
-	ref = set_referential(&test);
-	// get_win_scale((double)camera->fov);
+	ref = set_referential(param->camera->vector);
+	get_win_scale(param, param->camera->fov);
 	colour = shifting_pixel(param, x, y, ref);
 	// data->param->ref = set_referential(data->param->camera->vector);
 	// get_win_scale(data->param, (double)data->param->camera->fov);
