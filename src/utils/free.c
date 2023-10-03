@@ -12,29 +12,33 @@
 
 #include "MiniRT.h"
 
-//Ajouter des macro de couleur pour que ce soit plus clair (constante)
-void	print_error(t_data	*data, char *msg, int code)
+void	free_param(t_param *param)
 {
-	ft_putendl_fd("Error", STDERR_FILENO);
-	ft_putendl_fd(msg, STDERR_FILENO);
-	free_struct(data);
-	exit (1);
+	if (param->alight)
+	{
+		free(param->alight);
+		param->alight = NULL;
+	}
+	if (param->camera)
+		free_camera(param->camera);
+	if (param->light)
+		free_light(param->light);
+	if (param->plane)
+		free_plane(param);
+	if (param->sphere)
+		free_sphere(param);
+	if (param->cylinder)
+		free_cylinder(param);
+	free(param);
+	param = NULL;
 }
-/// Check args and open it
-/// \param ac number of args
-/// \param av args
-int	open_fd(int ac, char *av)
-{
-	int		fd;
-	size_t 	i;
 
-	if (ac != 2)
-		return (print_error("Usage ./minirt example\n",ERROR));
-	i = ft_strlen(av);
-	if (ft_strncmp(av + i - 3, ".rt", 4))
-		return (print_error("Only .rt are allowed\n", ERROR));
-	fd = open(av, O_RDONLY);
-	if (fd < 0)
-		return (print_error("Open the noor pls\n", ERROR));
-	return (fd);
+void	free_struct(t_data *data)
+{
+	free_param(data->param);
+	mlx_destroy_window(data->mlx, data->mlx_win);
+	free(data->img);
+	data->img = NULL;
+	free(data->addr);
+	data->addr =NULL;
 }
