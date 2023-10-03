@@ -16,6 +16,8 @@ void	free_param(t_param *param)
 {
 	if (param->alight)
 	{
+		if (param->alight->rgb)
+			free(param->alight->rgb);
 		free(param->alight);
 		param->alight = NULL;
 	}
@@ -40,5 +42,5 @@ void	free_struct(t_data *data)
 	free(data->img);
 	data->img = NULL;
 	free(data->addr);
-	data->addr =NULL;
+	data->addr = NULL;
 }

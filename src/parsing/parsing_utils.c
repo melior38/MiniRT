@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/03 09:14:00 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:06:32 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int parsing(t_data *data, int ac, char *av)
 	char	*line;
 	t_param	*param;
 
-	fd = open_fd(data, ac, av);
+	fd = open_fd(data ,ac, av);
 	line = get_next_line(fd);
 	param = malloc(sizeof(t_param));
 	if (!param)

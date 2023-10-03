@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/03 13:12:51 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:06:05 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,6 @@ void		init_tab(int *tab);
 int			check_rt_file(char *av);
 
 ///////////////////////////////// PARSE_INIT.C /////////////////////////////////
-
 void		free_tab(char **tab);
 
 ////////////////////////////////// FT_ATOD.C ///////////////////////////////////
@@ -223,8 +222,10 @@ double		ft_atod(char *str, t_data *data);
 // bool		get_ratio(double *ratio, char *str);
 
 ///////////////////////////////// PARSING.C ////////////////////////////////////
+
 int			open_fd(t_data *data, int ac, char *av);
-void		print_error(t_data	*data, char *msg, int code);
+void		print_error(t_data	*data, char *msg);
+
 
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// projection /////////////////////////////////
