@@ -38,9 +38,9 @@ void	free_param(t_param *param)
 void	free_struct(t_data *data)
 {
 	free_param(data->param);
-	mlx_destroy_window(data->mlx, data->mlx_win);
-	free(data->img);
-	data->img = NULL;
-	free(data->addr);
-	data->addr = NULL;
+//	mlx_destroy_window(data->mlx, data->mlx_win);
+//	free(data->img);
+//	data->img = NULL;
+//	free(data->addr);
+//	data->addr = NULL;
 }
