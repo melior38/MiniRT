@@ -27,11 +27,13 @@ t_alight	*create_alight(t_data *data, char **args)
 	new = malloc(sizeof(t_alight));
 	if (!new)
 		return (NULL);
+	if (data->param->alight)
+		print_error(data, "Alight twice or more in .rt file\n");
 	if (ft_atod(args[1], data) >= 0.0 && ft_atod(args[1], data) <= 1.0)
 		new->ratio = ft_atod(args[1], data);
 	else
 	{
-		data->error = 1;
+		print_error(data, "Alight Ratio not in range\n");
 		return (new);
 	}
 	new->rgb = rgb_converter(data, args[2]);
@@ -46,12 +48,14 @@ t_camera	*create_camera(t_data *data, char **args)
 	new = malloc(sizeof(t_camera));
 	if (!new)
 		return (NULL);
+	if (data->param->alight)
+		print_error(data, "Camera twice or more in .rt file\n");
 	new->coor = ft_coor(args[1], data);
 	new->vector = ft_vector(data, args[2]);
 	if (ft_atod(args[3], data) >= 0 && ft_atod(args[3], data) <= 180)
 		new->fov = ft_atod(args[3], data);
 	else
-		data->error = 4;
+		print_error(data, "Camera fov not in range\n");
 	return (new);
 }
 
@@ -63,11 +67,13 @@ t_light	*create_light(t_data *data, char **args)
 	new = malloc(sizeof(t_light));
 	if (!new)
 		return (NULL);
+	if (data->param->alight)
+		print_error(data, "Light twice or more in .rt file\n");
 	new->coor = ft_coor(args[1], data);
 	if (ft_atod(args[2], data) >= 0.0 && ft_atod(args[2], data) <= 1.0)
 		new->bright = ft_atod(args[2], data);
 	else
-		data->error = 5;
+		print_error(data, "Light brightness not in range\n");
 	new->rgb = rgb_converter(data, args[3]);
 	return (new);
 }

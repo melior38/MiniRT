@@ -33,7 +33,7 @@ t_rgb	*rgb_converter(t_data *data, char *str)
 		rgb->b = ft_atoi(split[2]);
 	}
 	else
-		data->error = 2;
+		print_error("Rgb not in range\n");
 	free_tab(split);
 	return (rgb);
 }
@@ -72,7 +72,7 @@ t_axis	*ft_vector(t_data *data, char *str)
 		new->z = ft_atod(split[2], data);
 	}
 	else
-		data->error = 3;
+		print_error(data, "Vector not in range\n");
 	free_tab(split);
 	return (new);
 }

@@ -13,7 +13,7 @@
 #include "MiniRT.h"
 
 //Ajouter des macro de couleur pour que ce soit plus clair (constante)
-void	print_error(t_data	*data, char *msg, int code)
+void	print_error(t_data	*data, char *msg)
 {
 	ft_putendl_fd("Error", STDERR_FILENO);
 	ft_putendl_fd(msg, STDERR_FILENO);
