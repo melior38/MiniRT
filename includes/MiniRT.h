@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/02 13:58:53 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/03 13:12:51 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef struct s_param
 	t_plane			*plane;
 	t_sphere		*sphere;
 	t_cylinder		*cylinder;
+	t_axis			corner;
 	double			hx;
 	double			hy;
 	t_referential	ref;
@@ -222,7 +223,7 @@ double		ft_atod(char *str, t_data *data);
 // bool		get_ratio(double *ratio, char *str);
 
 ///////////////////////////////// PARSING.C ////////////////////////////////////
-int			open_fd(int ac, char *av);
+int			open_fd(t_data *data, int ac, char *av);
 void		print_error(t_data	*data, char *msg, int code);
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -240,9 +241,10 @@ t_axis		subs_vec(t_axis vec1, t_axis vec2);
 t_axis		scale_vec(t_axis vec, double scaling);
 
 //////////////////////////////// VEC_OPERATION.C ///////////////////////////////
-void		little_main_for_pixel(t_data *data, int x, int y);
-int			shifting_pixel(t_param *param, int x, int y, t_referential ref);
-void		get_win_scale(t_param *param, double fov);
+
+int			pixel_color(t_param *param, t_axis pixel);
+void		little_main_for_pixel(t_data *data, t_axis pixel, int x, int y);
+void		get_win_scale(t_param *param);
 t_referential	set_referential(t_axis *cam_ve);
 
 #endif

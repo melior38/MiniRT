@@ -6,85 +6,74 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 09:32:28 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/02 13:52:00 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:50:51 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MiniRT.h"
 
 // we need to norm the camera vec
-t_referential	set_referential(t_axis *cam_ve)
+t_referential	set_referential(t_axis *cam_vec)
 {
-	(void) cam_ve;
-	t_axis cam_vec = {0,0,1};
 	t_axis	tmp;
 	t_referential ref;
 
-	if (cam_vec.x || cam_vec.z)
-		tmp = add_vec(cam_vec, (t_axis){0,1,0});
+	normed_vec(cam_vec);
+	if (cam_vec->x || cam_vec->z)
+		tmp = add_vec(*cam_vec, (t_axis){0,1,0});
 	else
 	{
-		tmp.x = cam_vec.y / vec_norm(cam_vec);
+		tmp.x = cam_vec->y / vec_norm(*cam_vec);
 		tmp.y = 0;
 		tmp.z = 0;
 	}
-	ref.x = cross_product(tmp, cam_vec);
-	ref.y = cross_product(ref.x, cam_vec);
-	ref.z = cam_vec;
+	ref.x = cross_product(tmp, *cam_vec);
+	ref.y = cross_product(ref.x, *cam_vec);
+	ref.z = *cam_vec;
 	return (ref);
 }
 
-void	get_win_scale(t_param *param, double fov)
+void	get_win_scale(t_param *param)
 {
-	param->hx = tan(fov);
+	t_axis	center;
+	t_axis	*cam;
+	t_axis	tmp;
+
+	cam = param->camera->coor;
+	param->hx = tan(param->camera->fov);
 	param->hy = (param->hx  * (double)(HEIGTH) / (double)(WIDTH));
+	param->dir.pixel_size = (param->hx * 2.0) / (double)(WIDTH);
+	center = add_vec(*cam, param->ref.z);
+	param->dir.shift_x = scale_vec(param->ref.x, param->dir.pixel_size);
+	param->dir.shift_y = scale_vec(param->ref.y, param->dir.pixel_size);
+	tmp = subs_vec(param->ref.z, add_vec(scale_vec(param->ref.x, \
+			param->hx), scale_vec(param->ref.y,param->hy)));
+	param->corner = add_vec(tmp, *cam);
 }
 
 // return un t_axis mais pour les test va return un int 
-int	shifting_pixel(t_param *param, int x, int y, t_referential ref)
+int	pixel_color(t_param *param, t_axis pixel)
 {
-	(void)	param;
-	t_vec_dir	ret;
-	t_axis	res;
-
-	param->vec.qx = scale_vec(param->ref.x, (param->hx * 2.0) / WIDTH);
-	param->vec.qy = scale_vec(param->ref.y, (param->hy * 2.0) / HEIGTH);
-
-	ret.qx = scale_vec(param->vec.qx, x);
-	ret.qy = scale_vec(param->vec.qy, y);
-	res = add_vec(param->vec.qx, param->vec.qy);
-	int tmp1 = (int)res.x;
-	int tmp2 = (int)res.y;
-	int tmp3 = (int)res.z;
-
-	// printf("res.x = {%f} \nres.y = {%f}\nres.z = {%f}\n", res.x, res.y, res.z);
-	tmp1 = tmp1 / 10;
-	tmp2 = tmp2 / 10;
-	tmp3 = tmp3 / 10;
-	if (res.z > res.y && res.z > res.x)
-		return (my_mlx_get_color_value(0, 0, tmp3 * 200));
-	else if (res.x > res.y && res.x > res.z)
-		return (my_mlx_get_color_value(tmp1 * 200, 0, 0));
-	else if (res.y > res.z && res.y > res.x)
-		return (my_mlx_get_color_value(0, 200 * tmp2, 0));
+	(void) param;
+	printf("pixel.x = {%f} \npixel.y = {%f}\npixel.z = {%f}\n", pixel.x, pixel.y, pixel.z);
+	if (pixel.z > pixel.y && pixel.z > pixel.x)
+		return (my_mlx_get_color_value(pixel.z * 50, pixel.z, pixel.z));
+	else if (pixel.x > pixel.y && pixel.x > pixel.z)
+		return (my_mlx_get_color_value(pixel.x, pixel.x * 50, pixel.x));
+	else if (pixel.y > pixel.z && pixel.y > pixel.x)
+		return (my_mlx_get_color_value(pixel.y, pixel.y, pixel.y * 50));
 	else 
 		return (my_mlx_get_color_value(0, 0, 0));
-	return (0);
 }
 
-void	little_main_for_pixel(t_data *data, int x, int y)
+void	little_main_for_pixel(t_data *data, t_axis pixel, int x, int  y)
 {
 	int				colour;
 	t_referential	ref;
 	t_param			*param;
 
 	param = data->param;
-	// printf("x = {%d}\ny = {%d}\n", x, y);
 	ref = set_referential(param->camera->vector);
-	get_win_scale(param, param->camera->fov);
-	colour = shifting_pixel(param, x, y, ref);
-	// data->param->ref = set_referential(data->param->camera->vector);
-	// get_win_scale(data->param, (double)data->param->camera->fov);
-	// colour = shifting_pixel(data->param, x, y);
+	colour = pixel_color(data->param, pixel);
 	my_mlx_pixel_put(data, x, y, colour);
 }
