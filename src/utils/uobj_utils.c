@@ -25,10 +25,12 @@ t_alight	*create_alight(t_data *data, char **args)
 	t_alight	*new;
 
 	new = malloc(sizeof(t_alight));
+	printf("alight address [%p]\n", &new);
 	if (!new)
 		return (NULL);
-	// if (data->param->alight)
-		// print_error(data, "Alight twice or more in .rt file\n");
+	new->rgb = NULL;
+	if (data->param->alight)
+		print_error(data, "Alight twice or more in .rt file\n");
 	if (ft_atod(args[1], data) >= 0.0 && ft_atod(args[1], data) <= 1.0)
 		new->ratio = ft_atod(args[1], data);
 	else
@@ -37,6 +39,7 @@ t_alight	*create_alight(t_data *data, char **args)
 		return (new);
 	}
 	new->rgb = rgb_converter(data, args[2]);
+	printf("alight->rgb address [%p]\n", new->rgb);
 	return (new);
 }
 
@@ -46,10 +49,11 @@ t_camera	*create_camera(t_data *data, char **args)
 	t_camera	*new;
 
 	new = malloc(sizeof(t_camera));
+	printf("camera address [%p]\n", &new);
 	if (!new)
 		return (NULL);
-	// if (data->param->alight)
-	// 	print_error(data, "Camera twice or more in .rt file\n");
+	if (data->param->camera)
+		print_error(data, "Camera twice or more in .rt file\n");
 	new->coor = ft_coor(args[1], data);
 	new->vector = ft_vector(data, args[2]);
 	if (ft_atod(args[3], data) >= 0 && ft_atod(args[3], data) <= 180)
@@ -65,10 +69,11 @@ t_light	*create_light(t_data *data, char **args)
 	t_light	*new;
 
 	new = malloc(sizeof(t_light));
+	printf("light address [%p]\n", &new);
 	if (!new)
 		return (NULL);
-	// if (data->param->alight)
-	// 	print_error(data, "Light twice or more in .rt file\n");
+	if (data->param->light)
+		print_error(data, "Light twice or more in .rt file\n");
 	new->coor = ft_coor(args[1], data);
 	if (ft_atod(args[2], data) >= 0.0 && ft_atod(args[2], data) <= 1.0)
 		new->bright = ft_atod(args[2], data);

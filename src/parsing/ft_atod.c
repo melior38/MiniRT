@@ -57,6 +57,7 @@ double 	ft_atod(char *str, t_data *data)
 			i++;
 			count++;
 		}
+		printf("tmp address [%p]\n", &tmp);
 		tmp = tmp / pow(10.0,(double)count);
 	}
 	res += tmp;

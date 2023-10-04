@@ -25,6 +25,7 @@ t_plane	*create_plane(t_data *data, char **args)
 	t_plane	*new;
 
 	new = malloc(sizeof(t_plane));
+	printf("plane address [%p]\n", &new);
 	if (!new)
 		return (NULL);
 	new->coor = ft_coor(args[1], data);
@@ -40,6 +41,7 @@ t_sphere	*create_sphere(t_data *data, char **args)
 	t_sphere	*new;
 
 	new = malloc(sizeof(t_sphere));
+	printf("sphere address [%p]\n", &new);
 	if (!new)
 		return (NULL);
 	new->coor = ft_coor(args[1], data);
@@ -55,6 +57,7 @@ t_cylinder	*create_cylinder(t_data *data, char **args)
 	t_cylinder	*new;
 
 	new = malloc(sizeof(t_cylinder));
+	printf("cylinder address [%p]\n", &new);
 	if (!new)
 		return (NULL);
 	new->coor = ft_coor(args[1], data);

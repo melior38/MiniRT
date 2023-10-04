@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/04 09:55:29 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/04 13:45:10 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_rgb	*rgb_converter(t_data *data, char *str)
 	t_rgb	*rgb;
 
 	rgb = malloc(sizeof(t_rgb));
+	printf("rgb address [%p]\n", &rgb);
 	if (!rgb)
 		return (NULL);
 	split = ft_split(str, ',');
@@ -44,9 +45,11 @@ t_pos	*ft_coor(char *str, t_data *data)
 	char	**split;
 
 	new = malloc(sizeof(t_pos));
+	printf("coor axis address [%p]\n", &new);
 	if (!new)
 		return (NULL);
 	split = ft_split(str, ',');
+	printf("split coor address [%p]\n", &split);
 	new->x = ft_atod(split[0], data);
 	new->y = ft_atod(split[1], data);
 	new->z = ft_atod(split[2], data);
@@ -60,9 +63,11 @@ t_pos	*ft_vector(t_data *data, char *str)
 	char	**split;
 
 	new = malloc(sizeof(t_pos));
+	printf("vector axis address [%p]\n", &new);
 	if (!new)
 		return (NULL);
 	split = ft_split(str, ',');
+	printf("vector split address [%p]\n", &split);
 	if (ft_atod(split[0], data) >= -1.0 && ft_atod(split[0], data) <= 1.0
 		&& ft_atod(split[1], data) >= -1.0 && ft_atod(split[1], data) <= 1.0
 		&& ft_atod(split[2], data) >= -1.0 && ft_atod(split[2], data) <= 1.0)
