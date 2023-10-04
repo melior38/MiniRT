@@ -6,12 +6,11 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/03 15:50:15 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/04 11:56:34 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MiniRT.h"
-
 
 int	my_mlx_get_color_value(int red, int green, int blue)
 {
@@ -31,26 +30,18 @@ int	render_next_frame(t_data *data)
 {
 	int		x;
 	int		y;
-	t_axis	pixel;
-	t_axis	tmp;
 
 	x = 0;
 	y = 0;
-	tmp = data->param->corner;
-	get_win_scale(data->param);
 	while (x < WIDTH)
 	{
 		y = 0;
-		pixel = tmp;
 		while (y < HEIGTH)
 		{
-			// my_mlx_pixel_put(data, x, y, my_mlx_get_color_value(23, 45, 200));
-			little_main_for_pixel(data, pixel, x, y);
-			pixel = add_vec(pixel, data->param->dir.shift_y);
+			little_main_for_pixel(data, x, y);
 			y++;
 		}
 		x++;
-		tmp = add_vec(tmp, data->param->dir.shift_x);
 	}
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	return (0);

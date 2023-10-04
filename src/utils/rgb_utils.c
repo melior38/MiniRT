@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/03 16:07:33 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/04 09:55:29 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ t_rgb	*rgb_converter(t_data *data, char *str)
 	return (rgb);
 }
 
-t_axis	*ft_coor(char *str, t_data *data)
+t_pos	*ft_coor(char *str, t_data *data)
 {
-	t_axis	*new;
+	t_pos	*new;
 	char	**split;
 
-	new = malloc(sizeof(t_axis));
+	new = malloc(sizeof(t_pos));
 	if (!new)
 		return (NULL);
 	split = ft_split(str, ',');
@@ -54,12 +54,12 @@ t_axis	*ft_coor(char *str, t_data *data)
 	return (new);
 }
 
-t_axis	*ft_vector(t_data *data, char *str)
+t_pos	*ft_vector(t_data *data, char *str)
 {
-	t_axis	*new;
+	t_pos	*new;
 	char	**split;
 
-	new = malloc(sizeof(t_axis));
+	new = malloc(sizeof(t_pos));
 	if (!new)
 		return (NULL);
 	split = ft_split(str, ',');

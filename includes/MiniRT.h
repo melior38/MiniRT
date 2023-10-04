@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/03 16:06:05 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/04 11:19:19 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@
 # define CYAN					"\033[0m\033[36m"
 # define WHITE					"\033[0m\033[37m"
 
-typedef struct s_axis {
+typedef struct s_pos {
 	double	x;
 	double	y;
 	double	z;
-}				t_axis;
+}				t_pos;
 
 typedef struct s_rgb {
 	int	r;
@@ -54,15 +54,15 @@ typedef struct s_rgb {
 
 typedef struct s_vec_dir
 {
-	t_axis	shift_x;
-	t_axis	shift_y;
+	t_pos	shift_x;
+	t_pos	shift_y;
 	double	pixel_size;
 }				t_vec_dir;
 
 typedef struct s_referential {
-	t_axis	x;
-	t_axis	y;
-	t_axis	z;
+	t_pos	x;
+	t_pos	y;
+	t_pos	z;
 }				t_referential;
 
 typedef struct s_alight
@@ -74,28 +74,28 @@ typedef struct s_alight
 typedef struct s_camera
 {
 	double				fov;
-	t_axis				*coor;
-	t_axis				*vector;
+	t_pos				*coor;
+	t_pos				*vector;
 }				t_camera;
 
 typedef struct s_light
 {
 	double				bright;
 	t_rgb				*rgb;
-	t_axis				*coor;
+	t_pos				*coor;
 }	t_light;
 
 typedef struct s_plane
 {
-	t_axis				*coor;
-	t_axis				*vector;
+	t_pos				*coor;
+	t_pos				*vector;
 	t_rgb				*rgb;
 	struct s_plane		*next;
 }	t_plane;
 
 typedef struct s_sphere
 {
-	t_axis				*coor;
+	t_pos				*coor;
 	double				diam;
 	t_rgb				*rgb;
 	struct s_sphere		*next;
@@ -103,8 +103,8 @@ typedef struct s_sphere
 
 typedef struct s_cylinder
 {
-	t_axis				*coor;
-	t_axis				*vector;
+	t_pos				*coor;
+	t_pos				*vector;
 	double				diam;
 	double				height;
 	t_rgb				*rgb;
@@ -119,7 +119,7 @@ typedef struct s_param
 	t_plane			*plane;
 	t_sphere		*sphere;
 	t_cylinder		*cylinder;
-	t_axis			corner;
+	t_pos			corner;
 	double			hx;
 	double			hy;
 	t_referential	ref;
@@ -191,8 +191,8 @@ t_light		*create_light(t_data *data, char **args);
 
 ////////////////////////////////// RGB_UTILS.C//////////////////////////////////
 t_rgb		*rgb_converter(t_data *data, char *str);
-t_axis		*ft_coor(char *str, t_data *data);
-t_axis		*ft_vector(t_data *data, char *str);
+t_pos		*ft_coor(char *str, t_data *data);
+t_pos		*ft_vector(t_data *data, char *str);
 
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////// parsing ///////////////////////////////////
@@ -215,10 +215,10 @@ double		ft_atod(char *str, t_data *data);
 
 /////////////////////////////// GET_FUNCTION.C /////////////////////////////////
 
-// bool		get_vector(t_axis *axis, char *str);
+// bool		get_vector(t_pos *pos, char *str);
 // bool		get_rgb(t_rgb *rgb, char *str);
 // bool		get_dimension(double *value, char *str);
-// bool		get_coor(t_axis *axis, char *str);
+// bool		get_coor(t_pos *pos, char *str);
 // bool		get_ratio(double *ratio, char *str);
 
 ///////////////////////////////// PARSING.C ////////////////////////////////////
@@ -234,18 +234,21 @@ void		print_error(t_data	*data, char *msg);
 
 ////////////////////////////////// VEC_UTILS.C /////////////////////////////////
 
-double		vec_norm(t_axis vec);
-void		normed_vec(t_axis *vec);
-t_axis		cross_product(t_axis vec1, t_axis vec2);
-t_axis		add_vec(t_axis vec1, t_axis vec2);
-t_axis		subs_vec(t_axis vec1, t_axis vec2);
-t_axis		scale_vec(t_axis vec, double scaling);
+double		vec_norm(t_pos vec);
+void		normed_vec(t_pos *vec);
+t_pos		cross_product(t_pos vec1, t_pos vec2);
+t_pos		add_vec(t_pos vec1, t_pos vec2);
+t_pos		subs_vec(t_pos vec1, t_pos vec2);
+t_pos		scale_vec(t_pos vec, double scaling);
+t_pos		create_vec(double x, double y, double z);
 
 //////////////////////////////// VEC_OPERATION.C ///////////////////////////////
 
-int			pixel_color(t_param *param, t_axis pixel);
-void		little_main_for_pixel(t_data *data, t_axis pixel, int x, int y);
-void		get_win_scale(t_param *param);
-t_referential	set_referential(t_axis *cam_ve);
+int			pixel_color(t_param *param, t_pos pixel);
+void		little_main_for_pixel(t_data *data, int x, int y);
+t_pos		get_vec_dir(t_param *param, int x, int y);
+// void		little_main_for_pixel(t_data *data, t_pos pixel,  int x, int y);
+// void		get_win_scale(t_param *param, int x, int y);
+t_referential	set_referential(t_pos *cam_ve);
 
 #endif

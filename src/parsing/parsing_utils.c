@@ -6,11 +6,12 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/03 16:06:32 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/04 09:53:56 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MiniRT.h"
+
 
 int	check_rt_file(char *av)
 {
