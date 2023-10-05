@@ -53,6 +53,8 @@ t_camera	*create_camera(t_data *data, char **args)
 		print_error(data, "Camera twice or more in .rt file\n");
 	new->coor = ft_coor(args[1], data);
 	new->vector = ft_vector(data, args[2]);
+    if (new->vector->x == 0.0 && new->vector->y == 0.0 && new->vector->z == 0)
+        print_error(data, "Vectors of camera are wrong.\n");
 	if (ft_atod(args[3], data) >= 0 && ft_atod(args[3], data) <= 180)
 		new->fov = ft_atod(args[3], data);
 	else
