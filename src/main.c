@@ -91,6 +91,13 @@ void	show_obj(t_data *data)
 	show_cylinder(data);
 }
 
+int	key_hook(int keycode, t_data *data)
+{
+    if (keycode == 53)
+        free_struct(data);
+    return (0);
+}
+
 int	main(int ac, char **av)
 {
 	void	*mlx_win;
@@ -115,6 +122,8 @@ int	main(int ac, char **av)
 	// mlx_hook(mlx_win, ON_DESTROY, 0, ft_handle_exit, &img);
 	// mlx_hook(mlx_win, ON_MOUSEDOWN, 0, ft_mouse_press, &img);
 	// mlx_hook(mlx_win, ON_MOUSEUP, 0, ft_mouse_release, &img);
+    mlx_hook(data.mlx_win, 2, 1L << 0, key_hook, &data);
+    mlx_hook(data.mlx_win, 17, 0, free_struct, &data);
 	mlx_loop_hook(mlx, render_next_frame, &data);
 	mlx_loop(mlx);
 }

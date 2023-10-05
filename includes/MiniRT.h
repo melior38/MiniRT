@@ -156,7 +156,7 @@ void		sp_addb(t_sphere **lst, t_sphere *new);
 void		pl_addb(t_plane **lst, t_plane*new);
 
 /////////////////////////////////// FREE.C /////////////////////////////////////
-void		free_struct(t_data *data);
+int free_struct(t_data *data);
 
 ///////////////////////////////// FREE_OBJ.C ///////////////////////////////////
 void		free_cylinder(t_param *param);
