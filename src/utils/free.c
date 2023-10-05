@@ -19,7 +19,6 @@ void	free_param(t_param *param)
 		if (param->alight->rgb)
 			free(param->alight->rgb);
 		free(param->alight);
-		printf("Ratio alight address [%p]\n", &param->alight->ratio);
 		param->alight = NULL;
 	}
 	if (param->camera)

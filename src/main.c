@@ -97,21 +97,18 @@ int	main(int ac, char **av)
 //	void	*mlx;
 	t_data	data;
 
-	printf("data address [%p]\n", &data);
 	if (ac != 2)
 	{
 		perror("wrong amount of argument \n");
 		exit(1);
 	}
 	init_data(&data);
-	(void) av;
-	(void) ac;
 	parsing(&data, ac, av[1]);
 //	t_data *tmp;
 //	tmp = &data;
 //	show_obj(&data);
 	free_struct(&data);
-	return (0);
+//	return (0);
 //	mlx = mlx_init();
 //	mlx_win = mlx_new_window(mlx, WIDTH, HEIGTH, "MiniRT");
 //	data.img = mlx_new_image(mlx, WIDTH, HEIGTH);
