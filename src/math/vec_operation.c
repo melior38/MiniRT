@@ -6,17 +6,17 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 09:32:28 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/04 13:37:33 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/05 15:43:32 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MiniRT.h"
 
 // // we need to norm the camera vec
-// t_referential	set_referential(t_pos *cam_vec)
+// t_ref	set_ref(t_pos *cam_vec)
 // {
 // 	t_pos	tmp;
-// 	t_referential ref;
+// 	t_ref ref;
 
 // 	normed_vec(cam_vec);
 // 	if (cam_vec->x || cam_vec->z)
@@ -70,24 +70,24 @@
 // void	little_main_for_pixel(t_data *data, t_pos pixel, int x, int  y)
 // {
 // 	int				colour;
-// 	t_referential	ref;
+// 	t_ref	ref;
 // 	t_param			*param;
 // 	double			tmp_x;
 // 	double			tmp_y;
 
 // 	tmp_x = param->dir->
 // 	param = data->param;
-// 	ref = set_referential(param->camera->vector);
+// 	ref = set_ref(param->camera->vector);
 
 // 	colour = pixel_color(data->param, pixel);
 // 	my_mlx_pixel_put(data, x, y, colour);
 // }
 // we need to norm the camera vec
 
-t_referential	set_referential(t_pos *cam_vec)
+t_ref	set_ref(t_pos *cam_vec)
 {
 	t_pos	tmp;
-	t_referential ref;
+	t_ref ref;
 
 	normed_vec(cam_vec);
 	if (cam_vec->x || cam_vec->z)
@@ -138,28 +138,37 @@ int	pixel_color(t_param *param, t_pos pixel)
 		color.z = color.z * -1 / 2.0;
 	// printf("red = [%d]\ngreen = [%d]\nblue = [%d]\n", (int)round(color.x), (int)round(color.y), (int)round(color.z));
 	return (my_mlx_get_color_value((int)round(color.x), (int)round(color.y), (int)round(color.z)));
-	// (void) param;
-	// printf("pixel.x = {%f} \npixel.y = {%f}\npixel.z = {%f}\n", pixel.x, pixel.y, pixel.z);
-	// if (pixel.z > pixel.y && pixel.z > pixel.x)
-	// 	return (my_mlx_get_color_value(pixel.z * 50, pixel.z, pixel.z));
-	// else if (pixel.x > pixel.y && pixel.x > pixel.z)
-	// 	return (my_mlx_get_color_value(pixel.x, pixel.x * 50, pixel.x));
-	// else if (pixel.y > pixel.z && pixel.y > pixel.x)
-	// 	return (my_mlx_get_color_value(pixel.y, pixel.y, pixel.y * 50));
-	// else 
-	// 	return (my_mlx_get_color_value(0, 0, 0));
+}
+void	init_matrix(t_ref *ref, t_matrix *m)
+{
+	m->a = ref->x;
+	m->b = ref->y;
+	m->c = ref->z;
+}
+
+t_pos	matrix_vector_multi(t_pos dir, t_matrix m)
+{
+	t_pos	ret;
+
+	ret.x = dot_product(dir, m.a);
+	ret.y = dot_product(dir, m.b);
+	ret.z = dot_product(dir, m.c);
+	return (ret);
 }
 
 void	little_main_for_pixel(t_data *data, int x, int  y)
 {
-	int				colour;
-	t_referential	ref;
-	t_param			*param;
-	t_pos			vec_dir;
+	int			colour;
+	t_ref		ref;
+	t_matrix	m;
+	t_param		*param;
+	t_pos		vec_dir;
 
 	param = data->param;
-	ref = set_referential(param->camera->vector);
+	ref = set_ref(param->camera->vector);
+	init_matrix(&ref, &m);
 	vec_dir = get_vec_dir(param, x, y);
+	matrix_vector_multi(vec_dir, m);
 	normed_vec(&vec_dir);
 	// printf("vec_dir:\nx = [%f]\ny = [%f]\nz = [%f]\n", vec_dir.x, vec_dir.y, vec_dir.z);
 	colour = pixel_color(data->param, vec_dir);
