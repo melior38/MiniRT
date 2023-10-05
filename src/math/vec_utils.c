@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 08:57:43 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/04 09:57:18 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/05 15:39:16 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,9 @@ t_pos	create_vec(double x, double y, double z)
 	vec.y = y;
 	vec.z = z;
 	return (vec);
+}
+
+double    dot_product(t_pos vec1, t_pos vec2)
+{
+    return (vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z);
 }

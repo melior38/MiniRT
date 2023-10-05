@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/04 11:19:19 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/05 15:43:37 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,18 @@ typedef struct s_rgb {
 }				t_rgb;
 
 
-typedef struct s_vec_dir
+typedef struct s_matrix
 {
-	t_pos	shift_x;
-	t_pos	shift_y;
-	double	pixel_size;
-}				t_vec_dir;
+	t_pos	a;
+	t_pos	b;
+	t_pos	c;
+}				t_matrix;
 
-typedef struct s_referential {
+typedef struct s_ref {
 	t_pos	x;
 	t_pos	y;
 	t_pos	z;
-}				t_referential;
+}				t_ref;
 
 typedef struct s_alight
 {
@@ -122,8 +122,8 @@ typedef struct s_param
 	t_pos			corner;
 	double			hx;
 	double			hy;
-	t_referential	ref;
-	t_vec_dir		dir;
+	t_ref	ref;
+	t_matrix		dir;
 }				t_param;
 
 typedef struct s_data {
@@ -246,9 +246,11 @@ t_pos		create_vec(double x, double y, double z);
 
 int			pixel_color(t_param *param, t_pos pixel);
 void		little_main_for_pixel(t_data *data, int x, int y);
-t_pos		get_vec_dir(t_param *param, int x, int y);
-// void		little_main_for_pixel(t_data *data, t_pos pixel,  int x, int y);
-// void		get_win_scale(t_param *param, int x, int y);
-t_referential	set_referential(t_pos *cam_ve);
+t_pos		get_matrix(t_param *param, int x, int y);
+t_ref		set_ref(t_pos *cam_ve);
+void		init_matrix(t_ref *ref, t_matrix *m);
+double	    dot_product(t_pos vec1, t_pos vec2);
+t_pos		matrix_vector_multi(t_pos dir, t_matrix m);
+
 
 #endif
