@@ -32,7 +32,6 @@ int	render_next_frame(t_data *data)
 	int		y;
 
 	x = 0;
-	y = 0;
 	while (x < WIDTH)
 	{
 		y = 0;
@@ -122,8 +121,9 @@ int	main(int ac, char **av)
 	// mlx_hook(mlx_win, ON_DESTROY, 0, ft_handle_exit, &img);
 	// mlx_hook(mlx_win, ON_MOUSEDOWN, 0, ft_mouse_press, &img);
 	// mlx_hook(mlx_win, ON_MOUSEUP, 0, ft_mouse_release, &img);
+	shoot_ray(&data);
     mlx_hook(data.mlx_win, 2, 1L << 0, key_hook, &data);
     mlx_hook(data.mlx_win, 17, 0, free_struct, &data);
-	mlx_loop_hook(mlx, render_next_frame, &data);
+//	mlx_loop_hook(mlx, render_next_frame, &data);
 	mlx_loop(mlx);
 }

@@ -44,7 +44,9 @@ t_sphere	*create_sphere(t_data *data, char **args)
 		return (NULL);
 	new->coor = ft_coor(args[1], data);
 	new->diam = ft_atod(args[2], data);
+	new->radius = new->diam / 2;
 	new->rgb = rgb_converter(data, args[3]);
+	new->center = NULL;
 	new->next = NULL;
 	return (new);
 }

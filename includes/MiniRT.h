@@ -44,11 +44,15 @@ typedef struct s_pos {
 	double	z;
 }				t_pos;
 
+typedef struct	s_ray {
+	t_pos	*origin;
+	t_pos	*direction;
+}				t_ray;
+
 typedef struct s_rgb {
 	int	r;
 	int	g;
 	int	b;
-
 }				t_rgb;
 
 
@@ -96,7 +100,9 @@ typedef struct s_plane
 typedef struct s_sphere
 {
 	t_pos				*coor;
+	t_pos				*center;
 	double				diam;
+	double 				radius;
 	t_rgb				*rgb;
 	struct s_sphere		*next;
 }	t_sphere;
@@ -122,7 +128,8 @@ typedef struct s_param
 	t_pos			corner;
 	double			hx;
 	double			hy;
-	t_ref	ref;
+	t_ref			ref;
+	t_ray			*ray;
 	t_matrix		dir;
 }				t_param;
 
@@ -231,6 +238,11 @@ void		print_error(t_data	*data, char *msg);
 /////////////////////////////////// projection /////////////////////////////////
 //////////////////////////////////// folder ////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////// RAY.C /////////////////////////////////////
+
+void	shoot_ray(t_data *data);
+
 
 ////////////////////////////////// VEC_UTILS.C /////////////////////////////////
 

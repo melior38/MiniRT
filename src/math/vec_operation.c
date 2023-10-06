@@ -168,8 +168,13 @@ void	little_main_for_pixel(t_data *data, int x, int  y)
 	ref = set_ref(param->camera->vector);
 	init_matrix(&ref, &m);
 	vec_dir = get_vec_dir(param, x, y);
+
+	//Donc faut que je cree un truc ou placer la camera
+	//Tirer des rayons
+	//Collisions
+	//J'allais commencer les maths pour la sphere :(
 	matrix_vector_multi(vec_dir, m);
-	normed_vec(&vec_dir);
+	normed_vec(&vec_dir); //Ray sent
 	// printf("vec_dir:\nx = [%f]\ny = [%f]\nz = [%f]\n", vec_dir.x, vec_dir.y, vec_dir.z);
 	colour = pixel_color(data->param, vec_dir);
 	my_mlx_pixel_put(data, x, y, colour);

@@ -51,7 +51,8 @@ SRC 		= 	main.c							\
 				utils/free_obj.c				\
 				utils/free_uobj.c				\
 				math/vec_utils.c 				\
-				math/vec_operation.c
+				math/vec_operation.c			\
+				math/ray.c
 
 
 # ------------  FILEPATHS  --------------------------------------------------- #
