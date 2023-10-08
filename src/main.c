@@ -103,12 +103,9 @@ int	main(int ac, char **av)
 	void	*mlx;
 	t_data	data;
 
-	if (ac != 2)
-	{
-		perror("wrong amount of argument \n");
-		exit(1);
-	}
 	init_data(&data);
+	if (ac != 2)
+		print_error(&data, "wrong amount of argument\n");
 	parsing(&data, ac, av[1]);
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGTH, "MiniRT");
@@ -121,7 +118,11 @@ int	main(int ac, char **av)
 	// mlx_hook(mlx_win, ON_DESTROY, 0, ft_handle_exit, &img);
 	// mlx_hook(mlx_win, ON_MOUSEDOWN, 0, ft_mouse_press, &img);
 	// mlx_hook(mlx_win, ON_MOUSEUP, 0, ft_mouse_release, &img);
-	shoot_ray(&data);
+	while (data.param->sphere)
+	{
+		shoot_ray(&data);
+		data.param->sphere = data.param->sphere->next;
+	}
     mlx_hook(data.mlx_win, 2, 1L << 0, key_hook, &data);
     mlx_hook(data.mlx_win, 17, 0, free_struct, &data);
 //	mlx_loop_hook(mlx, render_next_frame, &data);

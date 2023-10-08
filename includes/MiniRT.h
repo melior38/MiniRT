@@ -18,8 +18,8 @@
 # include <mlx.h>
 # include <stdbool.h>
 
-# define HEIGTH		720.0
-# define WIDTH		1280.0
+# define HEIGTH		1200.0
+# define WIDTH		1600.0
 # define ERROR		0
 # define SUCCESS	1
 # define AMBIENT_LIGHT 1
@@ -44,7 +44,7 @@ typedef struct s_pos {
 	double	z;
 }				t_pos;
 
-typedef struct	s_ray {
+typedef struct s_ray {
 	t_pos	*origin;
 	t_pos	*direction;
 }				t_ray;
@@ -54,7 +54,6 @@ typedef struct s_rgb {
 	int	g;
 	int	b;
 }				t_rgb;
-
 
 typedef struct s_matrix
 {
@@ -102,7 +101,7 @@ typedef struct s_sphere
 	t_pos				*coor;
 	t_pos				*center;
 	double				diam;
-	double 				radius;
+	double				radius;
 	t_rgb				*rgb;
 	struct s_sphere		*next;
 }	t_sphere;
@@ -147,10 +146,10 @@ typedef struct s_data {
 
 //////////////////////////////////// MAIN.C ////////////////////////////////////
 
-int			main(int ac, char **av);
-void		ft_handle_error(int error);
-int			my_mlx_get_color_value(int red, int green, int blue);
-void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int				main(int ac, char **av);
+void			ft_handle_error(int error);
+int				my_mlx_get_color_value(int red, int green, int blue);
+void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////// utils /////////////////////////////////////
@@ -158,48 +157,45 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 ////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////// ADD_BACK.C ///////////////////////////////////
-void		cyl_addb(t_cylinder **lst, t_cylinder *new);
-void		sp_addb(t_sphere **lst, t_sphere *new);
-void		pl_addb(t_plane **lst, t_plane*new);
+void			cyl_addb(t_cylinder **lst, t_cylinder *new);
+void			sp_addb(t_sphere **lst, t_sphere *new);
+void			pl_addb(t_plane **lst, t_plane*new);
 
 /////////////////////////////////// FREE.C /////////////////////////////////////
-int free_struct(t_data *data);
+int				free_struct(t_data *data);
 
 ///////////////////////////////// FREE_OBJ.C ///////////////////////////////////
-void		free_cylinder(t_param *param);
-void		free_plane(t_param *param);
-void		free_sphere(t_param *param);
+void			free_cylinder(t_param *param);
+void			free_plane(t_param *param);
+void			free_sphere(t_param *param);
 
 ///////////////////////////////// FREE_UOBJ.C //////////////////////////////////
-void		free_camera(t_camera *camera);
-void		free_light(t_light *light);
-
+void			free_camera(t_camera *camera);
+void			free_light(t_light *light);
 
 /////////////////////////////////// SHOW.C /////////////////////////////////////
-void		show_alight(t_data *data);
-void		show_camera(t_data *data);
-void		show_light(t_data *data);
-void		show_plane(t_data *data);
-void		show_sphere(t_data *data);
-void		show_cylinder(t_data *data);
-
-
+void			show_alight(t_data *data);
+void			show_camera(t_data *data);
+void			show_light(t_data *data);
+void			show_plane(t_data *data);
+void			show_sphere(t_data *data);
+void			show_cylinder(t_data *data);
 
 /////////////////////////////////// SHOW.C /////////////////////////////////////
 //////////////////////////////// OBJ_UTILS.C ///////////////////////////////////
-t_plane		*create_plane(t_data *data, char **args);
-t_sphere	*create_sphere(t_data *data, char **args);
-t_cylinder	*create_cylinder(t_data *data, char **args);
+t_plane			*create_plane(t_data *data, char **args);
+t_sphere		*create_sphere(t_data *data, char **args);
+t_cylinder		*create_cylinder(t_data *data, char **args);
 
 /////////////////////////////// UOBJ_UTILS.C ///////////////////////////////////
-t_alight	*create_alight(t_data *data, char **args);
-t_camera	*create_camera(t_data *data, char **args);
-t_light		*create_light(t_data *data, char **args);
+t_alight		*create_alight(t_data *data, char **args);
+t_camera		*create_camera(t_data *data, char **args);
+t_light			*create_light(t_data *data, char **args);
 
 ////////////////////////////////// RGB_UTILS.C//////////////////////////////////
-t_rgb		*rgb_converter(t_data *data, char *str);
-t_pos		*ft_coor(char *str, t_data *data);
-t_pos		*ft_vector(t_data *data, char *str);
+t_rgb			*rgb_converter(t_data *data, char *str);
+t_pos			*ft_coor(char *str, t_data *data);
+t_pos			*ft_vector(t_data *data, char *str);
 
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////// parsing ///////////////////////////////////
@@ -208,17 +204,17 @@ t_pos		*ft_vector(t_data *data, char *str);
 
 /////////////////////////////// PARSING_UTILS.C ////////////////////////////////
 
-void		init_file(t_data *data, char *line);
-int			parsing(t_data *data, int ac, char *av);
-int			tab_check(int *tab);
-void		init_tab(int *tab);
-int			check_rt_file(char *av);
+void			init_file(t_data *data, char *line);
+int				parsing(t_data *data, int ac, char *av);
+int				tab_check(int *tab);
+void			init_tab(int *tab);
+int				check_rt_file(char *av);
 
 ///////////////////////////////// PARSE_INIT.C /////////////////////////////////
-void		free_tab(char **tab);
+void			free_tab(char **tab);
 
 ////////////////////////////////// FT_ATOD.C ///////////////////////////////////
-double		ft_atod(char *str, t_data *data);
+double			ft_atod(char *str, t_data *data);
 
 /////////////////////////////// GET_FUNCTION.C /////////////////////////////////
 
@@ -230,9 +226,8 @@ double		ft_atod(char *str, t_data *data);
 
 ///////////////////////////////// PARSING.C ////////////////////////////////////
 
-int			open_fd(t_data *data, int ac, char *av);
-void		print_error(t_data	*data, char *msg);
-
+int				open_fd(t_data *data, int ac, char *av);
+void			print_error(t_data	*data, char *msg);
 
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// projection /////////////////////////////////
@@ -240,29 +235,33 @@ void		print_error(t_data	*data, char *msg);
 ////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////// RAY.C /////////////////////////////////////
+void			shoot_ray(t_data *data);
 
-void	shoot_ray(t_data *data);
-
+////////////////////////////////// RAY_UTILS.C /////////////////////////////////
+t_pos			*create_pos(double x, double y, double z);
+t_ray			*create_ray(t_pos *origin, t_pos *direction);
+t_pos			*substract(t_pos *vec1, t_pos *vec2);
+void			swap_doubles(double *a, double *b);
+unsigned long	creatergb(t_rgb *rgb);
 
 ////////////////////////////////// VEC_UTILS.C /////////////////////////////////
 
-double		vec_norm(t_pos vec);
-void		normed_vec(t_pos *vec);
-t_pos		cross_product(t_pos vec1, t_pos vec2);
-t_pos		add_vec(t_pos vec1, t_pos vec2);
-t_pos		subs_vec(t_pos vec1, t_pos vec2);
-t_pos		scale_vec(t_pos vec, double scaling);
-t_pos		create_vec(double x, double y, double z);
+double			vec_norm(t_pos vec);
+void			normed_vec(t_pos *vec);
+t_pos			cross_product(t_pos vec1, t_pos vec2);
+t_pos			add_vec(t_pos vec1, t_pos vec2);
+t_pos			subs_vec(t_pos vec1, t_pos vec2);
+t_pos			scale_vec(t_pos vec, double scaling);
+t_pos			create_vec(double x, double y, double z);
 
 //////////////////////////////// VEC_OPERATION.C ///////////////////////////////
 
-int			pixel_color(t_param *param, t_pos pixel);
-void		little_main_for_pixel(t_data *data, int x, int y);
-t_pos		get_matrix(t_param *param, int x, int y);
-t_ref		set_ref(t_pos *cam_ve);
-void		init_matrix(t_ref *ref, t_matrix *m);
-double	    dot_product(t_pos vec1, t_pos vec2);
-t_pos		matrix_vector_multi(t_pos dir, t_matrix m);
-
+int				pixel_color(t_param *param, t_pos pixel);
+void			little_main_for_pixel(t_data *data, int x, int y);
+t_pos			get_matrix(t_param *param, int x, int y);
+t_ref			set_ref(t_pos *cam_ve);
+void			init_matrix(t_ref *ref, t_matrix *m);
+double			dot_product(t_pos vec1, t_pos vec2);
+t_pos			matrix_vector_multi(t_pos dir, t_matrix m);
 
 #endif

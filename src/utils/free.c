@@ -37,7 +37,8 @@ void	free_param(t_param *param)
 
 int free_struct(t_data *data)
 {
-	free_param(data->param);
+	if (data->param)
+		free_param(data->param);
     if (data->mlx && data->mlx_win)
 	    mlx_destroy_window(data->mlx, data->mlx_win);
 	free(data->img);
