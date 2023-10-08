@@ -12,9 +12,7 @@
 
 #include "MiniRT.h"
 
-// une modiff de atod serait de le coder comme ça : int	ft_atod(char *str, double *d)
-// de cette maniere on peut faire un return avec code d'erreur tout en modifiant le double *d.
-double 	ft_atod(char *str, t_data *data)
+double	ft_atod(char *str, t_data *data)
 {
 	double	res;
 	double	neg;
@@ -27,7 +25,6 @@ double 	ft_atod(char *str, t_data *data)
 	neg = 1.0;
 	res = 0.0;
 	tmp = 0.0;
-	// printf("str = [%s]\n", str);
 	if (str[i] == '-')
 	{
 		neg = -1.0;
@@ -46,7 +43,7 @@ double 	ft_atod(char *str, t_data *data)
 			return (res);
 		}
 	}
-	if(str[i] == '.')
+	if (str[i] == '.')
 	{
 		i++;
 		while (str[i])
@@ -57,9 +54,8 @@ double 	ft_atod(char *str, t_data *data)
 			i++;
 			count++;
 		}
-		tmp = tmp / pow(10.0,(double)count);
+		tmp = tmp / pow(10.0, (double)count);
 	}
 	res += tmp;
-	// printf("lol");
 	return (res * neg);
 }

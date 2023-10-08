@@ -40,7 +40,6 @@ SRC 		= 	main.c							\
 				parsing/ft_atod.c				\
 				parsing/parsing.c				\
 				parsing/parse_init.c			\
-				parsing/get_function.c			\
 				parsing/parsing_utils.c			\
 				utils/obj_utils.c				\
 				utils/uobj_utils.c				\

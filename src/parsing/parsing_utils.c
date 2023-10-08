@@ -12,7 +12,6 @@
 
 #include "MiniRT.h"
 
-
 int	check_rt_file(char *av)
 {
 	int	i;
@@ -31,24 +30,24 @@ int	check_rt_file(char *av)
 	{
 		i++;
 		if (av[i] == 'r')
-			{
-				i++;
-				if (av[i] == 't')
-					check = 0;
-			}
+		{
+			i++;
+			if (av[i] == 't')
+				check = 0;
+		}
 	}
 	return (check);
 }
 
 bool	check_line(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])
 	{
 		if ((line[i] <= '9' && line[i] >= '0') || line[i] == ' '
-				|| line[i] == ',' || line[i] == '.')
+			|| line[i] == ',' || line[i] == '.')
 			i++;
 		else
 			return (false);
@@ -88,7 +87,7 @@ char	*trim_gnl(char *line)
 	line = NULL;
 	res = ft_strtrim(dup, "\n");
 	if (res == NULL)
-		return NULL;
+		return (NULL);
 	free(dup);
 	dup = NULL;
 	return (res);
@@ -99,17 +98,17 @@ char	*trim_gnl(char *line)
 /// \param ac nb d'arguments
 /// \param av args
 /// \return a voir
-int parsing(t_data *data, int ac, char *av)
+int	parsing(t_data *data, int ac, char *av)
 {
 	int		fd;
 	char	*line;
 	t_param	*param;
 
-	fd = open_fd(data ,ac, av);
+	fd = open_fd(data, ac, av);
 	line = get_next_line(fd);
 	param = malloc(sizeof(t_param));
 	if (!param)
-		exit(1); // a mieux faire mais la je suis pas sur ce soucis la
+		exit(1);
 	param->alight = NULL;
 	param->camera = NULL;
 	param->light = NULL;

@@ -20,13 +20,14 @@ void	print_error(t_data	*data, char *msg)
 	free_struct(data);
 	exit (1);
 }
+
 /// Check args and open it
 /// \param ac number of args
 /// \param av args
 int	open_fd(t_data *data, int ac, char *av)
 {
 	int		fd;
-	size_t 	i;
+	size_t	i;
 
 	if (ac != 2)
 		print_error(data, "Usage ./minirt example\n");
