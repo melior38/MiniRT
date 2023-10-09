@@ -30,18 +30,19 @@ t_ray	*ray_to_pixel(int x, int y, t_pos *coor)
 	direction = create_pos(p_x, p_y, -1);
 	//Norme du vectuer directionnel
 	normed_vec(direction);
-	//Recupere les coor de la camera et le vecteur directionnel pour creer le rayon
+	//Recupere les coor de la camera
+	//Et le vecteur directionnel pour creer le rayon
 	result = create_ray(create_pos(coor->x, coor->y, coor->z), direction);
 	return (result);
 }
 
 int	intersect_sphere(t_ray *ray, t_sphere *sphere)
 {
-	double	tca;
-	double	d2;
-	double	thc;
-	double	t0;
-	double	t1;
+	double	tca; 	//tangent closest approach.
+	double	thc; 	//tangent hit distance
+	double	d2;		//square distance between sphere center and tca
+	double	t0;		//distance ray hit sphere
+	double	t1;		//distance exit sphere
 	t_pos	*l;
 
 	l = substract(sphere->center, ray->origin);
@@ -84,7 +85,8 @@ void	shoot_ray(t_data *data)
 			sent = ray_to_pixel(x, y, data->param->camera->coor);
 			//Check si le rayon a une sphere dans la trajectoire
 			if (intersect_sphere(sent, sphere))
-				mlx_pixel_put(data->mlx, data->mlx_win, x, y, creatergb(sphere->rgb));
+				mlx_pixel_put(data->mlx, data->mlx_win, x, y,
+					(int)creatergb(sphere->rgb));
 			x++;
 		}
 		y++;
