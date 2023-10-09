@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/05 13:15:03 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/09 15:43:28 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	render_next_frame(t_data *data)
 {
 	int		x;
 	int		y;
+	double	t;
 
 	x = 0;
 	y = 0;
@@ -38,7 +39,7 @@ int	render_next_frame(t_data *data)
 		y = 0;
 		while (y < HEIGTH)
 		{
-			little_main_for_pixel(data, x, y);
+			intersect_sphere(init_ray(data, x, y), data->param->sphere, &t);
 			y++;
 		}
 		x++;

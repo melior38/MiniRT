@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/05 15:43:37 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/09 15:00:21 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,13 @@ typedef struct s_rgb {
 	int	r;
 	int	g;
 	int	b;
-
 }				t_rgb;
 
+typedef struct	s_ray
+{
+	t_pos	origin;
+	t_pos	dir;
+}				t_ray;
 
 typedef struct s_matrix
 {
@@ -244,13 +248,24 @@ t_pos		create_vec(double x, double y, double z);
 
 //////////////////////////////// VEC_OPERATION.C ///////////////////////////////
 
-int			pixel_color(t_param *param, t_pos pixel);
-void		little_main_for_pixel(t_data *data, int x, int y);
-t_pos		get_matrix(t_param *param, int x, int y);
+int			pixel_color(t_ray ray, t_rgb *pixel, t_sphere *sphere);
+t_ray		init_ray(t_data *data, int x, int y);
+// t_pos		get_matrix(t_param *param, int x, int y);
 t_ref		set_ref(t_pos *cam_ve);
 void		init_matrix(t_ref *ref, t_matrix *m);
 double	    dot_product(t_pos vec1, t_pos vec2);
 t_pos		matrix_vector_multi(t_pos dir, t_matrix m);
 
+///////////////////////////////// INTERSECTION.C ////////////////////////////////
+
+void		swap_doubles(double *a, double *b);
+int			intersect_sphere(t_ray ray, t_sphere *sphere, double *t);
+t_pos		get_sphere_normal(t_pos point, t_sphere *sphere);
+int			get_roots(double *t0, double *t1, t_ray ray, t_sphere *sphere);
+// int			intersect_sphere(t_ray ray, t_sphere *sphere);
+
+////////////////////////////////// QUADRATIC.C //////////////////////////////////
+
+int			solve_quadratic(t_pos params, double *x0, double *x1);
 
 #endif

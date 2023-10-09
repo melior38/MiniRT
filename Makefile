@@ -6,7 +6,7 @@
 #    By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 08:45:50 by lcamilo-          #+#    #+#              #
-#    Updated: 2023/09/28 16:06:23 by asouchet         ###   ########.fr        #
+#    Updated: 2023/10/09 13:00:56 by asouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,9 @@ SRC 		= 	main.c							\
 				utils/free_obj.c				\
 				utils/free_uobj.c				\
 				math/vec_utils.c 				\
-				math/vec_operation.c
+				math/vec_operation.c			\
+				math/quadratic.c				\
+				math/intersection.c
 
 
 # ------------  FILEPATHS  --------------------------------------------------- #

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image.c                                            :+:      :+:    :+:   */
+/*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 14:51:24 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/20 12:59:23 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/09 15:44:21 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,59 @@
 // ensuite on cree un scale des coor en fonction du nombre de pixel
 
 
-void	ft_minirt(t_object *list ,int x, int y)
+void	swap_doubles(double *a, double *b)
 {
-	t_object *tmp;
+	double buffer;
+	buffer = *a;
+	*a = *b;
+	*b = buffer;
+}
+// esquisse de ce qu'il y a a faire
+t_pos		get_sphere_normal(t_pos point, t_sphere *sphere)
+{
+	t_pos n;
+	t_pos *coor;
 
-	tmp = list;
-	while (tmp->type != CAMERA)
-		tmp = tmp->next;
-	return ;
+	coor = sphere->coor;
+	n = subs_vec(point, *coor);
+	normalize_vector(&n);
+	return (n);
+}
+
+int			get_roots(double *t0, double *t1, t_ray ray, t_sphere *sphere)
+{
+	t_pos	l;
+	double	a;
+	double	b;
+	double	c;
+	t_pos *coor;
+
+	coor = sphere->coor;
+
+	l = subs_vec(ray.origin, *coor);
+	a = dot_product(ray.dir, ray.dir);
+	b = 2.0 * dot_product(ray.dir, l);
+	c = dot_product(l, l) - (sphere->diam * sphere->diam);
+	if (solve_quadratic(create_vec(a, b, c), t0, t1) == 0)
+		return (0);
+	return (1);
+}
+
+HUGE_VAL
+
+int			intersect_sphere(t_ray ray, t_sphere *sphere, double *t)
+{
+	double t0;
+	double t1;
+
+	if (get_roots(&t0, &t1, ray, sphere) == 0)
+		return (0);
+	if (t0 < 0)
+	{
+		t0 = t1;
+		if (t0 < 0)
+			return (0);
+	}
+	*t = t0;
+	return (1);
 }

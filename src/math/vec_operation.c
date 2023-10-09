@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 09:32:28 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/05 15:43:32 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/09 15:00:56 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,22 +122,19 @@ t_pos	get_vec_dir(t_param *param, int x, int y)
 }
 
 // pour l'instant cette fonction sert a voir le comportement de nos calculs
-int	pixel_color(t_param *param, t_pos pixel)
+int	pixel_color(t_ray ray, t_rgb *pixel, t_sphere *sphere)
 {
-	t_pos color;
-	(void) param;
+	t_rgb	color;
+	t_rgb	tmp;
 
-	color.x = pixel.x * 200;
-	color.y = pixel.y * 200;
-	color.z = pixel.z * 200;
-	if (color.x < 0)
-		color.x = color.x * -1 / 2.0;
-	if (color.y < 0)
-		color.y = color.y * -1 / 2.0;
-	if (color.z < 0)
-		color.z = color.z * -1 / 2.0;
+	tmp = *pixel;
+	color.r = tmp.r;
+	color.g = tmp.g;
+	color.b = tmp.b;
+	if (intersect_sphere(ray, sphere))
+		return (my_mlx_get_color_value((int)round(color.r), (int)round(color.g), (int)round(color.b)));
+	return (0);
 	// printf("red = [%d]\ngreen = [%d]\nblue = [%d]\n", (int)round(color.x), (int)round(color.y), (int)round(color.z));
-	return (my_mlx_get_color_value((int)round(color.x), (int)round(color.y), (int)round(color.z)));
 }
 void	init_matrix(t_ref *ref, t_matrix *m)
 {
@@ -156,21 +153,30 @@ t_pos	matrix_vector_multi(t_pos dir, t_matrix m)
 	return (ret);
 }
 
-void	little_main_for_pixel(t_data *data, int x, int  y)
+t_ray	create_ray(t_pos origin, t_pos dir)
 {
-	int			colour;
+	t_ray	res;
+
+	res.dir = dir;
+	res.origin = origin;
+	return (res);
+}
+
+t_ray	init_ray(t_data *data, int x, int y)
+{
 	t_ref		ref;
 	t_matrix	m;
 	t_param		*param;
 	t_pos		vec_dir;
+	t_pos		*cam_vec;
 
 	param = data->param;
+	cam_vec = param->camera->coor;
 	ref = set_ref(param->camera->vector);
 	init_matrix(&ref, &m);
 	vec_dir = get_vec_dir(param, x, y);
 	matrix_vector_multi(vec_dir, m);
 	normed_vec(&vec_dir);
 	// printf("vec_dir:\nx = [%f]\ny = [%f]\nz = [%f]\n", vec_dir.x, vec_dir.y, vec_dir.z);
-	colour = pixel_color(data->param, vec_dir);
-	my_mlx_pixel_put(data, x, y, colour);
+	return (create_ray(*cam_vec, vec_dir));
 }
