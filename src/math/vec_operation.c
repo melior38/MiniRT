@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 09:32:28 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/11 13:40:16 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:49:22 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	init_ray(t_data *data, int x, int y, t_ray *res)
 			// printf("z = [%f]\n", cam->up_left.z);
 			// printf("\n\n\n");
 	pixel_pos = add_vec(cam->up_left, subs_vec(scale_vec(cam->ref.right, u * \
-			2 * cam->width), scale_vec(cam->ref.up, 2 * cam->heigth * v)));
+			 cam->width), scale_vec(cam->ref.up, cam->heigth * v)));
 			// printf("p_x = [%f]\n", pixel_pos.x);
 			// printf("p_y = [%f]\n", pixel_pos.y);
 			// printf("p_z = [%f]\n", pixel_pos.z);
