@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/04 09:54:50 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/11 10:40:36 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_alight	*create_alight(t_data *data, char **args)
 	new = malloc(sizeof(t_alight));
 	if (!new)
 		return (NULL);
-	new->rgb = NULL;
+	new->rgb = rgb_converter(data, args[2]);
 	if (data->param->alight)
 		print_error(data, "Alight twice or more in .rt file\n");
 	if (ft_atod(args[1], data) >= 0.0 && ft_atod(args[1], data) <= 1.0)
@@ -37,7 +37,6 @@ t_alight	*create_alight(t_data *data, char **args)
 		print_error(data, "Alight Ratio not in range\n");
 		return (new);
 	}
-	new->rgb = rgb_converter(data, args[2]);
 	return (new);
 }
 
@@ -53,12 +52,13 @@ t_camera	*create_camera(t_data *data, char **args)
 		print_error(data, "Camera twice or more in .rt file\n");
 	new->coor = ft_coor(args[1], data);
 	new->vector = ft_vector(data, args[2]);
-    if (new->vector->x == 0.0 && new->vector->y == 0.0 && new->vector->z == 0)
+    if (new->vector.x == 0.0 && new->vector.y == 0.0 && new->vector.z == 0)
         print_error(data, "Vectors of camera are wrong.\n");
 	if (ft_atod(args[3], data) >= 0 && ft_atod(args[3], data) <= 180)
 		new->fov = ft_atod(args[3], data);
 	else
 		print_error(data, "Camera fov not in range\n");
+	init_camera(new);
 	return (new);
 }
 
