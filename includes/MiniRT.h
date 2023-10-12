@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/05 15:43:37 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:13:12 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,17 @@ typedef struct s_pos {
 	double	z;
 }				t_pos;
 
-typedef struct s_ray {
-	t_pos	*origin;
-	t_pos	*direction;
-}				t_ray;
-
 typedef struct s_rgb {
 	int	r;
 	int	g;
 	int	b;
 }				t_rgb;
+
+typedef struct	s_ray
+{
+	t_pos	origin;
+	t_pos	dir;
+}				t_ray;
 
 typedef struct s_matrix
 {
@@ -57,36 +58,41 @@ typedef struct s_matrix
 }				t_matrix;
 
 typedef struct s_ref {
-	t_pos	x;
-	t_pos	y;
-	t_pos	z;
+	t_pos	right;
+	t_pos	up;
+	t_pos	dir;
 }				t_ref;
 
 typedef struct s_alight
 {
 	double				ratio;
-	t_rgb				*rgb;
+	t_rgb				rgb;
 }				t_alight;
 
 typedef struct s_camera
 {
 	double				fov;
-	t_pos				*coor;
-	t_pos				*vector;
+	t_pos				coor;
+	t_pos				vector;
+	t_ref				ref;
+	t_pos				up_left;
+	t_pos				center;
+	double				width;
+	double				heigth;
 }				t_camera;
 
 typedef struct s_light
 {
 	double				bright;
-	t_rgb				*rgb;
-	t_pos				*coor;
+	t_rgb				rgb;
+	t_pos				coor;
 }	t_light;
 
 typedef struct s_plane
 {
-	t_pos				*coor;
-	t_pos				*vector;
-	t_rgb				*rgb;
+	t_pos				coor;
+	t_pos				vector;
+	t_rgb				rgb;
 	struct s_plane		*next;
 }	t_plane;
 
@@ -102,11 +108,11 @@ typedef struct s_sphere
 
 typedef struct s_cylinder
 {
-	t_pos				*coor;
-	t_pos				*vector;
+	t_pos				coor;
+	t_pos				vector;
 	double				diam;
 	double				height;
-	t_rgb				*rgb;
+	t_rgb				rgb;
 	struct s_cylinder	*next;
 }	t_cylinder;
 
@@ -228,9 +234,9 @@ t_camera		*create_camera(t_data *data, char **args);
 t_light			*create_light(t_data *data, char **args);
 
 ////////////////////////////////// RGB_UTILS.C//////////////////////////////////
-t_rgb			*rgb_converter(t_data *data, char *str);
-t_pos			*ft_coor(char *str, t_data *data);
-t_pos			*ft_vector(t_data *data, char *str);
+t_rgb		rgb_converter(t_data *data, char *str);
+t_pos		ft_coor(char *str, t_data *data);
+t_pos		ft_vector(t_data *data, char *str);
 
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////// parsing ///////////////////////////////////
@@ -280,25 +286,38 @@ void			swap_doubles(double *a, double *b);
 unsigned long	creatergb(t_rgb *rgb);
 
 ////////////////////////////////// VEC_UTILS.C /////////////////////////////////
-
-double			vec_norm(t_pos vec);
-void			normed_vec(t_pos *vec);
-t_pos			cross_product(t_pos vec1, t_pos vec2);
-t_pos			add_vec(t_pos vec1, t_pos vec2);
-t_pos			subs_vec(t_pos vec1, t_pos vec2);
-t_pos			scale_vec(t_pos vec, double scaling);
-t_pos			create_vec(double x, double y, double z);
+double		vec_norm(t_pos vec);
+void		normed_vec(t_pos *vec);
+t_pos		cross_product(t_pos vec1, t_pos vec2);
+t_pos		add_vec(t_pos vec1, t_pos vec2);
+t_pos		subs_vec(t_pos vec1, t_pos vec2);
+t_pos		scale_vec(t_pos vec, double scaling);
+t_pos		create_vec(double x, double y, double z);
+double	    dot_product(t_pos vec1, t_pos vec2);
 
 //////////////////////////////// VEC_OPERATION.C ///////////////////////////////
 
-int				pixel_color(t_param *param, t_pos pixel);
-void			little_main_for_pixel(t_data *data, int x, int y);
-t_pos			get_matrix(t_param *param, int x, int y);
-t_ref			set_ref(t_pos *cam_ve);
-void			init_matrix(t_ref *ref, t_matrix *m);
-double			dot_product(t_pos vec1, t_pos vec2);
-t_pos			matrix_vector_multi(t_pos dir, t_matrix m);
+int			pixel_color(t_ray ray, t_rgb pixel, t_sphere *sphere);
+void		init_ray(t_data *data, int x, int y, t_ray *res);
+// t_pos		get_matrix(t_param *param, int x, int y);
+t_ref		set_ref(t_pos cam_ve);
+// void		init_matrix(t_ref *ref, t_matrix *m);
+// t_pos		matrix_vector_multi(t_pos dir, t_matrix m);
 
+///////////////////////////////// INTERSECTION.C ////////////////////////////////
+
+int			intersect_sphere(t_ray ray, t_sphere *sphere, double *t);
+t_pos		get_sphere_normal(t_pos point, t_sphere *sphere);
+int			get_roots(double *t0, double *t1, t_ray ray, t_sphere *sphere);
+// int			intersect_sphere(t_ray ray, t_sphere *sphere);
+
+////////////////////////////////// QUADRATIC.C //////////////////////////////////
+
+int			solve_quadratic(t_pos params, double *x0, double *x1);
+
+////////////////////////////////// INIT_CAMERA.C //////////////////////////////////
+
+void		init_camera(t_camera *camera);
 
 void			parse_sphere(t_data *data, char **line);
 void			parse_plane(t_data *data, char **line);

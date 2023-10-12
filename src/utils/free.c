@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:42:43 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/11 13:48:30 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:03:01 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	free_param(t_param *param)
 {
 	if (param->alight)
 	{
-		if (param->alight->rgb)
-			free(param->alight->rgb);
 		free(param->alight);
 		param->alight = NULL;
 	}

@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 08:57:43 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/05 15:39:16 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:08:53 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ t_pos	scale_vec(t_pos vec, double scaling)
 	t_pos res;
 
 	res.x = vec.x * scaling;
-	res.x = vec.y * scaling;
-	res.x = vec.z * scaling;
+	res.y = vec.y * scaling;
+	res.z = vec.z * scaling;
 	return (res);
 }
 

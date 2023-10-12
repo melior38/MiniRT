@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/05 13:15:03 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:33:29 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,18 @@ int	render_next_frame(t_data *data)
 {
 	int		x;
 	int		y;
+	t_ray	ray;
 
 	x = 0;
+	y = 0;
+	ray.origin = data->param->camera->coor;
 	while (x < WIDTH)
 	{
 		y = 0;
 		while (y < HEIGTH)
 		{
-			little_main_for_pixel(data, x, y);
+			init_ray(data, x, y, &ray);
+			my_mlx_pixel_put(data, x, y, pixel_color(ray, data->param->sphere->rgb, data->param->sphere));
 			y++;
 		}
 		x++;

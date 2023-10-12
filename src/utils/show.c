@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
-/*   Updated: 2023/09/28 10:47:24 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:01:08 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	show_alight(t_data *data)
 	printf(WHITE);
 	printf("ratio [%f]\n", tmp->ratio);
 	printf(MAGENTA);
-	printf("rgb [%d", tmp->rgb->r);
-	printf(",%d,", tmp->rgb->g);
-	printf("%d]\n", tmp->rgb->b);
+	printf("rgb [%d", tmp->rgb.r);
+	printf(",%d,", tmp->rgb.g);
+	printf("%d]\n", tmp->rgb.b);
 	printf(RESET_COLOR);
 }
 
@@ -34,13 +34,13 @@ void	show_camera(t_data *data)
 
 	tmp = data->param->camera;
 	printf(GREEN);
-	printf("coords [%f", tmp->coor->x);
-	printf(",%f,", tmp->coor->y);
-	printf("%f]\n", tmp->coor->z);
+	printf("coords [%f", tmp->coor.x);
+	printf(",%f,", tmp->coor.y);
+	printf("%f]\n", tmp->coor.z);
 	printf(CYAN);
-	printf("vector [%f", tmp->vector->x);
-	printf(",%f,", tmp->vector->y);
-	printf("%f]\n", tmp->vector->z);
+	printf("vector [%f", tmp->vector.x);
+	printf(",%f,", tmp->vector.y);
+	printf("%f]\n", tmp->vector.z);
 	printf(WHITE);
 	printf("fov [%f]\n", tmp->fov);
 	printf(RESET_COLOR);
@@ -52,15 +52,15 @@ void	show_light(t_data *data)
 
 	tmp = data->param->light;
 	printf(GREEN);
-	printf("coords [%f", tmp->coor->x);
-	printf(",%f,", tmp->coor->y);
-	printf("%f]\n", tmp->coor->z);
+	printf("coords [%f", tmp->coor.x);
+	printf(",%f,", tmp->coor.y);
+	printf("%f]\n", tmp->coor.z);
 	printf(WHITE);
 	printf("Brightness [%f]\n", tmp->bright);
 	printf(MAGENTA);
-	printf("rgb [%d", tmp->rgb->r);
-	printf(",%d,", tmp->rgb->g);
-	printf("%d]\n", tmp->rgb->b);
+	printf("rgb [%d", tmp->rgb.r);
+	printf(",%d,", tmp->rgb.g);
+	printf("%d]\n", tmp->rgb.b);
 	printf(RESET_COLOR);
 }
 
@@ -76,17 +76,17 @@ void	show_plane(t_data *data)
 		printf(WHITE);
 		printf("id %d\n", i);
 		printf(GREEN);
-		printf("coords [%f", tmp->coor->x);
-		printf(",%f,", tmp->coor->y);
-		printf("%f]\n", tmp->coor->z);
+		printf("coords [%f", tmp->coor.x);
+		printf(",%f,", tmp->coor.y);
+		printf("%f]\n", tmp->coor.z);
 		printf(CYAN);
-		printf("vector [%f", tmp->vector->x);
-		printf(",%f,", tmp->vector->y);
-		printf("%f]\n", tmp->vector->z);
+		printf("vector [%f", tmp->vector.x);
+		printf(",%f,", tmp->vector.y);
+		printf("%f]\n", tmp->vector.z);
 		printf(MAGENTA);
-		printf("rgb [%d", tmp->rgb->r);
-		printf(",%d,", tmp->rgb->g);
-		printf("%d]\n", tmp->rgb->b);
+		printf("rgb [%d", tmp->rgb.r);
+		printf(",%d,", tmp->rgb.g);
+		printf("%d]\n", tmp->rgb.b);
 		i++;
 		tmp = tmp->next;
 	}
@@ -105,15 +105,15 @@ void	show_sphere(t_data *data)
 		printf(WHITE);
 		printf("id %d\n", i);
 		printf(GREEN);
-		printf("coords [%f", tmp->coor->x);
-		printf(",%f,", tmp->coor->y);
-		printf("%f]\n", tmp->coor->z);
+		printf("coords [%f", tmp->coor.x);
+		printf(",%f,", tmp->coor.y);
+		printf("%f]\n", tmp->coor.z);
 		printf(WHITE);
 		printf("diam [%f]\n", tmp->diam);
 		printf(MAGENTA);
-		printf("rgb [%d", tmp->rgb->r);
-		printf(",%d,", tmp->rgb->g);
-		printf("%d]\n", tmp->rgb->b);
+		printf("rgb [%d", tmp->rgb.r);
+		printf(",%d,", tmp->rgb.g);
+		printf("%d]\n", tmp->rgb.b);
 		i++;
 		tmp = tmp->next;
 	}
@@ -132,21 +132,21 @@ void	show_cylinder(t_data *data)
 		printf(WHITE);
 		printf("id %d\n", i);
 		printf(GREEN);
-		printf("coords [%f", tmp->coor->x);
-		printf(",%f,", tmp->coor->y);
-		printf("%f]\n", tmp->coor->z);
+		printf("coords [%f", tmp->coor.x);
+		printf(",%f,", tmp->coor.y);
+		printf("%f]\n", tmp->coor.z);
 		printf(CYAN);
-		printf("vector [%f", tmp->vector->x);
-		printf(",%f,", tmp->vector->y);
-		printf("%f]\n", tmp->vector->z);
+		printf("vector [%f", tmp->vector.x);
+		printf(",%f,", tmp->vector.y);
+		printf("%f]\n", tmp->vector.z);
 		printf(WHITE);
 		printf("diam [%f]\n", tmp->diam);
 		printf(WHITE);
 		printf("height [%f]\n", tmp->height);
 		printf(MAGENTA);
-		printf("rgb [%d", tmp->rgb->r);
-		printf(",%d,", tmp->rgb->g);
-		printf("%d]\n", tmp->rgb->b);
+		printf("rgb [%d", tmp->rgb.r);
+		printf(",%d,", tmp->rgb.g);
+		printf("%d]\n", tmp->rgb.b);
 		i++;
 		tmp = tmp->next;
 	}

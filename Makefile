@@ -6,7 +6,7 @@
 #    By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 08:45:50 by lcamilo-          #+#    #+#              #
-#    Updated: 2023/09/28 16:06:23 by asouchet         ###   ########.fr        #
+#    Updated: 2023/10/10 14:29:32 by asouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,13 +48,15 @@ SRC 		= 	main.c							\
 				utils/add_back.c				\
 				utils/free.c					\
 				utils/free_obj.c				\
+				utils/init_camera.c				\
 				utils/free_uobj.c				\
 				math/vec_utils.c 				\
 				math/vec_operation.c			\
 				math/ray.c						\
 				math/tmp.c						\
-				math/ray_utils.c
-
+				math/ray_utils.c				\
+				math/quadratic.c				\
+				math/intersection.c
 
 # ------------  FILEPATHS  --------------------------------------------------- #
 OBJS				= ${SRC:.c=.o}
