@@ -71,7 +71,10 @@ void	init_data(t_data *data)
 	data->line_length = 0;
 	data->endian = 0;
 	data->error = 0;
-	data->param = NULL;
+	data->obj = NULL;
+	data->alight = NULL;
+	data->camera = NULL;
+	data->light = NULL;
 }
 
 void	show_obj(t_data *data)
@@ -118,10 +121,10 @@ int	main(int ac, char **av)
 	// mlx_hook(mlx_win, ON_DESTROY, 0, ft_handle_exit, &img);
 	// mlx_hook(mlx_win, ON_MOUSEDOWN, 0, ft_mouse_press, &img);
 	// mlx_hook(mlx_win, ON_MOUSEUP, 0, ft_mouse_release, &img);
-	while (data.param->sphere)
+	while (data.obj)
 	{
 		shoot_ray(&data);
-		data.param->sphere = data.param->sphere->next;
+		data.obj = data.obj->next;
 	}
     mlx_hook(data.mlx_win, 2, 1L << 0, key_hook, &data);
     mlx_hook(data.mlx_win, 17, 0, free_struct, &data);

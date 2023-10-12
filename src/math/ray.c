@@ -22,13 +22,17 @@ t_ray	*ray_to_pixel(int x, int y, t_pos *coor)
 	double	p_y;
 	t_ray	*result;
 	t_pos	*direction;
+//	t_matrix	m;
+	//Ajouter vec dir
 
 	//normalized pixel x and y
 	p_x = 2.0 * ((double)x / (double)WIDTH) - 1.0;
 	p_y = 1.0 - 2.0 * ((double)y / (double)HEIGTH);
 	//Creation vecteur directionnel
 	direction = create_pos(p_x, p_y, -1);
+	//init_matrix(ref, m);
 	//Norme du vectuer directionnel
+	//direction *= matrice_pos;
 	normed_vec(direction);
 	//Recupere les coor de la camera
 	//Et le vecteur directionnel pour creer le rayon
@@ -75,6 +79,7 @@ void	shoot_ray(t_data *data)
 
 	sphere = data->param->sphere;
 	sphere->center = sphere->coor;
+	//Creer matrice avec camera->vector, check vec operation
 	y = 0;
 	while (y < HEIGTH)
 	{

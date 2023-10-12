@@ -61,17 +61,17 @@ void	init_file(t_data *data, char *line)
 
 	s_line = ft_split(line, ' ');
 	if (ft_strncmp(line, "A ", 2) == 0)
-		data->param->alight = create_alight(data, s_line);
+		data->alight = create_alight(data, s_line);
 	if (ft_strncmp(line, "C ", 2) == 0)
-		data->param->camera = create_camera(data, s_line);
+		data->camera = create_camera(data, s_line);
 	if (ft_strncmp(line, "L ", 2) == 0)
-		data->param->light = create_light(data, s_line);
+		data->light = create_light(data, s_line);
 	if (ft_strncmp(line, "sp ", 3) == 0)
-		sp_addb(&data->param->sphere, create_sphere(data, s_line));
+		parse_sphere(data, s_line);
 	if (ft_strncmp(line, "pl ", 3) == 0)
-		pl_addb(&data->param->plane, create_plane(data, s_line));
+		parse_plane(data, s_line);
 	if (ft_strncmp(line, "cy ", 3) == 0)
-		cyl_addb(&data->param->cylinder, create_cylinder(data, s_line));
+		parse_cylinder(data, s_line);
 	free_tab(s_line);
 }
 
@@ -102,20 +102,9 @@ int	parsing(t_data *data, int ac, char *av)
 {
 	int		fd;
 	char	*line;
-	t_param	*param;
 
 	fd = open_fd(data, ac, av);
 	line = get_next_line(fd);
-	param = malloc(sizeof(t_param));
-	if (!param)
-		exit(1);
-	param->alight = NULL;
-	param->camera = NULL;
-	param->light = NULL;
-	param->cylinder = NULL;
-	param->plane = NULL;
-	param->sphere = NULL;
-	data->param = param;
 	while (line)
 	{
 		line = trim_gnl(line);

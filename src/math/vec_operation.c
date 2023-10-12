@@ -111,9 +111,9 @@ t_pos	get_vec_dir(t_param *param, int x, int y)
 	double	win_ratio;
 	double	p_x;
 	double	p_y;
-	t_pos	*cam_pos;
+//	t_pos	*cam_pos;
 
-	cam_pos = param->camera->coor;
+//	cam_pos = param->camera->coor;
 	fov_coeff = tan(param->camera->fov / 2 * M_PI / 180);
 	win_ratio = (double)WIDTH / (double)HEIGTH;
 	p_x = (2 * x / (double)WIDTH) * fov_coeff * win_ratio;

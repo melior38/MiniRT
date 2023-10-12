@@ -52,6 +52,7 @@ SRC 		= 	main.c							\
 				math/vec_utils.c 				\
 				math/vec_operation.c			\
 				math/ray.c						\
+				math/tmp.c						\
 				math/ray_utils.c
 
 

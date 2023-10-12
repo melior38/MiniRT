@@ -22,12 +22,6 @@
 # define WIDTH		1600.0
 # define ERROR		0
 # define SUCCESS	1
-# define AMBIENT_LIGHT 1
-# define CAMERA 2
-# define LIGHT 3
-# define PLAN 4
-# define SPHERE 5
-# define CYLINDER 6
 # define RESET_COLOR			"\033[0m"
 # define BLACK					"\033[0m\033[30m"
 # define RED					"\033[0m\033[31m"
@@ -116,6 +110,42 @@ typedef struct s_cylinder
 	struct s_cylinder	*next;
 }	t_cylinder;
 
+typedef enum	e_object_type
+{
+	SPHERE,
+	PLANE,
+	CYLINDER,
+}				t_objtype;
+
+typedef struct s_math
+{
+	double 		a;
+	double 		b;
+}				t_math;
+
+
+//if (object->type == SPHERE)
+//return (intersect_sphere(sent, *(t_sphere *)object->ptr, t));
+//int	intersect_sphere(t_ray ray, t_sphere sphere, double *t)
+//int		intersect_with_all(t_listobj *objects);
+//
+//t_list *runner;
+//t_object *actual_obj;
+//runner = obj;
+//while (runner)
+//actual_obj = runner->content;
+//if (FunctionIfForest(actual_obj)
+
+//int FunctionIfForest(t_object *obj)
+//if (obj->type == X)
+//XFunction((t_objX *)obj->ptr);
+typedef struct	s_listobj
+{
+	t_objtype			type;
+	void				*ptr;
+	struct	s_listobj	*next;
+}				t_listobj;
+
 typedef struct s_param
 {
 	t_alight		*alight;
@@ -141,6 +171,11 @@ typedef struct s_data {
 	int			line_length;
 	int			endian;
 	int			error;
+	t_alight	*alight;
+	t_camera	*camera;
+	t_light		*light;
+	t_listobj	*obj;
+	t_math		*math;
 	t_param		*param;
 }				t_data;
 
@@ -264,4 +299,8 @@ void			init_matrix(t_ref *ref, t_matrix *m);
 double			dot_product(t_pos vec1, t_pos vec2);
 t_pos			matrix_vector_multi(t_pos dir, t_matrix m);
 
+
+void			parse_sphere(t_data *data, char **line);
+void			parse_plane(t_data *data, char **line);
+void			parse_cylinder(t_data *data, char **line);
 #endif
