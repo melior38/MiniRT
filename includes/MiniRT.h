@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/11 13:13:12 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/16 15:19:03 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,11 @@ typedef struct s_param
 	t_camera		*camera;
 	t_light			*light;
 	t_plane			*plane;
+	t_plane			*pl_head;
 	t_sphere		*sphere;
+	t_sphere		*sp_head;
 	t_cylinder		*cylinder;
+	t_cylinder		*cy_head;
 	t_pos			corner;
 	double			hx;
 	double			hy;
@@ -160,9 +163,9 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 ////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////// ADD_BACK.C ///////////////////////////////////
-void		cyl_addb(t_cylinder **lst, t_cylinder *new);
-void		sp_addb(t_sphere **lst, t_sphere *new);
-void		pl_addb(t_plane **lst, t_plane*new);
+void		cyl_addb(t_cylinder **lst, t_cylinder *new, t_cylinder *cy_head);
+void		sp_addb(t_sphere **lst, t_sphere *new, t_sphere *sp_head);
+void		pl_addb(t_plane **lst, t_plane*new, t_plane *pl_head);
 
 /////////////////////////////////// FREE.C /////////////////////////////////////
 int free_struct(t_data *data);
@@ -217,18 +220,12 @@ void		init_tab(int *tab);
 int			check_rt_file(char *av);
 
 ///////////////////////////////// PARSE_INIT.C /////////////////////////////////
+
 void		free_tab(char **tab);
 
 ////////////////////////////////// FT_ATOD.C ///////////////////////////////////
+
 double		ft_atod(char *str, t_data *data);
-
-/////////////////////////////// GET_FUNCTION.C /////////////////////////////////
-
-// bool		get_vector(t_pos *pos, char *str);
-// bool		get_rgb(t_rgb *rgb, char *str);
-// bool		get_dimension(double *value, char *str);
-// bool		get_coor(t_pos *pos, char *str);
-// bool		get_ratio(double *ratio, char *str);
 
 ///////////////////////////////// PARSING.C ////////////////////////////////////
 
@@ -254,7 +251,9 @@ double	    dot_product(t_pos vec1, t_pos vec2);
 
 //////////////////////////////// VEC_OPERATION.C ///////////////////////////////
 
-int			pixel_color(t_ray ray, t_rgb pixel, t_sphere *sphere);
+int			pixel_color_sphere(t_ray ray, t_rgb pixel, t_sphere *sphere, t_alight *A);
+int			pixel_color_cylinder(t_ray ray, t_rgb pixel, t_cylinder *cylinder, t_alight *A);
+int			pixel_color_plane(t_ray ray, t_rgb pixel, t_plane *plane, t_alight *A);
 void		init_ray(t_data *data, int x, int y, t_ray *res);
 // t_pos		get_matrix(t_param *param, int x, int y);
 t_ref		set_ref(t_pos cam_ve);
@@ -267,15 +266,22 @@ void		swap_doubles(double *a, double *b);
 int			intersect_sphere(t_ray ray, t_sphere *sphere, double *t);
 t_pos		get_sphere_normal(t_pos point, t_sphere *sphere);
 int			get_roots(double *t0, double *t1, t_ray ray, t_sphere *sphere);
+int			intersect_plane(t_ray ray, t_plane *plane, double *t);
 // int			intersect_sphere(t_ray ray, t_sphere *sphere);
 
-////////////////////////////////// QUADRATIC.C //////////////////////////////////
+///////////////////////////////// QUADRATIC.C ///////////////////////////////////
 
 int			solve_quadratic(t_pos params, double *x0, double *x1);
 
-////////////////////////////////// INIT_CAMERA.C //////////////////////////////////
+//////////////////////////////// INIT_CAMERA.C //////////////////////////////////
 
 void		init_camera(t_camera *camera);
 
+///////////////////////////////// CYLINDER.C ////////////////////////////////////
+
+t_pos		get_cylinder_normal(t_pos point, t_cylinder *cylinder);
+void		check_t(double *t, t_cylinder *cylinder, t_ray ray);
+int			cyl_get_roots(double *t0, double *t1, t_cylinder *cylinder, t_ray ray);
+int			intersect_cylinder(t_ray ray, t_cylinder *cylinder, double *t);
 
 #endif

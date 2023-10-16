@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/11 13:33:29 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/16 15:09:56 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	render_next_frame(t_data *data)
 	int		x;
 	int		y;
 	t_ray	ray;
+	int		color;
 
 	x = 0;
 	y = 0;
@@ -41,7 +42,10 @@ int	render_next_frame(t_data *data)
 		while (y < HEIGTH)
 		{
 			init_ray(data, x, y, &ray);
-			my_mlx_pixel_put(data, x, y, pixel_color(ray, data->param->sphere->rgb, data->param->sphere));
+			// color = pixel_color_plane(ray, data->param->plane->rgb, data->param->plane, data->param->alight);
+			// color = pixel_color_sphere(ray, data->param->sphere->rgb, data->param->sphere, data->param->alight);
+			color = pixel_color_cylinder(ray, data->param->cylinder->rgb, data->param->cylinder, data->param->alight);
+			my_mlx_pixel_put(data, x, y, color);
 			y++;
 		}
 		x++;

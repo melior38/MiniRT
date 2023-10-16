@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 08:57:43 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/11 13:08:53 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:39:33 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_pos	cross_product(t_pos vec1, t_pos vec2)
 	res.x = vec1.y * vec2.z - vec1.z * vec2.y;
 	res.y = vec1.z * vec2.x - vec1.x * vec2.z;
 	res.z = vec1.x * vec2.y - vec1.y * vec2.x;
-    return (res);
+	return (res);
 }
 
 // addition de 2 vecteur et return le resultat
@@ -85,7 +85,7 @@ t_pos	create_vec(double x, double y, double z)
 	return (vec);
 }
 
-double    dot_product(t_pos vec1, t_pos vec2)
+double	dot_product(t_pos vec1, t_pos vec2)
 {
-    return (vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z);
+	return (vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z);
 }

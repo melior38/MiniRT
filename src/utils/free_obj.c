@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:42:43 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/11 11:03:48 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:34:49 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	free_sphere(t_param *param)
 	while (lst)
 	{
 		lst_tmp = lst->next;
+		free(lst);
 		lst = lst_tmp;
 	}
 	param->sphere = NULL;

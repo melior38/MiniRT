@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 13:00:13 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/09 13:03:09 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/12 13:21:41 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ void		swap_doubles(double *a, double *b)
 	*b = buffer;
 }
 
+// Cette fonction résout une équation quadratique de la forme ax^2 + bx + c = 0
+// La variable discr calcule le discriminant de l'équation quadratique à l'aide 
+// de la formule discr = b^2 - 4ac. Ensuite, les cas suivants sont gérés :
+// si discr = neg donc pas d'intersection 
+// si discr = pos mais un seul res = a une intersection
+// si discr = a 2 res a 2 intersection; 
 int			solve_quadratic(t_pos params, double *x0, double *x1)
 {
 	double discr;

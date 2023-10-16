@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 14:51:24 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/11 10:56:49 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:14:29 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_pos		get_sphere_normal(t_pos point, t_sphere *sphere)
 	return (n);
 }
 
+// calcule les coefficients a, b, et c de l'équation quadratique qui représente l'intersection entre le rayon et la sphère.
 int			get_roots(double *t0, double *t1, t_ray ray, t_sphere *sphere)
 {
 	t_pos	l;
@@ -44,6 +45,7 @@ int			get_roots(double *t0, double *t1, t_ray ray, t_sphere *sphere)
 	return (1);
 }
 
+
 int			intersect_sphere(t_ray ray, t_sphere *sphere, double *t)
 {
 	double t0;
@@ -59,4 +61,26 @@ int			intersect_sphere(t_ray ray, t_sphere *sphere, double *t)
 	}
 	*t = t0;
 	return (1);
+}
+
+// Fonction pour calculer l'intersection entre un rayon et un plan
+int intersect_plane(t_ray ray, t_plane *plane, double *t)
+{
+    t_pos plane_to_ray;
+    double denominator;
+    
+	denominator = dot_product(plane->vector, ray.dir);
+	// fabs --> Vérifie si le rayon est parallèle au plan (pas d'intersection)
+	// "1e-6" = 1 multiplié par 10 élevé à la puissance de -6". 
+    if (fabs(denominator) < 1e-6) {
+        return 0;
+    }
+    plane_to_ray = subs_vec(ray.origin, plane->coor);
+    // Utilise l'équation de l'intersection du rayon avec le plan
+    *t = dot_product(plane->vector, plane_to_ray) / denominator;
+    // Si t est négatif, cela signifie que le plan est derrière le rayon
+    if (*t < 0) {
+        return 0;
+    }
+    return 1;
 }
