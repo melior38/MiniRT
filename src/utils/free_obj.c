@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:42:43 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/11 14:34:49 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:03:22 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	free_plane(t_param *param)
 		lst = lst_tmp;
 	}
 	param->plane = NULL;
+	free(param->pl_head);
+	param->pl_head = NULL;
 }
 
 void	free_sphere(t_param *param)
@@ -40,6 +42,8 @@ void	free_sphere(t_param *param)
 		lst = lst_tmp;
 	}
 	param->sphere = NULL;
+	free(param->sp_head);
+	param->sp_head = NULL;
 }
 
 void	free_cylinder(t_param *param)
@@ -55,4 +59,6 @@ void	free_cylinder(t_param *param)
 		lst = lst_tmp;
 	}
 	param->cylinder = NULL;
+	free(param->cy_head);
+	param->cy_head = NULL;
 }

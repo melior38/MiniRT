@@ -6,7 +6,7 @@
 #    By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 08:45:50 by lcamilo-          #+#    #+#              #
-#    Updated: 2023/10/16 11:23:56 by asouchet         ###   ########.fr        #
+#    Updated: 2023/10/17 12:51:24 by asouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,6 @@ SRC 		= 	main.c							\
 				parsing/ft_atod.c				\
 				parsing/parsing.c				\
 				parsing/parse_init.c			\
-				parsing/get_function.c			\
 				parsing/parsing_utils.c			\
 				utils/obj_utils.c				\
 				utils/uobj_utils.c				\

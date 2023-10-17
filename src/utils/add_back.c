@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/16 16:09:47 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:50:43 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void	pl_addb(t_plane **lst, t_plane *new, t_plane *pl_head)
 
 	if (*lst == NULL)
 	{
-		*lst = new;
+		pl_head = malloc(sizeof(t_plane));
 		pl_head = new;
+		*lst = new;
 	}
 	else
 	{
@@ -36,8 +37,9 @@ void	sp_addb(t_sphere **lst, t_sphere *new, t_sphere *sp_head)
 
 	if (*lst == NULL)
 	{
+		sp_head = malloc(sizeof(t_sphere));
+		sp_head  = new;
 		*lst = new;
-		sp_head = new;
 	}
 	else
 	{
@@ -54,8 +56,9 @@ void	cyl_addb(t_cylinder **lst, t_cylinder *new, t_cylinder *cy_head)
 
 	if (*lst == NULL)
 	{
+		cy_head = malloc(sizeof(t_cylinder));
+		cy_head = *lst;
 		*lst = new;
-		cy_head = lst;
 	}
 	else
 	{
