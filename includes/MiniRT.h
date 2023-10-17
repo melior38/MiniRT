@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/16 15:19:03 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:08:39 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@
 # define WIDTH		1280.0
 # define ERROR		0
 # define SUCCESS	1
-# define AMBIENT_LIGHT 1
-# define CAMERA 2
-# define LIGHT 3
-# define PLAN 4
-# define SPHERE 5
-# define CYLINDER 6
 # define RESET_COLOR			"\033[0m"
 # define BLACK					"\033[0m\033[30m"
 # define RED					"\033[0m\033[31m"
@@ -37,6 +31,13 @@
 # define MAGENTA				"\033[0m\033[35m"
 # define CYAN					"\033[0m\033[36m"
 # define WHITE					"\033[0m\033[37m"
+
+typedef enum	e_obj_type
+{
+	SPHERE,
+	CYLINDER,
+	PLANE,
+}				t_o_type;
 
 typedef struct s_pos {
 	double	x;
@@ -126,14 +127,15 @@ typedef struct s_param
 	t_camera		*camera;
 	t_light			*light;
 	t_plane			*plane;
-	t_plane			*pl_head;
+	t_plane			*pl_choosed;
 	t_sphere		*sphere;
-	t_sphere		*sp_head;
+	t_sphere		*sp_choosed;
 	t_cylinder		*cylinder;
-	t_cylinder		*cy_head;
+	t_cylinder		*cy_choosed;
 	t_pos			corner;
 	double			hx;
 	double			hy;
+	int				miss;
 	t_ref	ref;
 	t_matrix		dir;
 }				t_param;
@@ -163,9 +165,9 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 ////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////// ADD_BACK.C ///////////////////////////////////
-void		cyl_addb(t_cylinder **lst, t_cylinder *new, t_cylinder *cy_head);
-void		sp_addb(t_sphere **lst, t_sphere *new, t_sphere *sp_head);
-void		pl_addb(t_plane **lst, t_plane*new, t_plane *pl_head);
+void		cyl_addb(t_cylinder **lst, t_cylinder *new, t_cylinder *cy_choosed);
+void		sp_addb(t_sphere **lst, t_sphere *new, t_sphere *sp_choosed);
+void		pl_addb(t_plane **lst, t_plane*new, t_plane *pl_choosed);
 
 /////////////////////////////////// FREE.C /////////////////////////////////////
 int free_struct(t_data *data);
@@ -251,7 +253,7 @@ double	    dot_product(t_pos vec1, t_pos vec2);
 
 //////////////////////////////// VEC_OPERATION.C ///////////////////////////////
 
-int			pixel_color_sphere(t_ray ray, t_rgb pixel, t_sphere *sphere, t_alight *A);
+int			pixel_color_sphere(t_ray ray, t_sphere *sphere, t_alight *A, int miss);
 int			pixel_color_cylinder(t_ray ray, t_rgb pixel, t_cylinder *cylinder, t_alight *A);
 int			pixel_color_plane(t_ray ray, t_rgb pixel, t_plane *plane, t_alight *A);
 void		init_ray(t_data *data, int x, int y, t_ray *res);
@@ -283,5 +285,12 @@ t_pos		get_cylinder_normal(t_pos point, t_cylinder *cylinder);
 void		check_t(double *t, t_cylinder *cylinder, t_ray ray);
 int			cyl_get_roots(double *t0, double *t1, t_cylinder *cylinder, t_ray ray);
 int			intersect_cylinder(t_ray ray, t_cylinder *cylinder, double *t);
+
+///////////////////////////////// INTERSECT_ALL.C ///////////////////////////////
+t_cylinder	*loop_cylinder(t_param *param, t_ray ray, double *t);
+t_sphere	*loop_sphere(t_param *param, t_ray ray, double *t);
+t_plane		*loop_plane(t_param *param, t_ray ray, double *t);
+t_o_type	intersect_with_all(t_param *param, t_ray ray, double *t);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 09:32:28 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/16 11:37:33 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:09:09 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ void	init_ray(t_data *data, int x, int y, t_ray *res)
 }
 
 // pour l'instant cette fonction sert a voir le comportement de nos calculs
-int	pixel_color_sphere(t_ray ray, t_rgb rgb, t_sphere *sphere, t_alight *A)
+int	pixel_color_sphere(t_ray ray, t_sphere *sphere, t_alight *A, int miss)
 {
-	double	t;
-	int	tmp;
+	(void) ray;
+	t_rgb	rgb;
 
-	tmp = intersect_sphere(ray, sphere, &t);
-	if (tmp)
+	rgb = sphere->rgb;
+	if (!miss)
 		return (my_mlx_get_color_value((int)round(rgb.r), (int)round(rgb.g), (int)round(rgb.b)));
 	else
 		return (my_mlx_get_color_value(A->rgb.r, A->rgb.g, A->rgb.b));
