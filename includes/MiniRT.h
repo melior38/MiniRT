@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/17 17:08:39 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:22:59 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,9 +253,9 @@ double	    dot_product(t_pos vec1, t_pos vec2);
 
 //////////////////////////////// VEC_OPERATION.C ///////////////////////////////
 
-int			pixel_color_sphere(t_ray ray, t_sphere *sphere, t_alight *A, int miss);
-int			pixel_color_cylinder(t_ray ray, t_rgb pixel, t_cylinder *cylinder, t_alight *A);
-int			pixel_color_plane(t_ray ray, t_rgb pixel, t_plane *plane, t_alight *A);
+int			pixel_color_sphere(t_ray ray, t_sphere *sphere, t_alight *A);
+int			pixel_color_cylinder(t_ray ray, t_cylinder *cylinder, t_alight *A);
+int			pixel_color_plane(t_ray ray, t_plane *plane, t_alight *A);
 void		init_ray(t_data *data, int x, int y, t_ray *res);
 // t_pos		get_matrix(t_param *param, int x, int y);
 t_ref		set_ref(t_pos cam_ve);

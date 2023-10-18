@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/17 17:09:39 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:23:18 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,35 +33,26 @@ int	render_next_frame(t_data *data)
 	t_ray	ray;
 	int		color;
 	double 	t;
-	// t_o_type res;
+	t_o_type res;
 
 	x = 0;
-	y = 0;
-	t = HUGE_VAL;
 	ray.origin = data->param->camera->coor;
+	// init_ray(data, x, y, &ray);
+	// color = pixel_color_sphere(ray, loop_sphere(data->param, ray, &t), data->param->alight, data->param->miss);
 	while (x < WIDTH)
 	{
 		y = 0;
 		while (y < HEIGTH)
 		{
+			t = HUGE_VAL;
 			init_ray(data, x, y, &ray);
-			color = pixel_color_sphere(ray, loop_sphere(data->param, ray, &t), data->param->alight, data->param->miss);
-			// res = intersect_with_all(data->param, ray, &t);
-			// if (res == SPHERE)
-			// {
-			// 	// printf("salut on est dans sphere\n");
-			// 	color = pixel_color_sphere(ray, data->param->sp_choosed->rgb, data->param->sp_choosed, data->param->alight);
-			// }
-			// if (res == CYLINDER)
-			// {
-			// 	// printf("salut on est dans cylinder\n");
-			// 	color = pixel_color_cylinder(ray, data->param->cy_choosed->rgb, data->param->cy_choosed, data->param->alight);
-			// }
-			// if (res == PLANE)
-			// {
-			// 	// printf("salut on est dans plane\n");
-			// 	color = pixel_color_plane(ray, data->param->pl_choosed->rgb, data->param->pl_choosed, data->param->alight);
-			// }
+			res = intersect_with_all(data->param, ray, &t);
+			if (res == SPHERE)
+				color = pixel_color_sphere(ray, data->param->sp_choosed, data->param->alight);
+			if (res == CYLINDER)
+				color = pixel_color_cylinder(ray, data->param->cy_choosed, data->param->alight);
+			if (res == PLANE)
+				color = pixel_color_plane(ray, data->param->pl_choosed, data->param->alight);
 			my_mlx_pixel_put(data, x, y, color);
 			y++;
 		}
