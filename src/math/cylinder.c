@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:19:13 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/16 11:39:05 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:33:13 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,19 @@ int			intersect_cylinder(t_ray ray, t_cylinder *cylinder, double *t)
 			*t = t1;
 	}
 	return (1);
+}
+
+t_pos	get_n_cylinder(t_cylinder *cylinder, t_intersection *p)
+{
+	t_pos		n;
+	t_pos		pc;
+	t_pos		v;
+	float		dot_v_pc;
+
+	pc = subs_vec(p->inter_point, cylinder->coor);
+	v = cylinder->vector;
+	dot_v_pc = dot_product(v, pc);
+	v = scale_vec(v, dot_v_pc);
+	n = subs_vec(pc, v);
+	return (n);
 }

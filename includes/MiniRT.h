@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/18 12:22:59 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:06:46 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,16 @@ typedef struct s_cylinder
 	struct s_cylinder	*next;
 }	t_cylinder;
 
+typedef struct s_intersection
+{
+	t_rgb	A_mod_color;
+	t_pos	inter_point;
+	double	dist;
+	t_pos	light_pos;
+	double	light_bright;
+	t_rgb	light_color;
+}	t_intersection;
+
 typedef struct s_param
 {
 	t_alight		*alight;
@@ -133,9 +143,9 @@ typedef struct s_param
 	t_cylinder		*cylinder;
 	t_cylinder		*cy_choosed;
 	t_pos			corner;
+	t_intersection	p;
 	double			hx;
 	double			hy;
-	int				miss;
 	t_ref	ref;
 	t_matrix		dir;
 }				t_param;
@@ -156,7 +166,7 @@ typedef struct s_data {
 
 int			main(int ac, char **av);
 void		ft_handle_error(int error);
-int			my_mlx_get_color_value(int red, int green, int blue);
+int			my_mlx_get_color_value(t_rgb rgb);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -253,14 +263,9 @@ double	    dot_product(t_pos vec1, t_pos vec2);
 
 //////////////////////////////// VEC_OPERATION.C ///////////////////////////////
 
-int			pixel_color_sphere(t_ray ray, t_sphere *sphere, t_alight *A);
-int			pixel_color_cylinder(t_ray ray, t_cylinder *cylinder, t_alight *A);
-int			pixel_color_plane(t_ray ray, t_plane *plane, t_alight *A);
 void		init_ray(t_data *data, int x, int y, t_ray *res);
-// t_pos		get_matrix(t_param *param, int x, int y);
 t_ref		set_ref(t_pos cam_ve);
-// void		init_matrix(t_ref *ref, t_matrix *m);
-// t_pos		matrix_vector_multi(t_pos dir, t_matrix m);
+void		update_intersection(t_param *param, t_intersection *p, t_pos obj_center, t_ray ray);
 
 ///////////////////////////////// INTERSECTION.C ////////////////////////////////
 
@@ -285,12 +290,28 @@ t_pos		get_cylinder_normal(t_pos point, t_cylinder *cylinder);
 void		check_t(double *t, t_cylinder *cylinder, t_ray ray);
 int			cyl_get_roots(double *t0, double *t1, t_cylinder *cylinder, t_ray ray);
 int			intersect_cylinder(t_ray ray, t_cylinder *cylinder, double *t);
+t_pos		get_n_cylinder(t_cylinder *cylinder, t_intersection *p);
 
 ///////////////////////////////// INTERSECT_ALL.C ///////////////////////////////
 t_cylinder	*loop_cylinder(t_param *param, t_ray ray, double *t);
 t_sphere	*loop_sphere(t_param *param, t_ray ray, double *t);
 t_plane		*loop_plane(t_param *param, t_ray ray, double *t);
 t_o_type	intersect_with_all(t_param *param, t_ray ray, double *t);
+
+//////////////////////////////////// PHONG.C ////////////////////////////////////
+
+t_rgb		i_diffuse_pl(t_intersection *p, t_plane *plane);
+t_rgb		phong_pl(t_intersection *p, t_plane *plane);
+t_rgb		i_diffuse_sp(t_intersection *p, t_sphere *sphere);
+t_rgb		phong_sp(t_intersection *p, t_sphere *sphere);
+t_rgb		i_diffuse_cy(t_intersection *p, t_cylinder *cylinder);
+t_rgb		phong_cy(t_intersection *p, t_cylinder *cylinder);
+
+//////////////////////////////////// COLOR.C ////////////////////////////////////
+
+t_rgb		multiplication_color(t_rgb color1, t_rgb color2);
+t_rgb		change_intensity(t_rgb color, double intensity);
+t_rgb		addition_color(t_rgb color1, t_rgb color2);
 
 
 #endif

@@ -1,20 +1,6 @@
-# sphere.rt
 
-# Object            | Coordinates      | Orientation | Info 1          | Info 2          | Color         | Bonus
-#                   | x,y,z as doubles | x,y,z in    |                 |                 | R,G,B in      |
-#                   |                  | [-1.0; 1.0] |                 |                 | {0; ...; 255} |
-# Mandatory objects |                  |             |                 |                 |               |
-# Ambient light     |                  |             | Ratio in        |                 |               |
-#                   |                  |             | [0.0; 1.0]      |                 |               |
-  A                                                    0.2                                 255,255,255
-# Camera            |                  |             | CAMERA_FOV in   |                 |               |
-#                   |                  |             | [0.0; 180.0]    |                 |               |
-  C                   0,0,0              -1.0,0,0      70
-# Main light        |                  |             | Ratio in        |                 |               |
-#                   |                  |             | [0.0; 1.0]      |                 |               |
-  L                   40,0,30                          0.7                                 255,255,255
-
-# Optional objects  |                  |             |                 |                 |               |
-# Sphere            |                  |             | Diameter as     |                 |               | 2nd color
-#                   |                  |             | positive double |                 |               |
-  sp                  -2,0,0                           1                                   255,255,255     checkerboard=128,128,128
+A 0.5           255,255,255
+C -10,-30,0         1,1,0             150
+L 50,0,50      0.7               255,255,255
+# pl -50,50,0        0,1.0,0           255,0,255
+sp 30,0,0       20                255,0,0

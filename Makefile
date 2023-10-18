@@ -6,7 +6,7 @@
 #    By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 08:45:50 by lcamilo-          #+#    #+#              #
-#    Updated: 2023/10/17 13:14:27 by asouchet         ###   ########.fr        #
+#    Updated: 2023/10/18 15:22:24 by asouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,8 @@ SRC 		= 	main.c							\
 				math/vec_operation.c			\
 				math/quadratic.c				\
 				math/cylinder.c					\
+				math/phong.c					\
+				math/color.c					\
 				math/intersect_all.c			\
 				math/intersection.c
 

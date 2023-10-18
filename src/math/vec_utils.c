@@ -6,13 +6,12 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 08:57:43 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/11 14:39:33 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:30:03 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "MiniRT.h"
-
 
 // donne la norm d'un vecteur (sa longueur)
 double	vec_norm(t_pos vec)

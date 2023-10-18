@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 09:32:28 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/18 12:22:40 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:05:58 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,42 +80,53 @@ void	init_ray(t_data *data, int x, int y, t_ray *res)
 	normed_vec(&res->dir);
 }
 
-// pour l'instant cette fonction sert a voir le comportement de nos calculs
-int	pixel_color_sphere(t_ray ray, t_sphere *sphere, t_alight *A)
+void	update_intersection(t_param *param, t_intersection *p, t_pos obj_center, t_ray ray)
 {
-	t_rgb	rgb;
-	double	t;
-
-	rgb = sphere->rgb;
-	if (intersect_sphere(ray, sphere, &t))
-		return (my_mlx_get_color_value((int)round(rgb.r), (int)round(rgb.g), (int)round(rgb.b)));
-	else
-		return (my_mlx_get_color_value(A->rgb.r, A->rgb.g, A->rgb.b));
-	return (0);
+	(void)	obj_center;
+	p->A_mod_color = change_intensity(param->alight->rgb, param->alight->ratio);
+	p->inter_point = add_vec(ray.origin, scale_vec(ray.dir, p->dist));
+	p->light_bright = param->light->bright;
+	p->light_color = param->light->rgb;
+	p->light_pos = param->light->coor;
 }
 
-int	pixel_color_cylinder(t_ray ray, t_cylinder *cylinder, t_alight *A)
-{
-	t_rgb	rgb;
-	double	t;
 
-	rgb = cylinder->rgb;
-	if (intersect_cylinder(ray, cylinder, &t))
-		return (my_mlx_get_color_value((int)round(rgb.r), (int)round(rgb.g), (int)round(rgb.b)));
-	else
-		return (my_mlx_get_color_value(A->rgb.r, A->rgb.g, A->rgb.b));
-	return (0);
-}
+// // pour l'instant cette fonction sert a voir le comportement de nos calculs
+// int	pixel_color_sphere(t_ray ray, t_sphere *sphere, t_alight *A)
+// {
+// 	t_rgb	rgb;
+// 	double	t;
 
-int	pixel_color_plane(t_ray ray, t_plane *plane, t_alight *A)
-{
-	t_rgb	rgb;
-	double	t;
+// 	rgb = sphere->rgb;
+// 	if (intersect_sphere(ray, sphere, &t))
+// 		return (my_mlx_get_color_value((int)round(rgb.r), (int)round(rgb.g), (int)round(rgb.b)));
+// 	else
+// 		return (my_mlx_get_color_value(A->rgb.r, A->rgb.g, A->rgb.b));
+// 	return (0);
+// }
 
-	rgb = plane->rgb;
-	if (intersect_plane(ray, plane, &t))
-		return (my_mlx_get_color_value((int)round(rgb.r), (int)round(rgb.g), (int)round(rgb.b)));
-	else
-		return (my_mlx_get_color_value(A->rgb.r, A->rgb.g, A->rgb.b));
-	return (0);
-}
+// int	pixel_color_cylinder(t_ray ray, t_cylinder *cylinder, t_alight *A)
+// {
+// 	t_rgb	rgb;
+// 	double	t;
+
+// 	rgb = cylinder->rgb;
+// 	if (intersect_cylinder(ray, cylinder, &t))
+// 		return (my_mlx_get_color_value((int)round(rgb.r), (int)round(rgb.g), (int)round(rgb.b)));
+// 	else
+// 		return (my_mlx_get_color_value(A->rgb.r, A->rgb.g, A->rgb.b));
+// 	return (0);
+// }
+
+// int	pixel_color_plane(t_ray ray, t_plane *plane, t_alight *A)
+// {
+// 	t_rgb	rgb;
+// 	double	t;
+
+// 	rgb = plane->rgb;
+// 	if (intersect_plane(ray, plane, &t))
+// 		return (my_mlx_get_color_value((int)round(rgb.r), (int)round(rgb.g), (int)round(rgb.b)));
+// 	else
+// 		return (my_mlx_get_color_value(A->rgb.r, A->rgb.g, A->rgb.b));
+// 	return (0);
+// }
