@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/18 16:41:11 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:23:27 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,11 @@ int	render_next_frame(t_data *data)
 	int		x;
 	int		y;
 	t_ray	ray;
-	int		color;
+	t_rgb	color;
 	t_o_type res;
 
 	x = 0;
 	ray.origin = data->param->camera->coor;
-	// init_ray(data, x, y, &ray);
-	// color = pixel_color_sphere(ray, loop_sphere(data->param, ray, &t), data->param->alight, data->param->miss);
 	while (x < WIDTH)
 	{
 		y = 0;
@@ -49,29 +47,20 @@ int	render_next_frame(t_data *data)
 			if (res == SPHERE)
 			{
 				update_intersection(data->param, &data->param->p, data->param->sp_choosed->coor, ray);
-				if (!intersect_sphere(ray, data->param->sp_choosed, &data->param->p.dist))
-					color = my_mlx_get_color_value((t_rgb) {0,0,0});
-				else
-					color = my_mlx_get_color_value(phong_sp(&data->param->p, data->param->sp_choosed));
+				color = get_pixel_color_sp(&data->param->p, data->param, data->param->sp_choosed, ray);
 			}
 			if (res == CYLINDER)
 			{
 				update_intersection(data->param, &data->param->p, data->param->cy_choosed->coor, ray);
-				if (!intersect_cylinder(ray, data->param->cy_choosed, &data->param->p.dist))
-					color = my_mlx_get_color_value((t_rgb) {0,0,0});
-				else
-					color = my_mlx_get_color_value(phong_cy(&data->param->p, data->param->cy_choosed));
+				color = get_pixel_color_cy(&data->param->p, data->param, data->param->cy_choosed, ray);
 			}
 			if (res == PLANE)
 			{
 				// plane pas affecter par la light
 				update_intersection(data->param, &data->param->p, data->param->pl_choosed->coor, ray);
-				if (!intersect_plane(ray, data->param->pl_choosed, &data->param->p.dist))
-					color = my_mlx_get_color_value((t_rgb) {0,0,0});
-				else
-					color = my_mlx_get_color_value(phong_pl(&data->param->p, data->param->pl_choosed));
+				color = get_pixel_color_pl(&data->param->p, data->param, data->param->pl_choosed, ray);
 			}
-			my_mlx_pixel_put(data, x, y, color);
+			my_mlx_pixel_put(data, x, y, my_mlx_get_color_value(color));
 			y++;
 		}
 		x++;
@@ -144,6 +133,7 @@ int	main(int ac, char **av)
 	}
 	init_data(&data);
 	parsing(&data, ac, av[1]);
+	// show_obj(&data);
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGTH, "MiniRT");
 	data.img = mlx_new_image(mlx, WIDTH, HEIGTH);

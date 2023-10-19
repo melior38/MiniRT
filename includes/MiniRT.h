@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/18 16:06:46 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:38:15 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,17 @@ typedef struct s_rgb {
 	int	g;
 	int	b;
 }				t_rgb;
+
+typedef struct s_eq
+{
+	t_pos	co;
+	float	a;
+	float	b;
+	float	c;
+	float	discriminant;
+	float	s1;
+	float	s2;
+}	t_eq;
 
 typedef struct	s_ray
 {
@@ -290,9 +301,11 @@ t_pos		get_cylinder_normal(t_pos point, t_cylinder *cylinder);
 void		check_t(double *t, t_cylinder *cylinder, t_ray ray);
 int			cyl_get_roots(double *t0, double *t1, t_cylinder *cylinder, t_ray ray);
 int			intersect_cylinder(t_ray ray, t_cylinder *cylinder, double *t);
+void		compute_cy_equation(t_ray ray, t_cylinder *cy, t_eq *eq);
 t_pos		get_n_cylinder(t_cylinder *cylinder, t_intersection *p);
 
 ///////////////////////////////// INTERSECT_ALL.C ///////////////////////////////
+
 t_cylinder	*loop_cylinder(t_param *param, t_ray ray, double *t);
 t_sphere	*loop_sphere(t_param *param, t_ray ray, double *t);
 t_plane		*loop_plane(t_param *param, t_ray ray, double *t);
@@ -313,5 +326,24 @@ t_rgb		multiplication_color(t_rgb color1, t_rgb color2);
 t_rgb		change_intensity(t_rgb color, double intensity);
 t_rgb		addition_color(t_rgb color1, t_rgb color2);
 
+////////////////////////////////// GET_PIXEL_COLOR.C ////////////////////////////
+
+t_rgb		get_pixel_color_pl(t_intersection *p, t_param *param, t_plane *pl, t_ray ray);
+t_rgb		get_pixel_color_cy(t_intersection *p, t_param *param, t_cylinder *cy, t_ray ray);
+t_rgb		get_pixel_color_sp(t_intersection *p, t_param *param, t_sphere *sp, t_ray ray);
+t_rgb		shade(t_intersection *p, t_rgb color, t_alight *al);
+
+////////////////////////////////// INTERSECT2.C /////////////////////////////////
+
+bool	is_intersection(t_pos p1, t_pos p2, t_param *param);
+bool	cy_intersection_between_points(t_pos p1, t_pos p2, t_cylinder *shape);
+bool	pl_intersection_between_points(t_pos p1, t_pos p2, t_plane *shape);
+bool	sp_intersection_between_points(t_pos p1, t_pos p2, t_sphere *shape);
+
+////////////////////////////////// LOOP_SHADE.C /////////////////////////////////
+
+bool	loop_pl_shade(t_pos p1, t_pos p2, t_plane *shape, t_plane *closest);
+bool	loop_sp_shade(t_pos p1, t_pos p2, t_sphere *shape, t_sphere *closest);
+bool	loop_cy_shade(t_pos p1, t_pos p2, t_cylinder *shape, t_cylinder *closest);
 
 #endif

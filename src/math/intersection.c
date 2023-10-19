@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 14:51:24 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/12 14:14:29 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:32:41 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,14 @@ int			intersect_sphere(t_ray ray, t_sphere *sphere, double *t)
 // Fonction pour calculer l'intersection entre un rayon et un plan
 int intersect_plane(t_ray ray, t_plane *plane, double *t)
 {
-    t_pos plane_to_ray;
-    double denominator;
+    // t_pos	plane_to_ray;
+	double	denominator;
     
+	normed_vec(&plane->vector);
 	denominator = dot_product(plane->vector, ray.dir);
-	// fabs --> Vérifie si le rayon est parallèle au plan (pas d'intersection)
-	// "1e-6" = 1 multiplié par 10 élevé à la puissance de -6". 
-    if (fabs(denominator) < 1e-6) {
+    if (denominator == 0) 
         return 0;
-    }
-    plane_to_ray = subs_vec(ray.origin, plane->coor);
-    // Utilise l'équation de l'intersection du rayon avec le plan
-    *t = dot_product(plane->vector, plane_to_ray) / denominator;
-    // Si t est négatif, cela signifie que le plan est derrière le rayon
+	*t = dot_product(subs_vec(plane->coor, ray.origin), plane->vector) / denominator;
     if (*t < 0) {
         return 0;
     }

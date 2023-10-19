@@ -6,7 +6,7 @@
 #    By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 08:45:50 by lcamilo-          #+#    #+#              #
-#    Updated: 2023/10/18 15:22:24 by asouchet         ###   ########.fr        #
+#    Updated: 2023/10/19 14:37:18 by asouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,10 @@ SRC 		= 	main.c							\
 				math/cylinder.c					\
 				math/phong.c					\
 				math/color.c					\
+				math/get_pixel_color.c			\
 				math/intersect_all.c			\
+				math/intersection2.c			\
+				math/loop_shade.c				\
 				math/intersection.c
 
 
