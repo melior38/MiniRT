@@ -15,10 +15,9 @@
 void	pl_addb(t_plane **lst, t_plane *new, t_plane *pl_head)
 {
 	t_plane	*current;
+
 	if (*lst == NULL)
 	{
-		// pl_head = malloc(sizeof(t_plane));
-		// pl_head = *lst;
 		pl_head = NULL;
 		*lst = new;
 	}
@@ -37,9 +36,7 @@ void	sp_addb(t_sphere **lst, t_sphere *new, t_sphere *sp_head)
 
 	if (*lst == NULL)
 	{
-		// sp_head = malloc(sizeof(t_sphere));
-		// sp_head  = *lst;
-		sp_head  = NULL;
+		sp_head = NULL;
 		*lst = new;
 	}
 	else
@@ -57,8 +54,6 @@ void	cyl_addb(t_cylinder **lst, t_cylinder *new, t_cylinder *cy_head)
 
 	if (*lst == NULL)
 	{
-		// cy_head = malloc(sizeof(t_cylinder));
-		// cy_head = *lst;
 		cy_head = NULL;
 		*lst = new;
 	}

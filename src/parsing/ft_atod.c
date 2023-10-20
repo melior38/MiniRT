@@ -12,54 +12,62 @@
 
 #include "MiniRT.h"
 
-// une modiff de atod serait de le coder comme ça : int	ft_atod(char *str, double *d)
-// de cette maniere on peut faire un return avec code d'erreur tout en modifiant le double *d.
-double 	ft_atod(char *str, t_data *data)
+double	get_digitbeforedot(t_data *data, const char *str, int i)
 {
 	double	res;
-	double	neg;
-	double	tmp;
-	int		count;
-	int		i;
 
-	i = 0;
-	count = 0;
-	neg = 1.0;
 	res = 0.0;
-	tmp = 0.0;
-	// printf("str = [%s]\n", str);
-	if (str[i] == '-')
-	{
-		neg = -1.0;
-		i++;
-	}
 	while (str[i] && str[i] != '.')
 	{
 		if (str[i] >= '0' && str[i] <= '9')
-		{
 			res = (res * 10) + (str[i] - 48);
-			i++;
-		}
 		else
 		{
 			data->error = 6;
 			return (res);
 		}
+		i++;
 	}
-	if(str[i] == '.')
+	return (res);
+}
+
+double	get_digitafterdot(const char *str, int i)
+{
+	double	res;
+	int		count;
+
+	count = 0;
+	res = 0.0;
+	if (str[i] == '.')
 	{
 		i++;
 		while (str[i])
 		{
-			if (str[i] <= '0' && str[i] >= '9')
-				data->error = 6;
-			tmp = (tmp * 10) + (str[i] - 48);
+			res = (res * 10) + (str[i] - 48);
 			i++;
 			count++;
 		}
-		tmp = tmp / pow(10.0,(double)count);
+		res = res / pow(10.0, (double) count);
 	}
-	res += tmp;
-	// printf("lol");
+	return (res);
+}
+
+double	ft_atod(char *str, t_data *data)
+{
+	double	res;
+	double	neg;
+	int		i;
+
+	neg = 1.0;
+	i = 0;
+	if (str[i] == '-')
+	{
+		neg = -1.0;
+		i++;
+	}
+	res = get_digitbeforedot(data, str, i);
+	while (str[i] && str[i] != '.')
+		i++;
+	res += get_digitafterdot(str, i);
 	return (res * neg);
 }

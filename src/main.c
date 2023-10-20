@@ -97,22 +97,6 @@ void	init_data(t_data *data)
 	data->param = NULL;
 }
 
-void	show_obj(t_data *data)
-{
-	printf("Ambient light :\n");
-	show_alight(data);
-	printf("Camera :\n");
-	show_camera(data);
-	printf("light :\n");
-	show_light(data);
-	printf("Plane :\n");
-	show_plane(data);
-	printf("Sphere :\n");
-	show_sphere(data);
-	printf("Cylinder :\n");
-	show_cylinder(data);
-}
-
 int	key_hook(int keycode, t_data *data)
 {
     if (keycode == 53)
@@ -133,7 +117,6 @@ int	main(int ac, char **av)
 	}
 	init_data(&data);
 	parsing(&data, ac, av[1]);
-	// show_obj(&data);
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGTH, "MiniRT");
 	data.img = mlx_new_image(mlx, WIDTH, HEIGTH);

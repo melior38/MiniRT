@@ -20,9 +20,6 @@ t_rgb	rgb_converter(t_data *data, char *str)
 	char	**split;
 	t_rgb	rgb;
 
-	// rgb = malloc(sizeof(t_rgb));
-	// if (!rgb)
-		// return (NULL);
 	rgb.r = 0;
 	rgb.g = 0;
 	rgb.b = 0;
@@ -37,7 +34,7 @@ t_rgb	rgb_converter(t_data *data, char *str)
 	}
 	else
 		print_error(data, "Rgb not in range\n");
-	// free_tab(split);
+	free_tab(split);
 	return (rgb);
 }
 
@@ -46,14 +43,11 @@ t_pos	ft_coor(char *str, t_data *data)
 	t_pos	new;
 	char	**split;
 
-	// new = malloc(sizeof(t_pos));
-	// if (!new)
-		// return (NULL);
 	split = ft_split(str, ',');
 	new.x = ft_atod(split[0], data);
 	new.y = ft_atod(split[1], data);
 	new.z = ft_atod(split[2], data);
-	// free_tab(split);
+	free_tab(split);
 	return (new);
 }
 
@@ -62,9 +56,6 @@ t_pos	ft_vector(t_data *data, char *str)
 	t_pos	new;
 	char	**split;
 
-	// new = malloc(sizeof(t_pos));
-	// if (!new)
-	// 	return (NULL);
 	new.x = 0;
 	new.y = 0;
 	new.z = 0;
@@ -79,6 +70,6 @@ t_pos	ft_vector(t_data *data, char *str)
 	}
 	else
 		print_error(data, "Vector not in range\n");
-	// free_tab(split);
+	free_tab(split);
 	return (new);
 }

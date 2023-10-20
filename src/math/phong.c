@@ -33,7 +33,7 @@ t_rgb	phong_sp(t_intersection *p, t_sphere *sphere)
 {
 	t_rgb	final_color;
 
-	final_color = addition_color(p->A_mod_color, i_diffuse_sp(p, sphere));
+	final_color = addition_color(p->a_mod_color, i_diffuse_sp(p, sphere));
 	final_color = multiplication_color(final_color, sphere->rgb);
 	return (final_color);
 }
@@ -59,7 +59,7 @@ t_rgb	phong_cy(t_intersection *p, t_cylinder *cylinder)
 {
 	t_rgb	final_color;
 
-	final_color = addition_color(change_intensity(p->A_mod_color, p->light_bright),
+	final_color = addition_color(change_intensity(p->a_mod_color, p->light_bright),
 			i_diffuse_cy(p, cylinder));
 	final_color = multiplication_color(final_color, cylinder->rgb);
 	return (final_color);
@@ -86,7 +86,7 @@ t_rgb	phong_pl(t_intersection *p, t_plane *plane)
 {
 	t_rgb	final_color;
 
-	final_color = addition_color(change_intensity(p->A_mod_color, p->light_bright),
+	final_color = addition_color(change_intensity(p->a_mod_color, p->light_bright),
 			i_diffuse_pl(p, plane));
 	final_color = multiplication_color(final_color, plane->rgb);
 	return (final_color);

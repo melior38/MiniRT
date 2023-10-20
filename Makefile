@@ -24,6 +24,7 @@ NAME		= MiniRT
 
 # ------------  DIRECTORIES  ------------------------------------------------- #
 LIB				= libftprintfgnl
+MINILIB			= mlx/libmlx.a
 SRC_PATH		= src/
 HEADERS			= includes
 HEADERS_LIB		= libftprintfgnl/includes
@@ -44,7 +45,6 @@ SRC 		= 	main.c							\
 				utils/obj_utils.c				\
 				utils/uobj_utils.c				\
 				utils/rgb_utils.c				\
-				utils/show.c 					\
 				utils/add_back.c				\
 				utils/free.c					\
 				utils/free_obj.c				\
@@ -76,6 +76,9 @@ lib:
 			make -C $(LIB)
 			@echo "$(COLOUR_YELLOW)Deplacement du libft.a $(COLOUR_END)"
 			@cp ./libftprintfgnl/libft.a libft.a
+
+$(MINILIB):
+			make -C mlx
 
 $(NAME): $(_OBJS)
 			@echo "$(COLOUR_CYAN)Compile..."
