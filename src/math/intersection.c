@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 14:51:24 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/19 16:32:41 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/20 16:20:10 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ int intersect_plane(t_ray ray, t_plane *plane, double *t)
     if (denominator == 0) 
         return 0;
 	*t = dot_product(subs_vec(plane->coor, ray.origin), plane->vector) / denominator;
-    if (*t < 0) {
+    if (*t < 0)
         return 0;
-    }
     return 1;
 }

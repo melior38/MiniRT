@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:13:47 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/18 16:08:50 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:08:50 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_sphere	*loop_sphere(t_param *param, t_ray ray, double *t)
 			if (t_min < *t)
 			{
 				ret = tmp;
+				ret->id = tmp->id;
 				*t = t_min;
 			}
 		}
@@ -57,6 +58,7 @@ t_cylinder	*loop_cylinder(t_param *param, t_ray ray, double *t)
 			if (t_min < *t)
 			{
 				ret = tmp;
+				ret->id = tmp->id;
 				*t = t_min;
 			}
 		}
@@ -83,11 +85,13 @@ t_plane	*loop_plane(t_param *param, t_ray ray, double *t)
 			if (t_min < *t)
 			{
 				ret = tmp;
+				ret->id = tmp->id;
 				*t = t_min;
 			}
 		}
 		tmp = tmp->next;
 	}
+
 	return (ret);
 }
 
@@ -122,9 +126,3 @@ t_o_type	intersect_with_all(t_param *param, t_ray ray, double *t)
 		return (CYLINDER);
 }
 
-
-// aura surement pour but de cree une struct pour le shading mais encore a voir
-// void	interpret_inter(t_param *param, t_o_type type, double *t)
-// {
-// 	if ()
-// }
