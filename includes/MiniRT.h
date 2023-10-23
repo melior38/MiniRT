@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/19 16:38:15 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/20 16:29:22 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define CYAN					"\033[0m\033[36m"
 # define WHITE					"\033[0m\033[37m"
 
-typedef enum	e_obj_type
+typedef enum e_obj_type
 {
 	SPHERE,
 	CYLINDER,
@@ -54,15 +54,15 @@ typedef struct s_rgb {
 typedef struct s_eq
 {
 	t_pos	co;
-	float	a;
-	float	b;
-	float	c;
-	float	discriminant;
-	float	s1;
-	float	s2;
+	double	a;
+	double	b;
+	double	c;
+	double	discriminant;
+	double	s1;
+	double	s2;
 }	t_eq;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	t_pos	origin;
 	t_pos	dir;
@@ -108,6 +108,7 @@ typedef struct s_light
 
 typedef struct s_plane
 {
+	int					id;
 	t_pos				coor;
 	t_pos				vector;
 	t_rgb				rgb;
@@ -116,6 +117,7 @@ typedef struct s_plane
 
 typedef struct s_sphere
 {
+	int					id;
 	t_pos				coor;
 	double				diam;
 	t_rgb				rgb;
@@ -124,6 +126,7 @@ typedef struct s_sphere
 
 typedef struct s_cylinder
 {
+	int					id;
 	t_pos				coor;
 	t_pos				vector;
 	double				diam;
@@ -132,15 +135,15 @@ typedef struct s_cylinder
 	struct s_cylinder	*next;
 }	t_cylinder;
 
-typedef struct s_intersection
+typedef struct s_inter
 {
-	t_rgb	A_mod_color;
+	t_rgb	a_mod_color;
 	t_pos	inter_point;
 	double	dist;
 	t_pos	light_pos;
 	double	light_bright;
 	t_rgb	light_color;
-}	t_intersection;
+}	t_inter;
 
 typedef struct s_param
 {
@@ -154,10 +157,10 @@ typedef struct s_param
 	t_cylinder		*cylinder;
 	t_cylinder		*cy_choosed;
 	t_pos			corner;
-	t_intersection	p;
+	t_inter	p;
 	double			hx;
 	double			hy;
-	t_ref	ref;
+	t_ref			ref;
 	t_matrix		dir;
 }				t_param;
 
@@ -186,12 +189,12 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 ////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////// ADD_BACK.C ///////////////////////////////////
-void		cyl_addb(t_cylinder **lst, t_cylinder *new, t_cylinder *cy_choosed);
-void		sp_addb(t_sphere **lst, t_sphere *new, t_sphere *sp_choosed);
-void		pl_addb(t_plane **lst, t_plane*new, t_plane *pl_choosed);
+void		cyl_addb(t_cylinder **lst, t_cylinder *new);
+void		sp_addb(t_sphere **lst, t_sphere *new);
+void		pl_addb(t_plane **lst, t_plane* new);
 
 /////////////////////////////////// FREE.C /////////////////////////////////////
-int free_struct(t_data *data);
+int			free_struct(t_data *data);
 
 ///////////////////////////////// FREE_OBJ.C ///////////////////////////////////
 void		free_cylinder(t_param *param);
@@ -202,18 +205,14 @@ void		free_sphere(t_param *param);
 void		free_camera(t_camera *camera);
 void		free_light(t_light *light);
 
+//////////////////////////////// SET_OBJ_ID.C //////////////////////////////////
 
-/////////////////////////////////// SHOW.C /////////////////////////////////////
-void		show_alight(t_data *data);
-void		show_camera(t_data *data);
-void		show_light(t_data *data);
-void		show_plane(t_data *data);
-void		show_sphere(t_data *data);
-void		show_cylinder(t_data *data);
+void	set_sphere_id(t_sphere *sphere);
+void	set_cylinder_id(t_cylinder *cylinder);
+void	set_plane_id(t_plane *plane);
+void	set_obj_id(t_data *data);
 
 
-
-/////////////////////////////////// SHOW.C /////////////////////////////////////
 //////////////////////////////// OBJ_UTILS.C ///////////////////////////////////
 t_plane		*create_plane(t_data *data, char **args);
 t_sphere	*create_sphere(t_data *data, char **args);
@@ -251,18 +250,14 @@ void		free_tab(char **tab);
 double		ft_atod(char *str, t_data *data);
 
 ///////////////////////////////// PARSING.C ////////////////////////////////////
-
 int			open_fd(t_data *data, int ac, char *av);
 void		print_error(t_data	*data, char *msg);
-
 
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// projection /////////////////////////////////
 //////////////////////////////////// folder ////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-
 ////////////////////////////////// VEC_UTILS.C /////////////////////////////////
-
 double		vec_norm(t_pos vec);
 void		normed_vec(t_pos *vec);
 t_pos		cross_product(t_pos vec1, t_pos vec2);
@@ -270,16 +265,15 @@ t_pos		add_vec(t_pos vec1, t_pos vec2);
 t_pos		subs_vec(t_pos vec1, t_pos vec2);
 t_pos		scale_vec(t_pos vec, double scaling);
 t_pos		create_vec(double x, double y, double z);
-double	    dot_product(t_pos vec1, t_pos vec2);
+double		dot_product(t_pos vec1, t_pos vec2);
 
 //////////////////////////////// VEC_OPERATION.C ///////////////////////////////
-
 void		init_ray(t_data *data, int x, int y, t_ray *res);
 t_ref		set_ref(t_pos cam_ve);
-void		update_intersection(t_param *param, t_intersection *p, t_pos obj_center, t_ray ray);
+t_inter		update_intersection(t_param *param, t_inter *p,
+				t_ray ray);
 
-///////////////////////////////// INTERSECTION.C ////////////////////////////////
-
+///////////////////////////////// INTERSECTION.C ///////////////////////////////
 void		swap_doubles(double *a, double *b);
 int			intersect_sphere(t_ray ray, t_sphere *sphere, double *t);
 t_pos		get_sphere_normal(t_pos point, t_sphere *sphere);
@@ -287,63 +281,61 @@ int			get_roots(double *t0, double *t1, t_ray ray, t_sphere *sphere);
 int			intersect_plane(t_ray ray, t_plane *plane, double *t);
 // int			intersect_sphere(t_ray ray, t_sphere *sphere);
 
-///////////////////////////////// QUADRATIC.C ///////////////////////////////////
-
+///////////////////////////////// QUADRATIC.C //////////////////////////////////
 int			solve_quadratic(t_pos params, double *x0, double *x1);
 
-//////////////////////////////// INIT_CAMERA.C //////////////////////////////////
-
+//////////////////////////////// INIT_CAMERA.C /////////////////////////////////
 void		init_camera(t_camera *camera);
 
-///////////////////////////////// CYLINDER.C ////////////////////////////////////
-
+///////////////////////////////// CYLINDER.C ///////////////////////////////////
 t_pos		get_cylinder_normal(t_pos point, t_cylinder *cylinder);
 void		check_t(double *t, t_cylinder *cylinder, t_ray ray);
-int			cyl_get_roots(double *t0, double *t1, t_cylinder *cylinder, t_ray ray);
+int			cyl_get_roots(double *t0, double *t1,
+				t_cylinder *cylinder, t_ray ray);
 int			intersect_cylinder(t_ray ray, t_cylinder *cylinder, double *t);
 void		compute_cy_equation(t_ray ray, t_cylinder *cy, t_eq *eq);
-t_pos		get_n_cylinder(t_cylinder *cylinder, t_intersection *p);
+t_pos		get_n_cylinder(t_cylinder *cylinder, t_inter p);
 
-///////////////////////////////// INTERSECT_ALL.C ///////////////////////////////
-
+///////////////////////////////// INTERSECT_ALL.C //////////////////////////////
 t_cylinder	*loop_cylinder(t_param *param, t_ray ray, double *t);
 t_sphere	*loop_sphere(t_param *param, t_ray ray, double *t);
 t_plane		*loop_plane(t_param *param, t_ray ray, double *t);
 t_o_type	intersect_with_all(t_param *param, t_ray ray, double *t);
 
-//////////////////////////////////// PHONG.C ////////////////////////////////////
+//////////////////////////////////// PHONG.C ///////////////////////////////////
+t_rgb		i_diffuse_pl(t_inter p, t_plane *plane);
+t_rgb		phong_pl(t_inter p, t_plane *plane);
+t_rgb		i_diffuse_sp(t_inter p, t_sphere *sphere);
+t_rgb		phong_sp(t_inter p, t_sphere *sphere);
+t_rgb		i_diffuse_cy(t_inter p, t_cylinder *cylinder);
+t_rgb		phong_cy(t_inter p, t_cylinder *cylinder);
 
-t_rgb		i_diffuse_pl(t_intersection *p, t_plane *plane);
-t_rgb		phong_pl(t_intersection *p, t_plane *plane);
-t_rgb		i_diffuse_sp(t_intersection *p, t_sphere *sphere);
-t_rgb		phong_sp(t_intersection *p, t_sphere *sphere);
-t_rgb		i_diffuse_cy(t_intersection *p, t_cylinder *cylinder);
-t_rgb		phong_cy(t_intersection *p, t_cylinder *cylinder);
-
-//////////////////////////////////// COLOR.C ////////////////////////////////////
-
+//////////////////////////////////// COLOR.C ///////////////////////////////////
 t_rgb		multiplication_color(t_rgb color1, t_rgb color2);
 t_rgb		change_intensity(t_rgb color, double intensity);
 t_rgb		addition_color(t_rgb color1, t_rgb color2);
 
-////////////////////////////////// GET_PIXEL_COLOR.C ////////////////////////////
+////////////////////////////////// GET_PIXEL_COLOR.C ///////////////////////////
+t_rgb		get_pixel_color_pl(t_inter p, t_param *param,
+				t_plane *pl, t_ray ray);
+t_rgb		get_pixel_color_cy(t_inter p, t_param *param,
+				t_cylinder *cy, t_ray ray);
+t_rgb		get_pixel_color_sp(t_inter p, t_param *param,
+				t_sphere *sp, t_ray ray);
+t_rgb		shade(t_inter p, t_rgb color, t_alight *al);
 
-t_rgb		get_pixel_color_pl(t_intersection *p, t_param *param, t_plane *pl, t_ray ray);
-t_rgb		get_pixel_color_cy(t_intersection *p, t_param *param, t_cylinder *cy, t_ray ray);
-t_rgb		get_pixel_color_sp(t_intersection *p, t_param *param, t_sphere *sp, t_ray ray);
-t_rgb		shade(t_intersection *p, t_rgb color, t_alight *al);
+////////////////////////////////// INTERSECT2.C ////////////////////////////////
+bool		is_intersection(t_pos p1, t_pos p2, t_param *param, int id);
+bool		cy_intersection_between_points(t_pos p1, t_pos p2,
+				t_cylinder *shape);
+bool		pl_intersection_between_points(t_pos p1, t_pos p2,
+				t_plane *shape);
+bool		sp_intersection_between_points(t_pos p1, t_pos p2,
+				t_sphere *shape);
 
-////////////////////////////////// INTERSECT2.C /////////////////////////////////
-
-bool	is_intersection(t_pos p1, t_pos p2, t_param *param);
-bool	cy_intersection_between_points(t_pos p1, t_pos p2, t_cylinder *shape);
-bool	pl_intersection_between_points(t_pos p1, t_pos p2, t_plane *shape);
-bool	sp_intersection_between_points(t_pos p1, t_pos p2, t_sphere *shape);
-
-////////////////////////////////// LOOP_SHADE.C /////////////////////////////////
-
-bool	loop_pl_shade(t_pos p1, t_pos p2, t_plane *shape, t_plane *closest);
-bool	loop_sp_shade(t_pos p1, t_pos p2, t_sphere *shape, t_sphere *closest);
-bool	loop_cy_shade(t_pos p1, t_pos p2, t_cylinder *shape, t_cylinder *closest);
+////////////////////////////////// LOOP_SHADE.C ////////////////////////////////
+bool		loop_pl_shade(t_pos p1, t_pos p2, t_param *param, int id);
+bool		loop_sp_shade(t_pos p1, t_pos p2, t_param *param, int id);
+bool		loop_cy_shade(t_pos p1, t_pos p2, t_param *param, int id);
 
 #endif

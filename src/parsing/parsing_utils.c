@@ -6,49 +6,21 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/17 16:16:56 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/20 11:48:09 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MiniRT.h"
 
-
-int	check_rt_file(char *av)
-{
-	int	i;
-	int	check;
-
-	check = 1;
-	i = 0;
-	while (av[i])
-		i++;
-	i = i - 4;
-	if (av[i] != '.')
-		i++;
-	else
-		return (check);
-	if (av[i] == '.')
-	{
-		i++;
-		if (av[i] == 'r')
-			{
-				i++;
-				if (av[i] == 't')
-					check = 0;
-			}
-	}
-	return (check);
-}
-
 bool	check_line(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])
 	{
 		if ((line[i] <= '9' && line[i] >= '0') || line[i] == ' '
-				|| line[i] == ',' || line[i] == '.')
+			|| line[i] == ',' || line[i] == '.')
 			i++;
 		else
 			return (false);
@@ -68,14 +40,11 @@ void	init_file(t_data *data, char *line)
 	if (ft_strncmp(line, "L ", 2) == 0)
 		data->param->light = create_light(data, s_line);
 	if (ft_strncmp(line, "sp ", 3) == 0)
-		sp_addb(&data->param->sphere, create_sphere(data, s_line), \
-				 data->param->sp_choosed);
+		sp_addb(&data->param->sphere, create_sphere(data, s_line));
 	if (ft_strncmp(line, "pl ", 3) == 0)
-		pl_addb(&data->param->plane, create_plane(data, s_line), \
-				data->param->pl_choosed);
+		pl_addb(&data->param->plane, create_plane(data, s_line));
 	if (ft_strncmp(line, "cy ", 3) == 0)
-		cyl_addb(&data->param->cylinder, create_cylinder(data, s_line), \
-				data->param->cy_choosed);
+		cyl_addb(&data->param->cylinder, create_cylinder(data, s_line));
 	free_tab(s_line);
 }
 
@@ -91,10 +60,26 @@ char	*trim_gnl(char *line)
 	line = NULL;
 	res = ft_strtrim(dup, "\n");
 	if (res == NULL)
-		return NULL;
+		return (NULL);
 	free(dup);
 	dup = NULL;
 	return (res);
+}
+
+t_param	*init_param(void)
+{
+	t_param	*param;
+
+	param = malloc(sizeof(t_param));
+	if (!param)
+		return (NULL);
+	param->alight = NULL;
+	param->camera = NULL;
+	param->light = NULL;
+	param->cylinder = NULL;
+	param->plane = NULL;
+	param->sphere = NULL;
+	return (param);
 }
 
 /// Recupere le fd via la fonction open_fd et creer les objects
@@ -102,24 +87,14 @@ char	*trim_gnl(char *line)
 /// \param ac nb d'arguments
 /// \param av args
 /// \return a voir
-int parsing(t_data *data, int ac, char *av)
+int	parsing(t_data *data, int ac, char *av)
 {
 	int		fd;
 	char	*line;
-	t_param	*param;
 
-	fd = open_fd(data ,ac, av);
+	fd = open_fd(data, ac, av);
 	line = get_next_line(fd);
-	param = malloc(sizeof(t_param));
-	if (!param)
-		exit(1); // a mieux faire mais la je suis pas sur ce soucis la
-	param->alight = NULL;
-	param->camera = NULL;
-	param->light = NULL;
-	param->cylinder = NULL;
-	param->plane = NULL;
-	param->sphere = NULL;
-	data->param = param;
+	data->param = init_param();
 	while (line)
 	{
 		line = trim_gnl(line);

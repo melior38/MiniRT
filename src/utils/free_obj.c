@@ -14,8 +14,8 @@
 
 void	free_plane(t_param *param)
 {
-	t_plane *lst;
-	t_plane *lst_tmp;
+	t_plane	*lst;
+	t_plane	*lst_tmp;
 
 	lst = param->plane;
 	while (lst)
@@ -25,8 +25,6 @@ void	free_plane(t_param *param)
 		lst = lst_tmp;
 	}
 	param->plane = NULL;
-	// free(param->pl_choosed);
-	// param->pl_choosed = NULL;
 }
 
 void	free_sphere(t_param *param)
@@ -42,8 +40,6 @@ void	free_sphere(t_param *param)
 		lst = lst_tmp;
 	}
 	param->sphere = NULL;
-	// free(param->sp_choosed);
-	// param->sp_choosed = NULL;
 }
 
 void	free_cylinder(t_param *param)
@@ -59,6 +55,4 @@ void	free_cylinder(t_param *param)
 		lst = lst_tmp;
 	}
 	param->cylinder = NULL;
-	// free(param->cy_choosed);
-	// param->cy_choosed = NULL;
 }
