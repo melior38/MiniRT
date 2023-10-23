@@ -6,7 +6,7 @@
 #    By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 08:45:50 by lcamilo-          #+#    #+#              #
-#    Updated: 2023/10/19 14:37:18 by asouchet         ###   ########.fr        #
+#    Updated: 2023/10/20 12:29:15 by asouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC 		= 	main.c							\
 				utils/obj_utils.c				\
 				utils/uobj_utils.c				\
 				utils/rgb_utils.c				\
+				utils/set_obj_id.c				\
 				utils/add_back.c				\
 				utils/free.c					\
 				utils/free_obj.c				\

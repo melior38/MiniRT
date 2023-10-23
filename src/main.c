@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/19 16:23:27 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/23 12:55:28 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,11 @@ int	render_next_frame(t_data *data)
 			init_ray(data, x, y, &ray);
 			res = intersect_with_all(data->param, ray, &data->param->p.dist);
 			if (res == SPHERE)
-			{
-				update_intersection(data->param, &data->param->p, data->param->sp_choosed->coor, ray);
-				color = get_pixel_color_sp(&data->param->p, data->param, data->param->sp_choosed, ray);
-			}
+				color = get_pixel_color_sp(update_intersection(data->param, &data->param->p, ray), data->param, data->param->sp_choosed, ray);
 			if (res == CYLINDER)
-			{
-				update_intersection(data->param, &data->param->p, data->param->cy_choosed->coor, ray);
-				color = get_pixel_color_cy(&data->param->p, data->param, data->param->cy_choosed, ray);
-			}
+				color = get_pixel_color_cy(update_intersection(data->param, &data->param->p, ray), data->param, data->param->cy_choosed, ray);
 			if (res == PLANE)
-			{
-				// plane pas affecter par la light
-				update_intersection(data->param, &data->param->p, data->param->pl_choosed->coor, ray);
-				color = get_pixel_color_pl(&data->param->p, data->param, data->param->pl_choosed, ray);
-			}
+				color = get_pixel_color_pl(update_intersection(data->param, &data->param->p, ray), data->param, data->param->pl_choosed, ray);
 			my_mlx_pixel_put(data, x, y, my_mlx_get_color_value(color));
 			y++;
 		}
@@ -117,6 +107,7 @@ int	main(int ac, char **av)
 	}
 	init_data(&data);
 	parsing(&data, ac, av[1]);
+	set_obj_id(&data);
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGTH, "MiniRT");
 	data.img = mlx_new_image(mlx, WIDTH, HEIGTH);

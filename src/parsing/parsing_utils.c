@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/17 16:16:56 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/20 11:48:09 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,11 @@ void	init_file(t_data *data, char *line)
 	if (ft_strncmp(line, "L ", 2) == 0)
 		data->param->light = create_light(data, s_line);
 	if (ft_strncmp(line, "sp ", 3) == 0)
-		sp_addb(&data->param->sphere, create_sphere(data, s_line), \
-				data->param->sp_choosed);
+		sp_addb(&data->param->sphere, create_sphere(data, s_line));
 	if (ft_strncmp(line, "pl ", 3) == 0)
-		pl_addb(&data->param->plane, create_plane(data, s_line), \
-				data->param->pl_choosed);
+		pl_addb(&data->param->plane, create_plane(data, s_line));
 	if (ft_strncmp(line, "cy ", 3) == 0)
-		cyl_addb(&data->param->cylinder, create_cylinder(data, s_line), \
-				data->param->cy_choosed);
+		cyl_addb(&data->param->cylinder, create_cylinder(data, s_line));
 	free_tab(s_line);
 }
 

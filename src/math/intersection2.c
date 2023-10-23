@@ -6,12 +6,14 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 13:46:23 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/19 16:38:57 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/23 14:49:07 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MiniRT.h"
 
+// Return whether or not there is an intersection with a sphere
+// between two points.
 bool	sp_intersection_between_points(t_pos p1, t_pos p2, t_sphere *shape)
 {
 	t_ray	ray;
@@ -75,6 +77,7 @@ bool	cy_intersection_between_points(t_pos p1, t_pos p2, t_cylinder *shape)
 	dir = subs_vec(p2, p1);
 	len = vec_norm(dir);
 	ray.origin = p1;
+	ray.dir = dir;
 	normed_vec(&ray.dir);
 	compute_cy_equation(ray, shape, &eq);
 	if (eq.discriminant < 0)
@@ -84,13 +87,13 @@ bool	cy_intersection_between_points(t_pos p1, t_pos p2, t_cylinder *shape)
 	return (false);
 }
 
-bool	is_intersection(t_pos p1, t_pos p2, t_param *param)
+bool	is_intersection(t_pos p1, t_pos p2, t_param *param, int id)
 {
-	if (loop_cy_shade(p1, p2, param->cylinder, param->cy_choosed))
+	if (loop_cy_shade(p1, p2, param, id))
 		return (true);
-	if (loop_pl_shade(p1, p2, param->plane, param->pl_choosed))
+	if (loop_pl_shade(p1, p2, param, id))
 		return (true);
-	if (loop_sp_shade(p1, p1, param->sphere, param->sp_choosed))
+	if (loop_sp_shade(p1, p2, param, id))
 		return (true);
 	return (false);
 }
