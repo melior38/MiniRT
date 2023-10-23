@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:19:13 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/20 17:44:07 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/10/23 14:51:42 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	compute_cy_equation(t_ray ray, t_cylinder *cy, t_eq *eq)
 
 	normed_vec(&cy->vector);
 	eq->co = subs_vec(ray.origin, cy->coor);
-	eq->a = dot_product(ray.dir, ray.dir) - pow(dot_product(ray.dir, cy->vector), 2);
+	eq->a = dot_product(ray.dir, ray.dir) - pow(dot_product(ray.dir, cy->vector), 2.0);
 	eq->b = 2 * (dot_product(ray.dir, eq->co) - dot_product(ray.dir,
 				cy->vector) * dot_product(eq->co, cy->vector));
 	eq->c = dot_product(eq->co, eq->co) - pow(dot_product(eq->co,
@@ -67,14 +67,12 @@ int	intersect_cylinder(t_ray ray, t_cylinder *cy, double *t)
 	if (eq.s1 > 0 && (eq.s2 < 0 || eq.s1 < eq.s2)
 		&& (eq.s1 < *t || *t == -1))
 	{
-		// inter->pos = vec_add(ray.pos, vec_mult(ray.dir, eq.s1));
 		*t = eq.s1;
 		return (1);
 	}
 	else if (eq.s2 > 0 && (eq.s1 < 0 || eq.s2 < eq.s1)
 		&& (eq.s2 < *t || *t == -1))
 	{
-		// inter->pos = vec_add(ray.pos, vec_mult(ray.dir, eq.s2));
 		*t = eq.s2;
 		return (1);
 	}
