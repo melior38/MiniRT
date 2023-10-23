@@ -230,6 +230,9 @@ int			tab_check(int *tab);
 void		init_tab(int *tab);
 int			check_rt_file(char *av);
 
+///////////////////////////////// CHECK_LINE.C /////////////////////////////////
+int		check_line(char *line);
+
 ///////////////////////////////// PARSE_INIT.C /////////////////////////////////
 
 void		free_tab(char **tab);

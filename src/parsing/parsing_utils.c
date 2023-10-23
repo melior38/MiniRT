@@ -12,22 +12,6 @@
 
 #include "MiniRT.h"
 
-bool	check_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if ((line[i] <= '9' && line[i] >= '0') || line[i] == ' '
-			|| line[i] == ',' || line[i] == '.')
-			i++;
-		else
-			return (false);
-	}
-	return (true);
-}
-
 void	init_file(t_data *data, char *line)
 {
 	char	**s_line;
@@ -101,6 +85,8 @@ int	parsing(t_data *data, int ac, char *av)
 	while (line)
 	{
 		line = trim_gnl(line);
+		if (check_line(line))
+			print_error(data, "Tabs in .rt\n");
 		init_file(data, line);
 		free(line);
 		line = get_next_line(fd);

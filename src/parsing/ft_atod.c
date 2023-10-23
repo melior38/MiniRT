@@ -60,7 +60,9 @@ double	ft_atod(char *str, t_data *data)
 
 	neg = 1.0;
 	i = 0;
-	if (str[i] == '-')
+	if (!str)
+		print_error(data, "Numbers given with space or tab\n");
+	if (str && str[i] == '-')
 	{
 		neg = -1.0;
 		i++;

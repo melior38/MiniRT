@@ -83,7 +83,7 @@ void	init_ray(t_data *data, int x, int y, t_ray *res)
 void	update_intersection(t_param *param, t_intersection *p, t_pos obj_center, t_ray ray)
 {
 	(void)	obj_center;
-	p->A_mod_color = change_intensity(param->alight->rgb, param->alight->ratio);
+	p->a_mod_color = change_intensity(param->alight->rgb, param->alight->ratio);
 	p->inter_point = add_vec(ray.origin, scale_vec(ray.dir, p->dist));
 	p->light_bright = param->light->bright;
 	p->light_color = param->light->rgb;
