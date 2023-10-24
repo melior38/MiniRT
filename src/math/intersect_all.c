@@ -69,8 +69,8 @@ t_cylinder	*loop_cylinder(t_param *param, t_ray ray, double *t)
 
 t_plane	*loop_plane(t_param *param, t_ray ray, double *t)
 {
-	t_plane	*tmp;
-	t_plane	*ret;
+	t_plane		*tmp;
+	t_plane		*ret;
 	double		t_min;
 	int			miss;
 
@@ -91,18 +91,22 @@ t_plane	*loop_plane(t_param *param, t_ray ray, double *t)
 		}
 		tmp = tmp->next;
 	}
-
 	return (ret);
+}
+
+void	init_var(double *t_min, int *check, double *t)
+{
+	*t = HUGE_VAL;
+	*check = 0;
+	*t_min = 0;
 }
 
 t_o_type	intersect_with_all(t_param *param, t_ray ray, double *t)
 {
 	double		t_min;
 	int			check;
-	
-	t_min = 0;
-	*t = HUGE_VAL;
-	check = 0;
+
+	init_var(&t_min, &check, t);
 	param->sp_choosed = loop_sphere(param, ray, &t_min);
 	if (*t > t_min)
 		*t = t_min;
@@ -125,4 +129,3 @@ t_o_type	intersect_with_all(t_param *param, t_ray ray, double *t)
 	else
 		return (CYLINDER);
 }
-

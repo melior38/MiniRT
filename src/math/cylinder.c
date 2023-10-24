@@ -33,7 +33,8 @@ void	compute_cy_equation(t_ray ray, t_cylinder *cy, t_eq *eq)
 
 	normed_vec(&cy->vector);
 	eq->co = subs_vec(ray.origin, cy->coor);
-	eq->a = dot_product(ray.dir, ray.dir) - pow(dot_product(ray.dir, cy->vector), 2.0);
+	eq->a = dot_product(ray.dir, ray.dir) - pow
+		(dot_product(ray.dir, cy->vector), 2.0);
 	eq->b = 2 * (dot_product(ray.dir, eq->co) - dot_product(ray.dir,
 				cy->vector) * dot_product(eq->co, cy->vector));
 	eq->c = dot_product(eq->co, eq->co) - pow(dot_product(eq->co,

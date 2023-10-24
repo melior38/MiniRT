@@ -12,7 +12,6 @@
 
 #include "MiniRT.h"
 
-
 t_rgb	change_intensity(t_rgb color, double intensity)
 {
 	t_rgb	new_color;

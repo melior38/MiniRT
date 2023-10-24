@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_init.c                                       :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/08 10:42:43 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/02 08:46:47 by asouchet         ###   ########.fr       */
+/*   Created: 2023/09/04 08:46:04 by asouchet          #+#    #+#             */
+/*   Updated: 2023/10/23 12:55:28 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MiniRT.h"
 
-int	allowed_symbol(char c)
+void	init_data(t_data *data)
 {
-	if (c == ' ' | c == '\n' | c == '.' || c == ','
-		|| (c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')
-		|| (c >= 'A' && c <= 'Z') || c == '-')
-		return (1);
-	return (0);
+	data->img = NULL;
+	data->addr = NULL;
+	data->mlx = NULL;
+	data->mlx_win = NULL;
+	data->bits_per_pixel = 0;
+	data->line_length = 0;
+	data->endian = 0;
+	data->error = 0;
+	data->param = NULL;
+	data->tmp = NULL;
 }
 
-int	check_line(char *line)
+int	key_hook(int keycode, t_data *data)
 {
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (!allowed_symbol(line[i]))
-			return (1);
-		i++;
-	}
+	if (keycode == 53)
+		free_struct(data);
 	return (0);
 }

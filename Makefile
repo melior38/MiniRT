@@ -32,7 +32,7 @@ HEADERS_LIB		= libftprintfgnl/includes
 INC			= $(addprefix $HEADERS_LIB)
 
 # ------------  FLAGS  ------------------------------------------------------- #
-CFLAGS 		= -I $(HEADERS) -I $(HEADERS_LIB) -Werror -Wextra -Wall -fsanitize=address -I ./mlx
+CFLAGS 		= -I $(HEADERS) -I $(HEADERS_LIB) -Werror -Wextra -Wall -I ./mlx
 CC			= @cc
 RM			= rm -rf
 
@@ -50,14 +50,18 @@ SRC 		= 	main.c							\
 				utils/add_back.c				\
 				utils/free.c					\
 				utils/free_obj.c				\
+				utils/main_utils.c				\
 				utils/init_camera.c				\
 				utils/free_uobj.c				\
 				math/vec_utils.c 				\
+				math/vec_utils2.c 				\
 				math/vec_operation.c			\
 				math/quadratic.c				\
 				math/cylinder.c					\
 				math/phong.c					\
+				math/phong_sp.c					\
 				math/color.c					\
+				math/render.c					\
 				math/get_pixel_color.c			\
 				math/intersect_all.c			\
 				math/intersection2.c			\

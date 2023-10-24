@@ -12,7 +12,6 @@
 
 #include "MiniRT.h"
 
-// faire en sorte de set un idea permettant de comfirmer si c un cylindre, un plane ou un cercle 
 bool	loop_cy_shade(t_pos p1, t_pos p2, t_param *param, int id)
 {
 	t_cylinder	*tmp;

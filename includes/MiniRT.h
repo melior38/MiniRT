@@ -157,7 +157,7 @@ typedef struct s_param
 	t_cylinder		*cylinder;
 	t_cylinder		*cy_choosed;
 	t_pos			corner;
-	t_inter	p;
+	t_inter			p;
 	double			hx;
 	double			hy;
 	t_ref			ref;
@@ -166,6 +166,7 @@ typedef struct s_param
 
 typedef struct s_data {
 	void		*img;
+	int 		*tmp;
 	char		*addr;
 	void		*mlx;
 	void		*mlx_win;
@@ -177,7 +178,9 @@ typedef struct s_data {
 }				t_data;
 
 //////////////////////////////////// MAIN.C ////////////////////////////////////
-
+t_rgb		render(t_data *data, t_ray ray, int x, int y);
+void		init_data(t_data *data);
+int			key_hook(int keycode, t_data *data);
 int			main(int ac, char **av);
 void		ft_handle_error(int error);
 int			my_mlx_get_color_value(t_rgb rgb);
@@ -191,7 +194,7 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 ///////////////////////////////// ADD_BACK.C ///////////////////////////////////
 void		cyl_addb(t_cylinder **lst, t_cylinder *new);
 void		sp_addb(t_sphere **lst, t_sphere *new);
-void		pl_addb(t_plane **lst, t_plane* new);
+void		pl_addb(t_plane **lst, t_plane *new);
 
 /////////////////////////////////// FREE.C /////////////////////////////////////
 int			free_struct(t_data *data);
@@ -207,11 +210,10 @@ void		free_light(t_light *light);
 
 //////////////////////////////// SET_OBJ_ID.C //////////////////////////////////
 
-void	set_sphere_id(t_sphere *sphere);
-void	set_cylinder_id(t_cylinder *cylinder);
-void	set_plane_id(t_plane *plane);
-void	set_obj_id(t_data *data);
-
+void		set_sphere_id(t_sphere *sphere);
+void		set_cylinder_id(t_cylinder *cylinder);
+void		set_plane_id(t_plane *plane);
+void		set_obj_id(t_data *data);
 
 //////////////////////////////// OBJ_UTILS.C ///////////////////////////////////
 t_plane		*create_plane(t_data *data, char **args);
@@ -242,7 +244,7 @@ void		init_tab(int *tab);
 int			check_rt_file(char *av);
 
 ///////////////////////////////// CHECK_LINE.C /////////////////////////////////
-int		check_line(char *line);
+int			check_line(char *line);
 
 ///////////////////////////////// PARSE_INIT.C /////////////////////////////////
 

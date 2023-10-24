@@ -12,9 +12,9 @@
 
 #include "MiniRT.h"
 
-void		swap_doubles(double *a, double *b)
+void	swap_doubles(double *a, double *b)
 {
-	double buffer;
+	double	buffer;
 
 	buffer = *a;
 	*a = *b;
@@ -27,10 +27,10 @@ void		swap_doubles(double *a, double *b)
 // si discr = neg donc pas d'intersection 
 // si discr = pos mais un seul res = a une intersection
 // si discr = a 2 res a 2 intersection; 
-int			solve_quadratic(t_pos params, double *x0, double *x1)
+int	solve_quadratic(t_pos params, double *x0, double *x1)
 {
-	double discr;
-	double q;
+	double	discr;
+	double	q;
 
 	discr = pow(params.y, 2) - 4 * params.x * params.z;
 	if (discr < 0)

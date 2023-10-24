@@ -25,7 +25,6 @@ void	set_sphere_id(t_sphere *sphere)
 		tmp = tmp->next;
 		id++;
 	}
-	// printf("sphere id {%d}\n\n", sphere->id);
 }
 
 void	set_cylinder_id(t_cylinder *cylinder)
@@ -41,7 +40,6 @@ void	set_cylinder_id(t_cylinder *cylinder)
 		tmp = tmp->next;
 		id++;
 	}
-	// printf("cylinder id {%d}\n\n", cylinder->id);
 }
 
 void	set_plane_id(t_plane *plane)
@@ -57,9 +55,7 @@ void	set_plane_id(t_plane *plane)
 		tmp = tmp->next;
 		id++;
 	}
-	// printf("plane id {%d}\n\n", plane->id);
 }
-
 
 void	set_obj_id(t_data *data)
 {
