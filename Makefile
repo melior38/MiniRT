@@ -6,7 +6,7 @@
 #    By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/04 08:45:50 by lcamilo-          #+#    #+#              #
-#    Updated: 2023/10/20 12:29:15 by asouchet         ###   ########.fr        #
+#    Updated: 2023/11/09 14:48:38 by asouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,7 +88,7 @@ $(MINILIB):
 
 $(NAME): $(_OBJS)
 			@echo "$(COLOUR_CYAN)Compile..."
-			$(CC) $(_OBJS) libft.a $(CFLAGS) -o $@ -L libftprintfgnl -lft -I ./mlx -L ./mlx -lmlx -framework OpenGL -framework AppKit
+			$(CC) $(_OBJS) libft.a $(CFLAGS) -o $@ -L libftprintfgnl -lft -I ./mlx -L ./mlx -lmlx -framework OpenGL -framework AppKit 
 			@echo "$(COLOUR_RED)MiniRT ready. $(COLOUR_END)"
 
 $(OBJS_DIR)/%.o: $(SRC_PATH)/%.c

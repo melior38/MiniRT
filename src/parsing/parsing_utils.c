@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 09:05:31 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/20 11:48:09 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/11/09 14:46:34 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,17 @@ t_param	*init_param(void)
 	return (param);
 }
 
+int	check_param(t_param *param)
+{
+	if (!param->alight)
+		return (1);
+	if (!param->camera)
+		return (1);
+	if (!param->light)
+		return (1);
+	return (0);
+}
+
 /// Recupere le fd via la fonction open_fd et creer les objects
 /// \param data structure principal
 /// \param ac nb d'arguments
@@ -90,5 +101,7 @@ int	parsing(t_data *data, int ac, char *av)
 	}
 	free(line);
 	line = NULL;
+	if (check_param(data->param))
+		print_error(data, "missing key argument(s) A / C or L");
 	return (1);
 }

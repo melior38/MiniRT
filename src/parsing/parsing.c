@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:42:43 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/03 16:06:24 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/11/09 14:48:22 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	print_error(t_data	*data, char *msg)
 {
 	ft_putendl_fd("Error", STDERR_FILENO);
 	ft_putendl_fd(msg, STDERR_FILENO);
-	free_struct(data);
+	if (data->param)
+		free_struct(data);
 	exit (1);
 }
 

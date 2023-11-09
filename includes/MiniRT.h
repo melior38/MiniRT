@@ -6,7 +6,7 @@
 /*   By: asouchet <asouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 08:52:07 by asouchet          #+#    #+#             */
-/*   Updated: 2023/10/20 16:29:22 by asouchet         ###   ########.fr       */
+/*   Updated: 2023/11/09 14:44:04 by asouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef enum e_obj_type
 	SPHERE,
 	CYLINDER,
 	PLANE,
+	ERRORS
 }				t_o_type;
 
 typedef struct s_pos {
@@ -166,7 +167,7 @@ typedef struct s_param
 
 typedef struct s_data {
 	void		*img;
-	int 		*tmp;
+	int			*tmp;
 	char		*addr;
 	void		*mlx;
 	void		*mlx_win;
